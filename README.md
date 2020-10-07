@@ -3,4 +3,4 @@ stuttgart-things/vault-handler
 
 # WIP
 
-This role can collect files and passwords from the hashicorp vault. It is also possible to write key / value data as environment variables in the system.
+This role can read and write files as well as passwords and KV data from the Hashicorp Vault. It is also possible to write key / value data as environment variables in the system.
