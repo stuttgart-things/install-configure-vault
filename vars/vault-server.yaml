@@ -1,0 +1,42 @@
+---
+container_name: vault-server
+permanent: true
+container_image: vault
+container_run_args: >-
+    -d --cap-add=IPC_LOCK
+container_cmd_args: >-
+    vault server -config=/vault/config/vault.json
+mounts:
+  logs:
+    host: /podman/pv/vault-server/logs/
+    container: /vault/logs/:z
+  file:
+    host: /podman/pv/vault-server/file/
+    container: /vault/file/:z
+  config:
+    host: /podman/pv/vault-server/config/
+    container: /vault/config/:z
+  certs:
+    host: /podman/pv/vault-server/certificate/
+    container: /etc/certificate/:z
+ports:
+  http:
+    host: 8200
+    container: 8200
+
+# /podman/pv/vault-server/config/vault.json
+# {
+#   "backend": {
+#     "file": {
+#       "path": "/vault/file"
+#     }
+#   },
+#   "listener": {
+#     "tcp":{
+#       "address": "0.0.0.0:8200",
+#       "tls_disable": 1,
+#       "proxy_protocol_behaviour": "use_always"
+#     }
+#   },
+#   "ui": true
+# }
