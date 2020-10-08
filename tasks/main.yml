@@ -4,3 +4,4 @@
 
 - name: Create vault certification authority
   ansible.builtin.include_tasks: create_ca.yml
+  when: create_ca | bool
