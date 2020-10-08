@@ -1,20 +1,4 @@
 roles:
-- src: git@codehub.sva.de:Lab/stuttgart-things/supporting-roles/install-requirements.git
-  scm: git
-- src: git@codehub.sva.de:Lab/stuttgart-things/supporting-roles/install-configure-podman.git
-  scm: git
-- src: git@codehub.sva.de:Lab/stuttgart-things/supporting-roles/deploy-podman-container.git
-  scm: git
-- src: git@codehub.sva.de:Lab/stuttgart-things/supporting-roles/install-configure-ldap.git
-  scm: git
-- src: git@codehub.sva.de:Lab/stuttgart-things/virtual-machines/create-vsphere-vm.git
-  scm: git
-- src: git@codehub.sva.de:Lab/stuttgart-things/supporting-roles/create-ansible-inventory.git
-  scm: git
-- src: git@codehub.sva.de:Lab/stuttgart-things/supporting-roles/download-install-binary.git
-  scm: git
-- src: git@codehub.sva.de:Lab/stuttgart-things/supporting-roles/configure-network.git
-  scm: git
 - src: git@codehub.sva.de:Lab/stuttgart-things/supporting-roles/install-configure-vault.git
   scm: git
   

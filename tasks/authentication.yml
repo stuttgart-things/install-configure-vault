@@ -2,11 +2,11 @@
 - name: API request vault auth token
   ansible.builtin.uri:
     validate_certs: false
-    url: "https://vault.labul.sva.de:8200/v1/auth/userpass/login/user"
+    url: "{{ vault_url }}/v1/auth/userpass/login/{{ vault_username }}"
     method: PUT
     body_format: form-urlencoded
     body:
-      password: password
+      password: "{{ vault_password }}"
     headers:
       Content-Type: application/json
       X-Vault-Request: true
