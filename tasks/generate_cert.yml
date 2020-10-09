@@ -1,5 +1,5 @@
 ---
-- name: "API request and sign certificate for {{ vault_gen_cert_fqdn }}"
+- name: "Request and sign certificate for {{ vault_gen_cert_fqdn }}"
   ansible.builtin.uri:
     return_content: yes
     validate_certs: false
