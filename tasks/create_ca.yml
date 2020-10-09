@@ -83,3 +83,7 @@
       X-Vault-Request: true
       X-Vault-Token: "{{ vault_token }}"
   delegate_to: localhost
+
+- name: Note
+  ansible.builtin.debug:
+    msg: "Please install the ca key on target system so that certificates classified as trusted. You can download the ca certificates for linux and windows here: {{ vault_url }}/ui/vault/settings/secrets/configure/{{ vault_ca_path }}/cert"
