@@ -7,6 +7,7 @@
     body_format: form-urlencoded
     body:
       password: "{{ vault_password }}"
+      content-Type: application/x-www-form-urlencoded
     headers:
       X-Vault-Request: true
   register: vault_api_data_token
