@@ -2,21 +2,21 @@
 - name: Enable vault secret engine for CA
   ansible.builtin.uri:
     validate_certs: false
-    url: "{{ vault_url }}/v1/sys/mounts/pki2"
+    url: "{{ vault_url }}/v1/sys/mounts/{{ vault_ca_path }}"
     method: POST
     body_format: json
     body:
       type: pki
       description: ""
       config: 
-        options: "null"
-        default_lease_ttl: "0s"
-        max_lease_ttl: "0s"
-        force_no_cache: "false"
-      local: "false"
-      seal_wrap: "false"
-      external_entropy_access: "false"
-      options: "false"
+        options: null
+        default_lease_ttl: 0s
+        max_lease_ttl: 0s
+        force_no_cache: false
+      local: false
+      seal_wrap: false
+      external_entropy_access: false
+      options: null
     headers:
       X-Vault-Request: true
       X-Vault-Token: "{{ vault_token }}"

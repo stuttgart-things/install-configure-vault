@@ -2,4 +2,5 @@
 vault_url: https://vault.example.com:8200
 vault_username: username
 vault_password: password
+vault_ca_path: pki
 create_ca: false
