@@ -2,5 +2,8 @@
 vault_url: https://vault.example.com:8200
 vault_username: username
 vault_password: password
-vault_ca_path: pki
+
+# CA default configuration
 create_ca: false
+vault_ca_path: pki
+vault_ca_conf_max_lease_ttl: 8760h0m0s

@@ -21,3 +21,19 @@
       X-Vault-Request: true
       X-Vault-Token: "{{ vault_token }}"
   delegate_to: localhost
+
+- name: Tune vault secret engine CA configuration
+  ansible.builtin.uri:
+    validate_certs: false
+    url: "{{ vault_url }}/v1/sys/mounts/{{ vault_ca_path }}/tune"
+    method: POST
+    body_format: json
+    body:
+      options: null
+      default_lease_ttl: ""
+      max_lease_ttl: "{{ vault_ca_conf_max_lease_ttl }}"
+      force_no_cache: false
+    headers:
+      X-Vault-Request: true
+      X-Vault-Token: "{{ vault_token }}"
+  delegate_to: localhost
