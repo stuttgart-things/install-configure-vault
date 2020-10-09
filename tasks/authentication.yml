@@ -13,7 +13,11 @@
   register: vault_api_data_token
   delegate_to: localhost
 
+- name: Save request vault api token to vars
+  set_fact:
+    vault_token: "{{ vault_api_data_token.json.auth.client_token }}"
+
 - name: Debug api token
   ansible.builtin.debug:
-    msg: "Token received from vault server: {{ vault_api_data_token.json.auth.client_token }}"
+    msg: "Token received from vault server: {{ vault_token }}"
   when: debug | bool
