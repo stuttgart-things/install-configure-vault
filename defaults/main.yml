@@ -1,4 +1,5 @@
 ---
+# default configuration
 vault_url: https://vault.example.com:8200
 vault_username: username
 vault_password: password
@@ -6,4 +7,11 @@ vault_password: password
 # CA default configuration
 create_ca: false
 vault_ca_path: pki
-vault_ca_conf_max_lease_ttl: 8760h0m0s
+vault_ca_max_lease_ttl: 8760h0m0s
+
+# CA root certificate default configuration
+vault_ca_cert_common_name: example.com # Best pratice the name of the domain managed by vault CA
+vault_ca_cert_key_bits: 4096
+vault_ca_cert_organization: example-org
+vault_ca_cert_ou: example-ou
+vault_ca_cert_ttl: 8760h # One year by default

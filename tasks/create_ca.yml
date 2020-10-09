@@ -31,8 +31,25 @@
     body:
       options: null
       default_lease_ttl: ""
-      max_lease_ttl: "{{ vault_ca_conf_max_lease_ttl }}"
+      max_lease_ttl: "{{ vault_ca_max_lease_ttl }}"
       force_no_cache: false
+    headers:
+      X-Vault-Request: true
+      X-Vault-Token: "{{ vault_token }}"
+  delegate_to: localhost
+
+- name: Create ca root certificate
+  ansible.builtin.uri:
+    validate_certs: false
+    url: "{{ vault_url }}/v1/{{ vault_ca_path }}/root/generate/internal"
+    method: PUT
+    body_format: json
+    body:
+      common_name: "{{ vault_ca_cert_common_name }}"
+      key_bits: "{{ vault_ca_cert_key_bits }}"
+      organization: "{{ vault_ca_cert_organization }}"
+      ou: "{{ vault_ca_cert_ou }}"
+      ttl: "{{ vault_ca_cert_ttl }}"
     headers:
       X-Vault-Request: true
       X-Vault-Token: "{{ vault_token }}"
