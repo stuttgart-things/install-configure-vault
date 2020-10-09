@@ -8,7 +8,6 @@
     body:
       password: "{{ vault_password }}"
     headers:
-      Content-Type: application/json
       X-Vault-Request: true
   register: vault_api_data_token
   delegate_to: localhost
