@@ -9,11 +9,10 @@
       password: "{{ vault_password }}"
     headers:
       X-Vault-Request: true
-      content-Type: application/x-www-form-urlencoded
   register: vault_api_data_token
   delegate_to: localhost
 
 - name: Debug api token
   ansible.builtin.debug:
-    msg: "Token received from vault server: {{ vault_api_data_token }}"
+    msg: "Token received from vault server: {{ vault_api_data_token.auth }}"
   when: debug | bool
