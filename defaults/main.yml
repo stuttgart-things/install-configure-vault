@@ -35,3 +35,7 @@ vault_create_kv_db: false
 
 # Create KV database
 vault_kv_write: false
+
+# Install ca on system
+vault_os_packages: 
+  - ca-certificates

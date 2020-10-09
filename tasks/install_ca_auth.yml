@@ -1,0 +1,14 @@
+---
+- name: Start install requirements task as become user
+  become: yes
+  block:
+  - name: Install required packages remote
+    include_role:
+      name: install-requirements 
+    vars:
+      update_packages: false
+      os_packages: "{{ vault_os_packages }}"
+      state: present
+
+
+# TODO TODO -> https://blog.confirm.ch/adding-a-new-trusted-certificate-authority/
