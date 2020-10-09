@@ -54,3 +54,17 @@
       X-Vault-Request: true
       X-Vault-Token: "{{ vault_token }}"
   delegate_to: localhost
+
+- name: Create ca and crl distribution points
+  ansible.builtin.uri:
+    validate_certs: false
+    url: "{{ vault_url }}/v1/{{ vault_ca_path }}/config/urls"
+    method: PUT
+    body_format: json
+    body:
+      crl_distribution_points: "{{ vault_url }}/v1/pki/crl"
+      issuing_certificates: "{{ vault_url }}/v1/pki/ca"
+    headers:
+      X-Vault-Request: true
+      X-Vault-Token: "{{ vault_token }}"
+  delegate_to: localhost
