@@ -15,5 +15,5 @@
 
 - name: Debug api token
   ansible.builtin.debug:
-    msg: "Token received from vault server: {{ vault_api_data_token.content }}"
+    msg: "Token received from vault server: {{ vault_api_data_token.content.auth }}"
   when: debug | bool
