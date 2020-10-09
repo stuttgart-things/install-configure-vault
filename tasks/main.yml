@@ -4,4 +4,8 @@
 
 - name: Create vault certification authority
   include_tasks: create_ca.yml
-  when: create_ca | bool
+  when: vault_create_ca | bool
+
+- name: Generate trusted certificate via vault server
+  include_tasks: create_ca.yml
+  when: vault_gen_cert | bool

@@ -5,7 +5,7 @@ vault_username: username
 vault_password: password
 
 # CA default configuration
-create_ca: false
+vault_create_ca: false
 vault_ca_path: pki
 vault_ca_max_lease_ttl: 8760h0m0s
 
@@ -20,3 +20,6 @@ vault_ca_cert_ttl: 8760h # One year by default
 vault_ca_role_allow_subdomains: true
 vault_ca_role_allowed_domains: example.com
 vault_ca_role_max_ttl: 8700h
+
+# Generate cert
+vault_gen_cert: false
