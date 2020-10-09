@@ -39,3 +39,11 @@
 - name: Note
   ansible.builtin.debug:
     msg: "Please install the ca key on target system so that the issued certificate is classified as trusted"
+
+- name: CA key linux link
+  ansible.builtin.debug:
+    msg: "CA key for linux - download here: {{ vault_url }}/v1/{{ vault_ca_path }}/ca/pem"
+
+- name: CA key windows link
+  ansible.builtin.debug:
+    msg: "CA key for windows - download here: {{ vault_url }}/v1/{{ vault_ca_path }}/ca"

@@ -72,7 +72,7 @@
 - name: Create ca role (general certificate policy)
   ansible.builtin.uri:
     validate_certs: false
-    url: "{{ vault_url }}/v1/{{ vault_ca_path }}//roles/{{ vault_ca_cert_role_name }}"
+    url: "{{ vault_url }}/v1/{{ vault_ca_path }}/roles/{{ vault_ca_cert_role_name }}"
     method: PUT
     body_format: json
     body:
@@ -86,4 +86,12 @@
 
 - name: Note
   ansible.builtin.debug:
-    msg: "Please install the ca key on target system so that certificates classified as trusted. You can download the ca certificates for linux and windows here: {{ vault_url }}/ui/vault/settings/secrets/configure/{{ vault_ca_path }}/cert"
+    msg: "Please install the ca key on target system so that certificates classified as trusted"
+
+- name: CA key linux link
+  ansible.builtin.debug:
+    msg: "CA key for linux - download here: {{ vault_url }}/v1/{{ vault_ca_path }}/ca/pem"
+
+- name: CA key windows link
+  ansible.builtin.debug:
+    msg: "CA key for windows - download here: {{ vault_url }}/v1/{{ vault_ca_path }}/ca"
