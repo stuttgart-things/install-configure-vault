@@ -2,9 +2,9 @@
 - name: Enable vault secret engine for CA
   ansible.builtin.uri:
     validate_certs: false
-    url: "{{ vault_url }}/v1/sys/mounts/pki"
+    url: "{{ vault_url }}/v1/sys/mounts/pki2"
     method: POST
-    body_format: form-urlencoded
+    body_format: json
     body:
       type: pki
       description: ""
