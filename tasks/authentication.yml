@@ -13,7 +13,7 @@
   register: vault_api_data_token
   delegate_to: localhost
 
-- name: Save request vault api token to vars
+- name: Save requested vault api token to vars
   ansible.builtin.set_fact:
     vault_token: "{{ vault_api_data_token.json.auth.client_token }}"
 
