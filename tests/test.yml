@@ -1,0 +1,11 @@
+---
+- hosts: "vault"
+  gather_facts: true
+  become: false
+  vars:
+    vault_url: https://vault.labul.sva.de:8200
+    vault_username: bernd
+    vault_password: hallo123
+    debug: true
+  roles:
+    - install-configure-vault
