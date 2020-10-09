@@ -1,7 +1,7 @@
 ---
 - name: Authenticate to the vault server
-  ansible.builtin.include_tasks: authentication.yml
+  include_tasks: authentication.yml
 
 - name: Create vault certification authority
-  ansible.builtin.include_tasks: create_ca.yml
+  include_tasks: create_ca.yml
   when: create_ca | bool
