@@ -17,9 +17,11 @@ vault_ca_cert_ou: example-ou
 vault_ca_cert_ttl: 8760h # One year by default
 
 # CA root role
+vault_ca_cert_role_name: example.com
 vault_ca_role_allow_subdomains: true
 vault_ca_role_allowed_domains: example.com
 vault_ca_role_max_ttl: 8700h
 
 # Generate cert
 vault_gen_cert: false
+vault_gen_cert_fqdn: host.example.com
