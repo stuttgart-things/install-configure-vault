@@ -29,3 +29,9 @@ vault_gen_cert_install: false
 vault_gen_cert_install_pub_path: /tmp/certs/vault/public_key.pem
 vault_gen_cert_install_priv_path: /tmp/certs/vault/private_key.pem
 vault_gen_cert_install_ca_path: /tmp/certs/vault/ca_key.pem
+
+# Create KV database
+vault_create_kv_db: false
+
+# Create KV database
+vault_kv_write: false
