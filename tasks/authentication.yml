@@ -1,6 +1,7 @@
 ---
 - name: API request vault auth token
   ansible.builtin.uri:
+    return_content: yes
     validate_certs: false
     url: "{{ vault_url }}/v1/auth/userpass/login/{{ vault_username }}"
     method: PUT
