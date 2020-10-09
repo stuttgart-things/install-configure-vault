@@ -68,3 +68,18 @@
       X-Vault-Request: true
       X-Vault-Token: "{{ vault_token }}"
   delegate_to: localhost
+
+- name: Create ca role (general certificate policy)
+  ansible.builtin.uri:
+    validate_certs: false
+    url: "{{ vault_url }}/v1/{{ vault_ca_path }}//roles/{{ vault_ca_cert_common_name }}"
+    method: PUT
+    body_format: json
+    body:
+      allow_subdomains: "{{ vault_ca_role_allow_subdomains }}"
+      allowed_domains: "{{ vault_ca_role_allowed_domains }}"
+      max_ttl: "{{ vault_ca_role_max_ttl }}"
+    headers:
+      X-Vault-Request: true
+      X-Vault-Token: "{{ vault_token }}"
+  delegate_to: localhost
