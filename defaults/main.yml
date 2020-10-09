@@ -25,3 +25,7 @@ vault_ca_role_max_ttl: 8700h
 # Generate cert
 vault_gen_cert: false
 vault_gen_cert_fqdn: host.example.com
+vault_gen_cert_install: false
+vault_gen_cert_install_pub_path: /tmp/certs/vault/public_key.pem
+vault_gen_cert_install_priv_path: /tmp/certs/vault/private_key.pem
+vault_gen_cert_install_ca_path: /tmp/certs/vault/ca_key.pem

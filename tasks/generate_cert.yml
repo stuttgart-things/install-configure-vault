@@ -14,6 +14,16 @@
   register: vault_generated_cert
   delegate_to: localhost
 
+- name: Installing public key
+  ansible.builtin.copy:
+    content: "{{ vault_generated_cert.json.certificate }}"
+    dest: "{{ vault_gen_cert_install_pub_path }}"
+
+- name: Installing private key
+  ansible.builtin.copy:
+    content: "{{ vault_generated_cert.json.certificate }}"
+    dest: "{{ vault_gen_cert_install_priv_path }}"
+
 - name: Output private key
   ansible.builtin.debug:
     msg: "Private KEY for {{ vault_gen_cert_fqdn }}: {{ vault_generated_cert.json.private_key }}"
