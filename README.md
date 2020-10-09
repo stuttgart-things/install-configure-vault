@@ -1,4 +1,4 @@
-stuttgart-things/vault-handler
+stuttgart-things/install-configure-vault
 =========================================
 
 # WIP
