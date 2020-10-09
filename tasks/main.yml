@@ -7,5 +7,5 @@
   when: vault_create_ca | bool
 
 - name: Generate trusted certificate via vault server
-  include_tasks: create_ca.yml
+  include_tasks: create_cert.yml
   when: vault_gen_cert | bool
