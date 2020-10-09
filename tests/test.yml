@@ -6,6 +6,7 @@
     vault_url: https://vault.labul.sva.de:8200
     vault_username: bernd
     vault_password: hallo123
+    create_ca: true
     debug: true
   roles:
     - install-configure-vault

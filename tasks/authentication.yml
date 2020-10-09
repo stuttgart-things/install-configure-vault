@@ -14,7 +14,7 @@
   delegate_to: localhost
 
 - name: Save request vault api token to vars
-  set_fact:
+  ansible.builtin.set_fact:
     vault_token: "{{ vault_api_data_token.json.auth.client_token }}"
 
 - name: Debug api token
