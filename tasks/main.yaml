@@ -4,20 +4,20 @@
   when: install_vault|bool
 
 - name: Authenticate to the vault server
-  include_tasks: authentication.yml
+  include_tasks: authentication.yaml
 
 - name: Create vault certification authority
-  include_tasks: create_ca.yml
-  when: vault_create_ca | bool
+  include_tasks: create-ca.yaml
+  when: vault_create_ca|bool
 
 - name: Generate trusted certificate via vault server
-  include_tasks: create_cert.yml
-  when: vault_gen_cert | bool
+  include_tasks: create-cert.yaml
+  when: vault_gen_cert|bool
 
 - name: Create kv database
-  include_tasks: create_kv_db.yml
-  when: vault_create_kv_db | bool
+  include_tasks: create-kv-db.yaml
+  when: vault_create_kv_db|bool
 
 - name: Write data to kv database
-  include_tasks: create_write_kv.yml
-  when: vault_kv_write | bool
+  include_tasks: create-write-kv.yaml
+  when: vault_kv_write|bool
