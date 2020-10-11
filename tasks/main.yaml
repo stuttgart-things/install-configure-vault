@@ -1,4 +1,8 @@
 ---
+- name: Install vault server
+  include_tasks: install-vault.yaml
+  when: install_vault|bool
+
 - name: Authenticate to the vault server
   include_tasks: authentication.yml
 
