@@ -24,19 +24,10 @@ ports:
     host: 8200
     container: 8200
 
-# /podman/pv/vault-server/config/vault.json
-# {
-#   "backend": {
-#     "file": {
-#       "path": "/vault/file"
-#     }
-#   },
-#   "listener": {
-#     "tcp":{
-#       "address": "0.0.0.0:8200",
-#       "tls_disable": 1,
-#       "proxy_protocol_behaviour": "use_always"
-#     }
-#   },
-#   "ui": true
-# }
+generate_certs: true
+certificate_option: selfsigned
+cert_ssl_subject: "{{ ansible_fqdn }}"
+cert_ssl_ip: "{{ ansible_default_ipv4.address }}"
+cert_mount_target: "{{ mounts.certs.host }}"
+cert_key_name: vault.key
+cert_crt_name: vault.crt
