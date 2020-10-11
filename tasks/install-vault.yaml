@@ -1,4 +1,13 @@
 ---
+- name: Load vault server podman-profile
+  include_vars: "{{lookup('first_found', params)}}"
+  vars:
+    params:
+      files:
+        - '{{ vault-server }}.yaml'
+      paths:
+        - 'vars'
+
 - name: Create vault config dir
   ansible.builtin.file:
     path: "{{ mounts.certs.host }}"
