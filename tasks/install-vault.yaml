@@ -1,0 +1,14 @@
+---
+- name: Create vault config dir
+  ansible.builtin.file:
+    path: "{{ mounts.certs.host }}"
+    state: directory
+
+- name: Create vault configuration file
+  ansible.builtin.template:
+    src: vault.json.j2
+    dest: "{{ mounts.certs.host }}/vault.json
+
+- name: Deploy Vault
+  include_role:
+    name: deploy-podman-container
