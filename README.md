@@ -11,6 +11,7 @@ Requirements
 installs role and all of it's dependencies w/:
 
 ```
+cat <<EOF > ./requirements.yaml
 roles:
 - src: git@codehub.sva.de:Lab/stuttgart-things/supporting-roles/install-configure-vault.git
   scm: git
@@ -25,4 +26,6 @@ collections:
 - name: containers.podman 
 - name: community.general
 - name: community.crypto
+EOF
+ansible-galaxy install -r ./requirements.yaml --force && ansible-galaxy collection install -r ./requirements.yaml -f
 ```
