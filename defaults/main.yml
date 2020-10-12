@@ -43,4 +43,6 @@ vault_os_packages:
   - ca-certificates
 
 # Install vault server
-install_vault: false  
+install_vault: false
+install_vault_init_secret_shares: 2
+install_vault_init_secret_threshold: 1
