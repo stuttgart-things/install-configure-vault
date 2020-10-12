@@ -15,7 +15,7 @@
   register: vault_generated_cert
   delegate_to: localhost
 
-- name: Debug api token
+- name: Debug api cert information
   ansible.builtin.debug:
     msg: "Certificate information from ca: {{ vault_generated_cert.json }}"
   when: debug | bool

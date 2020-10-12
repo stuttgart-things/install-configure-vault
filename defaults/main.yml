@@ -3,7 +3,7 @@
 vault_url: https://vault.example.com:8200
 vault_username: username
 vault_password: password
-
+debug: false
 # CA default configuration
 vault_create_ca: false
 vault_ca_path: pki
