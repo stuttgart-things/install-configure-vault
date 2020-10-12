@@ -22,25 +22,25 @@
 
 - name: Installing public key
   ansible.builtin.copy:
-    content: "{{ vault_generated_cert.json.certificate }}"
+    content: "{{ vault_generated_cert.json.data.certificate }}"
     dest: "{{ vault_gen_cert_install_pub_path }}"
 
 - name: Installing private key
   ansible.builtin.copy:
-    content: "{{ vault_generated_cert.json.certificate }}"
+    content: "{{ vault_generated_cert.json.data.certificate }}"
     dest: "{{ vault_gen_cert_install_priv_path }}"
 
 - name: Output private key
   ansible.builtin.debug:
-    msg: "Private KEY for {{ vault_gen_cert_fqdn }}: {{ vault_generated_cert.json.private_key }}"
+    msg: "Private KEY for {{ vault_gen_cert_fqdn }}: {{ vault_generated_cert.json.data.private_key }}"
 
 - name: Output public key
   ansible.builtin.debug:
-    msg: "Public KEY for {{ vault_gen_cert_fqdn }}: {{ vault_generated_cert.json.certificate }}"
+    msg: "Public KEY for {{ vault_gen_cert_fqdn }}: {{ vault_generated_cert.json.data.certificate }}"
 
 - name: Output issuing ca public key
   ansible.builtin.debug:
-    msg: "Public KEY of certification authority (please install): {{ vault_generated_cert.json.issuing_ca }}"
+    msg: "Public KEY of certification authority (please install): {{ vault_generated_cert.json.data.issuing_ca }}"
 
 - name: Note
   ansible.builtin.debug:
