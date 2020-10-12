@@ -4,6 +4,7 @@
     validate_certs: false
     url: "{{ vault_url }}/v1/sys/mounts/{{ vault_ca_path }}"
     method: POST
+    status_code: 204
     body_format: json
     body:
       type: pki
