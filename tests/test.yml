@@ -3,10 +3,41 @@
   gather_facts: true
   become: false
   vars:
-    vault_url: https://vault.labul.sva.de:8200
-    vault_username: bernd
-    vault_password: hallo123
-    create_ca: true
-    debug: true
+    # default configuration
+    vault_url: https://vault.example.com:8200
+    vault_username: username
+    vault_password: password
+
+    # CA default configuration
+    vault_create_ca: false
+    vault_ca_path: pki
+    vault_ca_max_lease_ttl: 8760h0m0s
+
+    # CA root certificate default configuration
+    vault_ca_cert_common_name: example.com # Best pratice the name of the domain managed by vault CA
+    vault_ca_cert_key_bits: 4096
+    vault_ca_cert_organization: company
+    vault_ca_cert_ou: example-ou
+    vault_ca_cert_ttl: 8760h # One year by default
+
+    # CA root role
+    vault_ca_cert_role_name: example.com
+    vault_ca_role_allow_subdomains: true
+    vault_ca_role_allowed_domains: example.com
+    vault_ca_role_max_ttl: 8700h
+
+    # Generate cert
+    vault_gen_cert: false
+    vault_gen_cert_fqdn: host.example.com
+    vault_gen_cert_install: false
+    vault_gen_cert_install_pub_path: /tmp/certs/vault/public_key.pem
+    vault_gen_cert_install_priv_path: /tmp/certs/vault/private_key.pem
+    vault_gen_cert_install_ca_path: /tmp/certs/vault/ca_key.crt
+
+    # Create KV database
+    vault_create_kv_db: false
+
+    # Create KV database
+    vault_kv_write: false
   roles:
     - install-configure-vault
