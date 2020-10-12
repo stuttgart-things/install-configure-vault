@@ -28,6 +28,7 @@
     validate_certs: false
     url: "{{ vault_url }}/v1/sys/mounts/{{ vault_ca_path }}/tune"
     method: POST
+    status_code: 204
     body_format: json
     body:
       options: null
@@ -44,6 +45,7 @@
     validate_certs: false
     url: "{{ vault_url }}/v1/{{ vault_ca_path }}/root/generate/internal"
     method: PUT
+    status_code: 204
     body_format: json
     body:
       common_name: "{{ vault_ca_cert_common_name }}"
@@ -61,6 +63,7 @@
     validate_certs: false
     url: "{{ vault_url }}/v1/{{ vault_ca_path }}/config/urls"
     method: PUT
+    status_code: 204
     body_format: json
     body:
       crl_distribution_points: "{{ vault_url }}/v1/pki/crl"
@@ -75,6 +78,7 @@
     validate_certs: false
     url: "{{ vault_url }}/v1/{{ vault_ca_path }}/roles/{{ vault_ca_cert_role_name }}"
     method: PUT
+    status_code: 204
     body_format: json
     body:
       allow_subdomains: "{{ vault_ca_role_allow_subdomains }}"
