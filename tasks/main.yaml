@@ -19,10 +19,10 @@
   include_tasks: generate-cert.yaml
   when: vault_gen_cert|bool
 
-- name: Create kv database
+- name: Create KV database
   include_tasks: create-kv-db.yaml
   when: vault_create_kv_db|bool
 
-- name: Write data to kv database
+- name: Write data to KV database
   include_tasks: create-write-kv.yaml
   when: vault_kv_write|bool

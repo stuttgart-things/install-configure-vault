@@ -1,1 +1,25 @@
 ---
+- name: Create KV database
+  ansible.builtin.uri:
+    validate_certs: false
+    url: "{{ vault_url }}/v1/sys/mounts/{{ vault_ceate_kv_db_name }}"
+    method: POST
+    status_code: 200
+    body_format: json
+    body:
+      type: kv
+      description: ""
+      config:
+        options: null
+        default_lease_ttl: 0s
+        max_lease_ttl: 0s
+        force_no_cache: false
+      local: false
+      seal_wrap: false
+      external_entropy_access: false
+      options:
+        version: 2
+    headers:
+      X-Vault-Request: true
+      X-Vault-Token: "{{ vault_token }}"
+  delegate_to: localhost
