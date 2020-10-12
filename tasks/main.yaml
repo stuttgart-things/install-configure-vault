@@ -12,7 +12,7 @@
   when: vault_create_ca|bool
 
 - name: Generate trusted certificate via vault server
-  include_tasks: create-cert.yaml
+  include_tasks: generate-cert.yaml
   when: vault_gen_cert|bool
 
 - name: Create kv database
