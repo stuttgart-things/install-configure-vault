@@ -1,1 +1,16 @@
 ---
+- name: "Write data to {{ vault_ceate_kv_db_name }}/{{ vault_kv_write_secret_name }}"
+  ansible.builtin.uri:
+    validate_certs: false
+    url: "{{ vault_url }}/v1/{{ vault_ceate_kv_db_name }}/{{ vault_kv_write_secret_name }}"
+    method: PUT
+    status_code: 200
+    body_format: json
+    body:
+      data:
+        KEY: VALUE
+        KEY2: VAULUE2
+    headers:
+      X-Vault-Request: true
+      X-Vault-Token: "{{ vault_token }}"
+  delegate_to: localhost
