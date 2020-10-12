@@ -11,10 +11,21 @@ Requirements
 installs role and all of it's dependencies w/:
 
 ```
-cat <<EOF > /tmp/requirements.yaml
+cat <<EOF > ./requirements.yaml
+roles:
 - src: git@codehub.sva.de:Lab/stuttgart-things/supporting-roles/install-configure-vault.git
   scm: git
+- src: git@codehub.sva.de:Lab/stuttgart-things/supporting-roles/install-requirements.git
+  scm: git
+- src: git@codehub.sva.de:Lab/stuttgart-things/supporting-roles/deploy-podman-container.git
+  scm: git
+- src: git@codehub.sva.de:Lab/stuttgart-things/supporting-roles/generate-selfsigned-certs.git
+  scm: git
+
+collections:
+- name: containers.podman 
+- name: community.general
+- name: community.crypto
 EOF
-ansible-galaxy install -r /tmp/requirements.yaml --force
-rm -rf /tmp/requirements.yaml
+ansible-galaxy install -r ./requirements.yaml --force && ansible-galaxy collection install -r ./requirements.yaml -f
 ```

@@ -39,3 +39,6 @@ vault_kv_write: false
 # Install ca on system
 vault_os_packages: 
   - ca-certificates
+
+# role
+install_vault: false  
