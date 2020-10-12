@@ -24,11 +24,13 @@
   ansible.builtin.copy:
     content: "{{ vault_generated_cert.json.data.certificate }}"
     dest: "{{ vault_gen_cert_install_pub_path }}"
+  when: vault_gen_cert_install | bool
 
 - name: Installing private key
   ansible.builtin.copy:
     content: "{{ vault_generated_cert.json.data.certificate }}"
     dest: "{{ vault_gen_cert_install_priv_path }}"
+  when: vault_gen_cert_install | bool
 
 - name: Output private key
   ansible.builtin.debug:
