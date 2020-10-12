@@ -7,6 +7,7 @@
     vault_url: https://vault.example.com:8200
     vault_username: username
     vault_password: password
+    client_token: "s.1234" # Only use if no user exists to auth
 
     # CA default configuration
     vault_create_ca: false
