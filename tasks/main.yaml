@@ -3,6 +3,10 @@
   include_tasks: install-vault.yaml
   when: install_vault|bool
 
+- name: Init vault server after installation
+  include_tasks: init-vault.yaml
+  when: install_vault|bool
+
 - name: Authenticate to the vault server
   include_tasks: authentication.yaml
   when: vault_token is undefined

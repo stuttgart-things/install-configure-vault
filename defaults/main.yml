@@ -41,5 +41,5 @@ vault_kv_write: false
 vault_os_packages: 
   - ca-certificates
 
-# role
+# Install vault server
 install_vault: false  

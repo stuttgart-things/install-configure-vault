@@ -1,0 +1,27 @@
+---
+- name: Request a vault init
+  ansible.builtin.uri:
+    validate_certs: false
+    url: "{{ vault_url }}/v1/sys/init"
+    method: PUT
+    status_code: 200
+    body_format: json
+    body:
+      secret_shares: 3
+      secret_threshold: 2
+      stored_shares: 0
+      pgp_keys: null
+      recovery_shares: 5
+      recovery_threshold: 3
+      recovery_pgp_keys: null
+      root_token_pgp_key: ""
+    headers:
+      X-Vault-Request: true
+      X-Vault-Token: "{{ vault_token }}"
+  register: vault_api_data_init
+  delegate_to: localhost
+
+- name: Debug api init information
+  ansible.builtin.debug:
+    msg: "Token received from vault server: {{ vault_api_data_init }}"
+  when: debug | bool
