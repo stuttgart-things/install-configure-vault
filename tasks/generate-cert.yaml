@@ -5,6 +5,7 @@
     validate_certs: false
     url: "{{ vault_url }}/v1/{{ vault_ca_path }}/issue/{{ vault_ca_cert_role_name }}"
     method: PUT
+    status_code: 204
     body_format: json
     body:
       common_name: "{{ vault_gen_cert_fqdn }}"
