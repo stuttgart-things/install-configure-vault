@@ -83,7 +83,7 @@ example.com
 ## Version:
 ```
 DATE         WHO       		  WHAT
-20200813     Marcel Zapf           Init readme, role wip
+20200813     Marcel Zapf        Init readme, role wip
 ```
 
 License
