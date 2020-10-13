@@ -27,3 +27,11 @@
   ansible.builtin.debug:
     msg: "Init confirmation message from server: {{ vault_api_data_init.json }}"
   when: debug | bool
+
+- name: Output root token
+  ansible.builtin.debug:
+    msg: "Generated root token: {{ vault_api_data_init.json.root_token }}"
+
+- name: Output unseal key(s)
+  ansible.builtin.debug:
+    msg: "Generated unseal key(s): {{ vault_api_data_init.json }}"
