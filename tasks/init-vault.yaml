@@ -1,5 +1,5 @@
 ---
-- name: "Wait for {{ vault_url }} come up"
+- name: "Wait for webservice {{ vault_url }} come up"
   ansible.builtin.uri:
     validate_certs: false
     url: "{{ vault_url }}"
@@ -25,5 +25,5 @@
 
 - name: Debug api init information
   ansible.builtin.debug:
-    msg: "Token received from vault server: {{ vault_api_data_init }}"
+    msg: "Init confirmation message from server: {{ vault_api_data_init.json }}"
   when: debug | bool
