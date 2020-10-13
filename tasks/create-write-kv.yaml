@@ -12,7 +12,7 @@
       X-Vault-Token: "{{ vault_token }}"
   delegate_to: localhost
 
-- name: "Write file data to in base64 {{ vault_ceate_kv_db_name }}/{{ vault_kv_write_secret_name }}"
+- name: Write file data in base64 to kv secret engine
   ansible.builtin.uri:
     validate_certs: false
     url: "{{ vault_url }}/v1/{{ item.secret_engine }}/{{ item.secret_name }}"
