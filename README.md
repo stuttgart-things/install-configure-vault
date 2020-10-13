@@ -75,3 +75,25 @@ ansible-playbook -i inventory.ini playbook.yml
 [vault]
 example.com
 ```
+
+## Requirements and Dependencies:
+- Ubuntu 20.04
+- Ubuntu 18.04
+- CentOS 8
+- CentOS 7
+
+## Version:
+```
+DATE         WHO       		  WHAT
+20200813     Marcel Zapf      Init readme, role wip
+```
+
+License
+-------
+
+BSD
+
+Author Information
+------------------
+
+Marcel Zapf; 10/2020; SVA GmbH
