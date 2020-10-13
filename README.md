@@ -3,7 +3,8 @@ stuttgart-things/install-configure-vault
 
 # WIP
 
-This Ansible role can completely set up and configure a hashicorp vault. 
+This Ansible role can completely set up and configure a hashicorp vault.
+
 In addition to the installation, this role can also be used to fill the vault with data and issue certificates and many more.
 
 ### Features:
