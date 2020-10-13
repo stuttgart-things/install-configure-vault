@@ -11,6 +11,7 @@ Requirements
 installs role and all of it's dependencies w/:
 
 <details><summary>Install this role on your ansible host (klick here)</summary>
+
 ```
 cat <<EOF > ./requirements.yaml
 roles:
