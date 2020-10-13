@@ -1,0 +1,24 @@
+---
+- name: Enable userpass auth engine
+  ansible.builtin.uri:
+    validate_certs: false
+    url: "{{ vault_url }}/v1/sys/auth/userpass"
+    method: POST
+    status_code: 204
+    body_format: json
+    body:
+      type: userpass
+      description: ""
+      config: 
+        options: null
+        default_lease_ttl: 0s
+        max_lease_ttl: 0s
+        force_no_cache: false
+      local: false
+      seal_wrap: false
+      external_entropy_access: false
+      options: null
+    headers:
+      X-Vault-Request: true
+      X-Vault-Token: "{{ vault_token }}"
+  delegate_to: localhost
