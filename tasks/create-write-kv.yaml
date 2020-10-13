@@ -6,10 +6,22 @@
     method: PUT
     status_code: 200
     body_format: json
+    body: "{{ lookup('template', './vault-kv-write-secret.json.j2') }}"
+    headers:
+      X-Vault-Request: true
+      X-Vault-Token: "{{ vault_token }}"
+  delegate_to: localhost
+
+- name: "Write file data to in base64 {{ vault_ceate_kv_db_name }}/{{ vault_kv_write_secret_name }}"
+  ansible.builtin.uri:
+    validate_certs: false
+    url: "{{ vault_url }}/v1/{{ vault_ceate_kv_db_name }}/{{ vault_kv_write_secret_name }}"
+    method: PUT
+    status_code: 200
+    body_format: json
     body:
       data:
-        KEY: VALUE
-        KEY2: VAULUE2
+        "{{ vault_kv_write_file_name }}: {{ vault_kv_write_file_path | base64 }}"
     headers:
       X-Vault-Request: true
       X-Vault-Token: "{{ vault_token }}"

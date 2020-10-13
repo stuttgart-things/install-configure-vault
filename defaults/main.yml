@@ -36,7 +36,13 @@ vault_create_kv_db: false
 vault_ceate_kv_db_name: mykvdb 
 # Write data to KV database
 vault_kv_write: false
-vault_kv_write_secret_name: mysecret
+vault_kv_write_data:
+  - secret_name: infra
+    key: username
+    value: password
+  - secret_name: infra
+    key: ip-address
+    value: 1.2.3.4
 
 # Install ca on system
 vault_os_packages: 
