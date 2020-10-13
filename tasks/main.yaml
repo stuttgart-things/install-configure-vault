@@ -7,6 +7,10 @@
   include_tasks: init-vault.yaml
   when: install_vault|bool
 
+- name: Create user via userpass engine
+  include_tasks: create-user.yaml
+  when: vault_create_user|bool
+
 - name: Authenticate to the vault server
   include_tasks: authentication.yaml
   when: vault_token is undefined and not install_vault
