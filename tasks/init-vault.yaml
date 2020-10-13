@@ -15,8 +15,8 @@
       recovery_threshold: "{{ install_vault_init_secret_shares }}"
       recovery_pgp_keys: null
       root_token_pgp_key: ""
-    headers:
-      X-Vault-Request: true
+#    headers:
+#      X-Vault-Request: true
 #      X-Vault-Token: "{{ vault_token }}"
   register: vault_api_data_init
   delegate_to: localhost
