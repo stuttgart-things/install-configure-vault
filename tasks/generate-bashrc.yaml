@@ -1,1 +1,7 @@
 ---
+- name: Create GET method in bashrc for request secrets
+  ansible.builtin.lineinfile:
+    path: ~/.bashrc
+    state: present
+    insertafter: EOF
+    line: "alias labda_vault="eval $(vault kv get -field=data -format=json labda/awx | jq -r 'keys[] as $k | "export \($k)=\(.[$k])"') && eval $(vault kv get -field=data -format=json labda/vcenter | jq -r 'keys[] as $k | "export \($k)=\(.[$k])"') && eval $(vault kv get -field=data -format=json ocp4/pull_secret | jq -r 'keys[] as $k | "export \($k)=\(.[$k])"')""
