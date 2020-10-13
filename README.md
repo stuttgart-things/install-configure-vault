@@ -8,7 +8,7 @@ In addition to the installation, this role can also be used to fill the vault wi
 - Install vault (within a podman container)
 - Initialize new vault installation
 - Create a vault root certification authority
-- Provide and sign trusted certificates for services such as letsencrypt
+- Provide and issue trusted certificates for services such as letsencrypt
 - Create local users
 - Create key value databases
 - Add key value data (WIP)
