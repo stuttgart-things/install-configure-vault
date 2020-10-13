@@ -3,21 +3,12 @@
   ansible.builtin.uri:
     validate_certs: false
     url: "{{ vault_url }}/v1/sys/init"
-    method: PUT
+    method: POST
     status_code: 200
     body_format: json
     body:
       secret_shares: "{{ install_vault_init_secret_shares }}"
       secret_threshold: "{{ install_vault_init_secret_threshold }}"
-      stored_shares: 0
-      pgp_keys: null
-      recovery_shares: "{{ install_vault_init_secret_shares }}"
-      recovery_threshold: "{{ install_vault_init_secret_shares }}"
-      recovery_pgp_keys: null
-      root_token_pgp_key: ""
-    headers:
-      X-Vault-Request: true
-      X-Vault-Token: ""
   register: vault_api_data_init
   delegate_to: localhost
 
