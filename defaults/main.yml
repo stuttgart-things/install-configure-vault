@@ -33,7 +33,8 @@ vault_gen_cert_install_ca_path: /tmp/certs/vault/ca_key.crt
 
 # Create KV database
 vault_create_kv_db: false
-vault_ceate_kv_db_name: mykvdb 
+vault_ceate_kv_db_name: mykvdb
+
 # Write data to KV database
 vault_kv_write: false
 vault_kv_write_data:
