@@ -30,3 +30,34 @@ ansible-galaxy install -r ./requirements.yaml --force && ansible-galaxy collecti
 </details>
 
 ## Example playbooks to use this role
+
+<details><summary>Install a vault server within a podman container (klick here)</summary>
+
+### Ansible command:
+```
+ansible-playbook -i inventory.ini playbook.yml
+```
+
+### Playbook: playbook.yml
+```
+- hosts: "vault"
+  gather_facts: true
+  become: true
+  vars:
+    # default configuration
+    vault_url: https://example.com:8200
+
+    # Install vault server
+    install_vault: true
+    install_vault_init_secret_shares: 1
+    install_vault_init_secret_threshold: 1
+
+  roles:
+    - install-configure-vault
+```
+
+### Playbook: inventory.ini
+```
+[vault]
+example.c
+```
