@@ -2,7 +2,6 @@ stuttgart-things/install-configure-vault
 =========================================
 
 This Ansible role can completely set up and configure a hashicorp vault. The entire ansible logic is based on api calls. No client binary is required.
-
 In addition to the installation, this role can also be used to fill the vault with data and issue certificates and much more.
 
 ### Features:
