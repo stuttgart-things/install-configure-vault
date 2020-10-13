@@ -52,3 +52,10 @@ vault_os_packages:
 install_vault: false
 install_vault_init_secret_shares: 2
 install_vault_init_secret_threshold: 1
+
+# Create new local userpass user
+vault_create_user: false
+vault_crate_user_data:
+  - name: username
+    password: secret
+    policies: admins

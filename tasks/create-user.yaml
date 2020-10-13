@@ -26,14 +26,16 @@
 - name: Create local vault user(s) via userpass engine
   ansible.builtin.uri:
     validate_certs: false
-    url: "{{ vault_url }}/v1/auth/userpass/users/{{ username }}"
+    url: "{{ vault_url }}/v1/auth/userpass/users/{{ item.name }}"
     method: PUT
     status_code: 204
     body_format: json
     body:
-      password: "{{ password}}"
-      policies: admins
+      password: "{{ item.password }}"
+      policies: "{{ item.policies }}"
     headers:
       X-Vault-Request: true
       X-Vault-Token: "{{ vault_token }}"
+  with_items:
+    - "{{ vault_crate_user_data }}"
   delegate_to: localhost
