@@ -11,13 +11,13 @@
       secret_threshold: "{{ install_vault_init_secret_threshold }}"
       stored_shares: 0
       pgp_keys: null
-      recovery_shares: "{{ install_vault_init_secret_shares }}"
-      recovery_threshold: "{{ install_vault_init_secret_shares }}"
+#      recovery_shares: "{{ install_vault_init_secret_shares }}"
+#      recovery_threshold: "{{ install_vault_init_secret_shares }}"
       recovery_pgp_keys: null
       root_token_pgp_key: ""
     headers:
       X-Vault-Request: true
-      X-Vault-Token: "{{ vault_token }}"
+#      X-Vault-Token: "{{ vault_token }}"
   register: vault_api_data_init
   delegate_to: localhost
 
