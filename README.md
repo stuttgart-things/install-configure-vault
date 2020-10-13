@@ -7,15 +7,15 @@ This Ansible role can completely set up and configure a hashicorp vault.
 In addition to the installation, this role can also be used to fill the vault with data and issue certificates and many more.
 
 Features:
--Install vault
--Initialize new vault installation
--Create a vault root certification authority
--Provide and sign trusted certificates for services such as letsencrypt
--Create local users
--Create key value databases
--Add key value data (WIP)
--Generate .bashrc file for fully automated environment handling (WIP)
--Automated certificate installation (WIP)
+- Install vault
+- Initialize new vault installation
+- Create a vault root certification authority
+- Provide and sign trusted certificates for services such as letsencrypt
+- Create local users
+- Create key value databases
+- Add key value data (WIP)
+- Generate .bashrc file for fully automated environment handling (WIP)
+- Automated certificate installation (WIP)
 
 
 <details><summary>Install this role on your ansible host (klick here)</summary>
