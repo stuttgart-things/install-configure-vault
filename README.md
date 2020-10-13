@@ -5,11 +5,6 @@ stuttgart-things/install-configure-vault
 
 This role can read and write files as well as passwords and KV data from the Hashicorp Vault. It is also possible to write key / value data as environment variables in the system.
 
-Requirements
-------------
-
-installs role and all of it's dependencies w/:
-
 <details><summary>Install this role on your ansible host (klick here)</summary>
 
 ```
