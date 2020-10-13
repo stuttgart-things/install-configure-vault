@@ -7,6 +7,7 @@ roles:
   scm: git
 - src: git@codehub.sva.de:Lab/stuttgart-things/supporting-roles/generate-selfsigned-certs.git
   scm: git
+  version: stable
 
 collections:
 - name: containers.podman 
