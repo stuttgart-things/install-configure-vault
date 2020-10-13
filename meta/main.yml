@@ -1,6 +1,6 @@
 galaxy_info:
   author: Marcel Zapf
-  description: role to deploy and configure hashicorp vault
+  description: role to deploy, configure and manage hashicorp vault
   company: SVA GmbH
 
   # If the issue tracker for your role is not on github, uncomment the
