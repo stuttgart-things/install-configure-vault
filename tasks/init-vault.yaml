@@ -34,4 +34,4 @@
 
 - name: Output unseal key(s)
   ansible.builtin.debug:
-    msg: "Generated unseal key(s): {{ vault_api_data_init.json.keys[*] }}"
+    msg: "Generated unseal key(s): {{ vault_api_data_init.json.keys }}"
