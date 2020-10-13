@@ -39,14 +39,17 @@ vault_ceate_kv_db_name: mykvdb
 vault_kv_write: false
 vault_kv_write_data:
   - secret_name: infra
+    secret_engine: example
     key: username
     value: password
   - secret_name: infra
+    secret_engine: example
     key: ip-address
     value: 1.2.3.4
 
 vault_kv_write_file_data:
   - secret_name: infra
+    secret_engine: example
     path: /tmp/kubeconfig
 
 # Install ca on system
