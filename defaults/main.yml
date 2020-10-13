@@ -51,6 +51,7 @@ vault_kv_write_file_data:
   - secret_name: infra
     secret_engine: example
     path: /tmp/kubeconfig
+    filename: kubeconfig
 
 # Install ca on system
 vault_os_packages: 
