@@ -12,7 +12,7 @@ In addition to the installation, this role can also be used to fill the vault wi
 - Create local users
 - Create key value databases
 - Add key value data (WIP)
-- Upload local files to vault secret store
+- Upload local files to vault secret store (implementet, but not tested yet)
 - Generate .bashrc file for fully automated environment handling (WIP)
 - Automated certificate installation (WIP)
 
