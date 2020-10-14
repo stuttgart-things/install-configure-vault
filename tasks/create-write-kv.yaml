@@ -1,8 +1,8 @@
 ---
-- name: "Write data to {{ vault_ceate_kv_db_name }}/{{ vault_kv_write_secret_name }}"
+- name: Write KV data to kv secret engine
   ansible.builtin.uri:
     validate_certs: false
-    url: "{{ vault_url }}/v1/{{ vault_ceate_kv_db_name }}/{{ vault_kv_write_secret_name }}"
+    url: "{{ vault_url }}/v1/{{ item.secret_engine }}/{{ item.secret_name }}"
     method: PUT
     status_code: 200
     body_format: json
@@ -10,7 +10,10 @@
     headers:
       X-Vault-Request: true
       X-Vault-Token: "{{ vault_token }}"
+  with_items:
+    - "{{ vault_kv_write_data }}"
   delegate_to: localhost
+  when: vault_kv_write_data is defined
 
 - name: Write file data in base64 to kv secret engine
   ansible.builtin.uri:
@@ -28,3 +31,4 @@
   with_items:
     - "{{ vault_kv_write_file_data }}"
   delegate_to: localhost
+  when: vault_kv_write_file_data is defined
