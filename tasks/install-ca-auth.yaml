@@ -10,11 +10,23 @@
       os_packages: "{{ vault_install_ca_cert_packages }}"
       state: present
 
-## TASK GET CA KEY FOR NEXT TASK
+- name: Download vault CA certificate
+  ansible.builtin.uri:
+    return_content: yes
+    validate_certs: false
+    url: "{{ vault_url }}/v1/{{ vault_ca_path }}/ca/pem"
+    method: GET
+    status_code: 200
+  register: vault_install_ca_cert_download
+  delegate_to: localhost
+
+- name: CA cert downloaded, installing following cert to system
+  ansible.builtin.debug:
+    var: vault_install_ca_cert_download.content
 
 - name: Copy certificate authority to trusted ca path of the os
   copy:
-    src: "{{ item }}"
+    content: "{{ vault_install_ca_cert_download.content }}"
     dest: '{{ ca_path[ansible_os_family][ansible_distribution_major_version|int] }}/'
     owner: root
     group: root
