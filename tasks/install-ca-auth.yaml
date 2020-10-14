@@ -7,8 +7,20 @@
       name: install-requirements 
     vars:
       update_packages: false
-      os_packages: "{{ vault_os_packages }}"
+      os_packages: "{{ vault_install_ca_cert_packages }}"
       state: present
 
+## TASK GET CA KEY FOR NEXT TASK
 
-# TODO TODO -> https://blog.confirm.ch/adding-a-new-trusted-certificate-authority/
+- name: Copy certificate authority to trusted ca path of the os
+  copy:
+    src: "{{ item }}"
+    dest: '{{ ca_path[ansible_os_family][ansible_distribution_major_version|int] }}/'
+    owner: root
+    group: root
+    mode: 0644
+  with_fileglob:
+    - files/ca/*
+  notify:
+    - Install vault CA to Debian os system
+    - Install vault CA to RedHat os system
