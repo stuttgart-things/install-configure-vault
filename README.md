@@ -358,8 +358,10 @@ example.com
 
 ## Version:
 ```
-DATE         WHO       		  WHAT
-20201013     Marcel Zapf        Init readme, role wip
+DATE         WHO            WHAT
+20201013     Marcel Zapf    Init readme, role wip
+20201014     Marcel Zapf    Implementet new Features
+20201015     Marcel Zapf    Bug fixing
 ```
 
 License
