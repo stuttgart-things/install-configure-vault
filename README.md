@@ -52,6 +52,7 @@ ansible-playbook -i inventory.ini playbook.yml
 
 ### Playbook: playbook.yml
 ```
+---
 - hosts: "vault"
   gather_facts: true
   become: true
@@ -73,6 +74,80 @@ ansible-playbook -i inventory.ini playbook.yml
 [vault]
 example.com
 ```
+</details>
+
+<details><summary>Create new local users (klick here)</summary>
+
+### Ansible command:
+```
+ansible-playbook -i inventory.ini playbook.yml
+```
+
+### Playbook: playbook.yml
+```
+---
+- hosts: "localhost"
+  gather_facts: true
+  become: true
+  vars:
+    # default configuration
+    vault_url: https://example.com:8200
+    #vault_username: username
+    #vault_password: password
+    vault_token: <root_token> # or uncomment vault user+pw and use a admin user account
+
+    # Create new local userpass user
+    vault_create_user: true
+    vault_crate_user_data:
+      - name: bob
+        password: secret
+        policies: admins
+      - name: alice
+        password: supersecret
+        policies: admins
+
+  roles:
+    - install-configure-vault
+```
+
+</details>
+
+<details><summary>Create certification authority (klick here)</summary>
+
+### Ansible command:
+```
+ansible-playbook playbook.yml
+```
+
+### Playbook: playbook.yml
+```
+---
+- hosts: "localhost"
+  gather_facts: true
+  become: true
+  vars:
+    # default configuration
+    vault_url: https://example.com:8200
+    #vault_username: username
+    #vault_password: password
+    vault_token: <root_token> # or uncomment vault user+pw and use a admin user account
+
+    # CA root certificate default configuration
+    vault_create_ca: true
+    vault_ca_cert_common_name: mydomain.com # Best pratice the name of the domain managed by vault CA
+    vault_ca_cert_key_bits: 4096
+    vault_ca_cert_organization: company
+    vault_ca_cert_ou: my-ou
+
+    # CA root role
+    vault_ca_cert_role_name: mydomain.com
+    vault_ca_role_allow_subdomains: true
+    vault_ca_role_allowed_domains: mydomain.com
+
+  roles:
+    - install-configure-vault
+```
+
 </details>
 
 ## Requirements and Dependencies:
