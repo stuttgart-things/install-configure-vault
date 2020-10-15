@@ -15,18 +15,28 @@
   delegate_to: localhost
   when: vault_kv_write_data is defined
 
-- name: Write file data in base64 to kv secret engine
-  ansible.builtin.uri:
-    validate_certs: false
-    url: "{{ vault_url }}/v1/{{ item.secret_engine }}/data/{{ item.secret_name }}"
-    method: PUT
-    status_code: 200
-    body_format: json
-    body: '{"data":{"{{ item.filename }}":"{{ lookup('file', '{{ item.path }}') | b64encode }}"},"options":{}}'
-    headers:
-      X-Vault-Request: true
-      X-Vault-Token: "{{ vault_token }}"
+- name: Start file handling process
+  block:
+
+    - name: "Decoding {{ item.path }} to base64"
+      set_fact: 
+        vault_kv_write_file_data_base64: "{{ lookup('file', '{{ item.path }}') | b64encode }}"
+
+    - name: Write file data in base64 to kv secret engine
+      ansible.builtin.uri:
+        validate_certs: false
+        url: "{{ vault_url }}/v1/{{ item.secret_engine }}/data/{{ item.secret_name }}"
+        method: PUT
+        status_code: 200
+        body_format: json
+        body:
+          data: 
+            '{"{{ item.filename }}": "{{ vault_kv_write_file_data_base64 }}"}'
+        headers:
+          X-Vault-Request: true
+          X-Vault-Token: "{{ vault_token }}"
+      delegate_to: localhost
   with_items:
     - "{{ vault_kv_write_file_data }}"
-  delegate_to: localhost
   when: vault_kv_write_file_data is defined
+
