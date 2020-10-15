@@ -76,7 +76,7 @@ vault_crate_user_data:
     policies: admins
 
 # Generate bashrc
-vault_bashrc_mod:
-  - name: vault_example
-    secret_engine: se
-    secret_name: example
+# vault_bashrc_mod:
+#   - name: vault_example
+#     secret_engine: se
+#     secret_name: example
