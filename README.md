@@ -150,7 +150,7 @@ ansible-playbook playbook.yml
 
 </details>
 
-<details><summary>Install the vault certification authority on remote system (klick here)</summary>
+<details><summary>Install the vault certification authority ca certificate on remote system (klick here)</summary>
 
 ### Ansible command:
 ```
@@ -181,7 +181,7 @@ example.com
 ```
 </details>
 
-<details><summary>Install the vault certification authority locally (klick here)</summary>
+<details><summary>Install the vault certification authority ca certificate locally (klick here)</summary>
 
 ### Ansible command:
 ```
