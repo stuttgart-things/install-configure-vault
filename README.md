@@ -305,7 +305,7 @@ ansible-playbook playbook.yml
       - secret_name: test
         secret_engine: labul
         path: /tmp/test.txt
-        filename: test
+        filename: test # The key on vault server, needed for extracting 
 
   roles:
     - install-configure-vault
@@ -337,7 +337,7 @@ ansible-playbook -i inventory.ini playbook.yml
       - secret_name: test
         secret_engine: labul
         path: /tmp/test.txt
-        filename: test
+        filename: test # The key on vault server, needed for extracting 
 
   roles:
     - install-configure-vault
