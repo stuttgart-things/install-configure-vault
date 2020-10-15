@@ -24,7 +24,7 @@
     body_format: json
     body:
       data:
-        "{{ item.filename }}: {{ lookup('file', '{{ item.path }}' | base64 }}"
+        "{{ item.filename }}: {{ lookup('file', '{{ item.path }}') | base64 }}"
     headers:
       X-Vault-Request: true
       X-Vault-Token: "{{ vault_token }}"
