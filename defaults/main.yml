@@ -54,6 +54,7 @@ vault_kv_write: false
 #     filename: kubeconfig
 
 # Install ca on system
+vault_install_ca_cert: false
 vault_install_ca_cert_packages: 
   - ca-certificates
 vault_install_ca_cert_ca_path:
@@ -63,6 +64,7 @@ vault_install_ca_cert_ca_path:
   Debian:
     18: /usr/local/share/ca-certificates
     20: /usr/local/share/ca-certificates
+
 # Install vault server
 install_vault: false
 install_vault_init_secret_shares: 2

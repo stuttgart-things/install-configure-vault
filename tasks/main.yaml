@@ -30,3 +30,7 @@
 - name: Write data to KV database
   include_tasks: create-write-kv.yaml
   when: vault_kv_write|bool
+
+- name: Install vault ca certificate to local system
+  include_tasks: install-ca-auth.yaml
+  when: vault_kv_write|bool
