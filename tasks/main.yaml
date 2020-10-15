@@ -13,7 +13,7 @@
 
 - name: Authenticate to the vault server
   include_tasks: authentication.yaml
-  when: vault_token is undefined and not install_vault
+  when: vault_token is undefined and not install_vault and not vault_install_ca_cert
 
 - name: Create vault certification authority
   include_tasks: create-ca.yaml
