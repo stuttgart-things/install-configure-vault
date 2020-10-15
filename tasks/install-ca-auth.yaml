@@ -31,8 +31,6 @@
     owner: root
     group: root
     mode: 0644
-  with_fileglob:
-    - files/ca/*
   notify:
     - Install vault CA to Debian os system
     - Install vault CA to RedHat os system
