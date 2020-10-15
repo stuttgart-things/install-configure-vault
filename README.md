@@ -14,7 +14,7 @@ In addition to the installation, this role can also be used to fill the vault wi
 - Add key value data (WIP)
 - Upload local files to vault secret store (implementet, but not tested yet)
 - Generate .bashrc file for fully automated environment handling (WIP)
-- Automated certificate installation (WIP)
+- Automated certificate installation
 
 
 <details><summary>Install this role on your ansible host (klick here)</summary>
