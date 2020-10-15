@@ -206,7 +206,7 @@ ansible-playbook playbook.yml
 ```
 </details>
 
-<details><summary>Request a certificate from the vault server to sign on remote system with installation(klick here)</summary>
+<details><summary>Request a certificate from the vault server to sign on remote system with installation (klick here) </summary>
 
 ### Ansible command:
 ```
@@ -309,6 +309,44 @@ ansible-playbook playbook.yml
 
   roles:
     - install-configure-vault
+```
+</details>
+
+<details><summary>Upload file from remote machine to vault (klick here)</summary>
+
+### Ansible command:
+```
+ansible-playbook -i inventory.ini playbook.yml
+```
+
+### Playbook: playbook.yml
+```
+---
+- hosts: "all"
+  gather_facts: true
+  become: false
+  vars:
+    # default configuration
+    vault_url: https://example.com:8200
+    #vault_username: username
+    #vault_password: password
+    vault_token: <root_token> # or uncomment vault user+pw and use a admin user account
+
+    vault_kv_write: true
+    vault_kv_write_file_data:
+      - secret_name: test
+        secret_engine: labul
+        path: /tmp/test.txt
+        filename: test
+
+  roles:
+    - install-configure-vault
+```
+
+### Playbook: inventory.ini
+```
+[vault]
+example.com
 ```
 </details>
 
