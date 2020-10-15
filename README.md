@@ -52,6 +52,7 @@ ansible-playbook -i inventory.ini playbook.yml
 
 ### Playbook: playbook.yml
 ```
+---
 - hosts: "vault"
   gather_facts: true
   become: true
@@ -73,6 +74,48 @@ ansible-playbook -i inventory.ini playbook.yml
 [vault]
 example.com
 ```
+</details>
+
+<details><summary>Create new local users (klick here)</summary>
+
+### Ansible command:
+```
+ansible-playbook -i inventory.ini playbook.yml
+```
+
+### Playbook: playbook.yml
+```
+---
+- hosts: "all"
+  gather_facts: true
+  become: true
+  vars:
+    # default configuration
+    vault_url: https://vault.labul.sva.de:8200
+    #vault_username: username
+    #vault_password: password
+    vault_token: <root_token> # or uncomment vault user+pw and use a admin user account
+
+    # Create new local userpass user
+    vault_create_user: true
+    vault_crate_user_data:
+      - name: bob
+        password: secret
+        policies: admins
+      - name: alice
+        password: supersecret
+        policies: admins
+
+  roles:
+    - install-configure-vault
+```
+
+### Playbook: inventory.ini
+```
+[vault]
+example.com
+```
+
 </details>
 
 ## Requirements and Dependencies:
