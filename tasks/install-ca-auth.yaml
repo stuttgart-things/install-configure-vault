@@ -27,7 +27,7 @@
 - name: Copy certificate authority to trusted ca path of the os
   ansible.builtin.copy:
     content: "{{ vault_install_ca_cert_download.content }}"
-    dest: '{{ vault_install_ca_cert_ca_path[ansible_os_family][ansible_distribution_major_version|int] }}/'
+    dest: '{{ vault_install_ca_cert_ca_path[ansible_os_family][ansible_distribution_major_version|int] }}'
     owner: root
     group: root
     mode: 0644
