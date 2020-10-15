@@ -1,0 +1,1 @@
+{​​​​​​​​% for item in vault_bashrc_mod %}​​​​​​​​ alias {{ item.name }}="eval $(vault kv get -field=data -format=json {{ item.secret_engine }}/{{ item.secret_name }} | jq -r 'keys[] as $k | "export \($k)=\(.[$k])"') && eval $(vault kv get -field=data -format=json labda/vcenter | jq -r 'keys[] as $k | "export \($k)=\(.[$k])"') {​​​​​​​​% endfor %}
