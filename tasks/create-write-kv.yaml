@@ -23,7 +23,7 @@
     status_code: 200
     body_format: json
     body:
-      data: "{{ item.filename }}": "{{ lookup('file', '{{ item.path }}') | b64encode }}"
+      data: "{{ item.filename }}: {{ lookup('file', '{{ item.path }}') | b64encode }}"
     headers:
       X-Vault-Request: true
       X-Vault-Token: "{{ vault_token }}"
