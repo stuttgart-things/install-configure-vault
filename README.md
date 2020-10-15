@@ -150,6 +150,62 @@ ansible-playbook playbook.yml
 
 </details>
 
+<details><summary>Install the vault certification authority on remote system (klick here)</summary>
+
+### Ansible command:
+```
+ansible-playbook -i inventory.ini playbook.yml
+```
+
+### Playbook: playbook.yml
+```
+---
+- hosts: "all"
+  gather_facts: true
+  become: true
+  vars:
+    # default configuration
+    vault_url: https://example.com:8200
+
+    # Install ca on system
+    vault_install_ca_cert: true
+
+  roles:
+    - install-configure-vault
+```
+
+### Playbook: inventory.ini
+```
+[vault]
+example.com
+```
+</details>
+
+<details><summary>Install the vault certification authority locally (klick here)</summary>
+
+### Ansible command:
+```
+ansible-playbook playbook.yml
+```
+
+### Playbook: playbook.yml
+```
+---
+- hosts: "localhost"
+  gather_facts: true
+  become: true
+  vars:
+    # default configuration
+    vault_url: https://example.com:8200
+
+    # Install ca on system
+    vault_install_ca_cert: true
+
+  roles:
+    - install-configure-vault
+```
+</details>
+
 ## Requirements and Dependencies:
 - Ubuntu 20.04
 - Ubuntu 18.04
