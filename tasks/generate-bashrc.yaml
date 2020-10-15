@@ -4,4 +4,8 @@
     path: ~/.bashrc
     state: present
     insertafter: EOF
-    line: "alias labda_vault="eval $(vault kv get -field=data -format=json labda/awx | jq -r 'keys[] as $k | "export \($k)=\(.[$k])"') && eval $(vault kv get -field=data -format=json labda/vcenter | jq -r 'keys[] as $k | "export \($k)=\(.[$k])"') && eval $(vault kv get -field=data -format=json ocp4/pull_secret | jq -r 'keys[] as $k | "export \($k)=\(.[$k])"')""
+    line: "{{ lookup('template', './bashrc.j2') }}"
+
+- name: Note
+  ansible.builtin.debug:
+    msg: "After terminal restart or system reboot you can execute the alias name to source the vault vars to your env"
