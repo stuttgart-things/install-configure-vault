@@ -206,7 +206,7 @@ ansible-playbook playbook.yml
 ```
 </details>
 
-<details><summary>Request a certificate from the vault server to sign on remote system(klick here)</summary>
+<details><summary>Request a certificate from the vault server to sign on remote system with installation(klick here)</summary>
 
 ### Ansible command:
 ```
@@ -221,17 +221,17 @@ ansible-playbook playbook.yml
   become: false
   vars:
     # default configuration
-    vault_url: https://vault.labul.sva.de:8200
+    vault_url: https://example.com:8200
     #vault_username: username
     #vault_password: password
     vault_token: <root_token> # or uncomment vault user+pw and use a admin user account
 
     # CA root role
-    vault_ca_cert_role_name: labul.sva.de
+    vault_ca_cert_role_name: example.com
 
     # Generate cert
     vault_gen_cert: true
-    vault_gen_cert_fqdn: host55.labul.sva.de
+    vault_gen_cert_fqdn: hostname.example.com
     vault_gen_cert_install: true # true for installing cert directly to the path 
     vault_gen_cert_install_pub_path: /tmp/public_key.pem
     vault_gen_cert_install_priv_path: /tmp/private_key.pem
@@ -248,13 +248,37 @@ example.com
 ```
 </details>
 
+<details><summary>Request a certificate from the vault server to sign locally without installation (klick here)</summary>
 
+### Ansible command:
+```
+ansible-playbook playbook.yml
+```
 
+### Playbook: playbook.yml
+```
+---
+- hosts: "all"
+  gather_facts: true
+  become: false
+  vars:
+    # default configuration
+    vault_url: https://example.com:8200
+    #vault_username: username
+    #vault_password: password
+    vault_token: <root_token> # or uncomment vault user+pw and use a admin user account
 
+    # CA root role
+    vault_ca_cert_role_name: example.com
 
+    # Generate cert
+    vault_gen_cert: true
+    vault_gen_cert_fqdn: hostname.example.com
 
-
-
+  roles:
+    - install-configure-vault
+```
+</details>
 
 ## Requirements and Dependencies:
 - Ubuntu 20.04
