@@ -258,7 +258,7 @@ ansible-playbook playbook.yml
 ### Playbook: playbook.yml
 ```
 ---
-- hosts: "all"
+- hosts: "localhost"
   gather_facts: true
   become: false
   vars:
