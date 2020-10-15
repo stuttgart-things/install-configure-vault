@@ -43,7 +43,7 @@ ansible-galaxy install -r ./requirements.yaml --force && ansible-galaxy collecti
 
 ## Example playbooks to use this role
 
-<details><summary>Install a vault server within a podman container (klick here)</summary>
+<details><summary>Install and initializing a vault server within a podman container (klick here)</summary>
 
 ### Ansible command:
 ```
