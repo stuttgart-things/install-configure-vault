@@ -33,4 +33,4 @@
 
 - name: Install vault ca certificate to local system
   include_tasks: install-ca-auth.yaml
-  when: vault_kv_write|bool
+  when: vault_install_ca_cert|bool
