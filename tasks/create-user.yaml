@@ -4,7 +4,7 @@
     validate_certs: false
     url: "{{ vault_url }}/v1/sys/auth/userpass"
     method: POST
-    status_code: 204
+    status_code: [200, 400, 204]
     body_format: json
     body:
       type: userpass
