@@ -5,6 +5,9 @@ vault_username: username
 vault_password: password
 debug: false
 
+vault_install_json_packages:
+  - name: jmespath
+
 # CA default configuration
 vault_create_ca: false
 vault_ca_path: pki

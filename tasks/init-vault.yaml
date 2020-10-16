@@ -1,4 +1,16 @@
 ---
+- name: Start install requirements task as become user
+  become: yes
+  block:
+  - name: Install jmespath library to provide json filtering
+    include_role:
+      name: install-requirements 
+    vars:
+      update_packages: false
+      python_modules: "{{ vault_install_json_packages }}"
+      state: present
+
+
 - name: "Wait for webservice {{ vault_url }} come up"
   ansible.builtin.uri:
     validate_certs: false
@@ -27,6 +39,11 @@
   ansible.builtin.debug:
     msg: "Init confirmation message from server: {{ vault_api_data_init.json }}"
   when: debug | bool
+
+- name: Save auth information from init to vars
+  set_fact:
+    vault_token: "{{ vault_api_data_init.json.root_token }}"
+    vault_unseal: "{{ vault_api_data_init.json }}"
 
 - name: Output root token
   ansible.builtin.debug:
