@@ -16,7 +16,7 @@ In addition to the installation, this role can also be used to fill the vault wi
 - Generate .bashrc file for fully automated environment handling (WIP)
 - Automated certificate installation
 
-
+### Role installation:
 <details><summary><b>Install this role on your ansible host (klick here)</b></summary>
 
 ```
