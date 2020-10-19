@@ -17,15 +17,17 @@ In addition to the installation, this role can also be used to fill the vault wi
 - Automated certificate installation
 
 
-<details><summary>Install this role on your ansible host (klick here)</summary>
+<details><summary>**-> Install this role on your ansible host (klick here)**</summary>
 
 ```
 cat <<EOF > ./requirements.yaml
 roles:
 - src: git@codehub.sva.de:Lab/stuttgart-things/supporting-roles/install-configure-vault.git
   scm: git
+  version: stable
 - src: git@codehub.sva.de:Lab/stuttgart-things/supporting-roles/install-requirements.git
   scm: git
+  version: stable
 - src: git@codehub.sva.de:Lab/stuttgart-things/supporting-roles/deploy-podman-container.git
   scm: git
 - src: git@codehub.sva.de:Lab/stuttgart-things/supporting-roles/generate-selfsigned-certs.git
