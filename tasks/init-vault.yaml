@@ -40,10 +40,17 @@
     msg: "Init confirmation message from server: {{ vault_api_data_init.json }}"
   when: debug | bool
 
+- name: "Search unseal key in json string"
+  set_fact:
+    vault_unseal: '{{ vault_api_data_init.json | json_query(query) }}'
+  vars:
+    query: "results[?(@.name == '{{ resource_name }}')].id"
+  when: vault_api_data_init is defined
+
+
 - name: Save auth information from init to vars
   set_fact:
     vault_token: "{{ vault_api_data_init.json.root_token }}"
-    vault_unseal: "{{ vault_api_data_init.json }}"
 
 - name: Output root token
   ansible.builtin.debug:
