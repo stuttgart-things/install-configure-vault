@@ -44,7 +44,7 @@
   set_fact:
     vault_unseal: '{{ vault_api_data_init.json | json_query(query) }}'
   vars:
-    query: ".keys[0]"
+    query: "keys[0]"
   when: vault_api_data_init is defined
 
 
