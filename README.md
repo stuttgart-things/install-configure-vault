@@ -44,7 +44,7 @@ collections:
 EOF
 ansible-galaxy install -r ./requirements.yaml --force && ansible-galaxy collection install -r ./requirements.yaml -f
 ```
-</details>
+**</details>**
 
 ## Example playbooks to use this role
 
