@@ -91,7 +91,7 @@
 
 - name: Note
   ansible.builtin.debug:
-    msg: "Please install the ca key on target system so that certificates classified as trusted"
+    msg: "Please install the ca key on target system so that certificates classified as trusted or you can run this role that automaticly installs the ca cert on your system"
 
 - name: CA key linux link
   ansible.builtin.debug:
