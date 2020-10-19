@@ -365,6 +365,7 @@ DATE         WHO            WHAT
 20201013     Marcel Zapf    Init readme, role wip
 20201014     Marcel Zapf    Implementet new Features
 20201015     Marcel Zapf    Bug fixing
+20201019     Marcel Zapf    Logic added that allows further vault tasks to be linked directly after installation
 ```
 
 License
