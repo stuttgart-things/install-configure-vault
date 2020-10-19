@@ -4,6 +4,7 @@ roles:
   version: stable
 - src: git@codehub.sva.de:Lab/stuttgart-things/supporting-roles/install-requirements.git
   scm: git
+  version: stable
 - src: git@codehub.sva.de:Lab/stuttgart-things/supporting-roles/deploy-podman-container.git
   scm: git
 - src: git@codehub.sva.de:Lab/stuttgart-things/supporting-roles/generate-selfsigned-certs.git
