@@ -1,4 +1,9 @@
 ---
+- name: Note
+  ansible.builtin.debug:
+    msg: "For more information and debuging you can enter the debug mode with the extra vars: -e 'debug=true'"
+  when: not debug
+
 - name: Install vault server
   include_tasks: install-vault.yaml
   when: install_vault|bool
