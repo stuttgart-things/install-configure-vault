@@ -17,7 +17,7 @@ In addition to the installation, this role can also be used to fill the vault wi
 - Automated certificate installation
 
 
-**<details><summary>Install this role on your ansible host (klick here)</summary>**
+<details><summary>Install this role on your ansible host (klick here)</summary>
 
 ```
 cat <<EOF > ./requirements.yaml
@@ -44,7 +44,7 @@ collections:
 EOF
 ansible-galaxy install -r ./requirements.yaml --force && ansible-galaxy collection install -r ./requirements.yaml -f
 ```
-**</details>**
+</details>
 
 ## Example playbooks to use this role
 
