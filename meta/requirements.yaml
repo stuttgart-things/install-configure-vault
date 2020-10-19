@@ -1,6 +1,7 @@
 roles:
 - src: git@codehub.sva.de:Lab/stuttgart-things/supporting-roles/install-configure-vault.git
   scm: git
+  version: stable
 - src: git@codehub.sva.de:Lab/stuttgart-things/supporting-roles/install-requirements.git
   scm: git
 - src: git@codehub.sva.de:Lab/stuttgart-things/supporting-roles/deploy-podman-container.git
