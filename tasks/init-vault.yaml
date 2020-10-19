@@ -52,7 +52,3 @@
 - name: Output unseal shamir key(s)
   ansible.builtin.debug:
     msg: "Generated unseal key(s): {{ vault_api_data_init.json }}"
-
-- name: Note
-  ansible.builtin.debug:
-    msg: "Please go to: {{ vault_url }} and unseal the vault with the shamir keys "
