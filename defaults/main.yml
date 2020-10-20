@@ -10,6 +10,7 @@ vault_install_json_packages:
 
 # CA default configuration
 vault_create_ca: false
+vault_ca_install_vault_cert: true
 vault_ca_path: pki
 vault_ca_max_lease_ttl: 8760h0m0s
 

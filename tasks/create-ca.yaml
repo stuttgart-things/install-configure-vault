@@ -99,7 +99,7 @@
         - 'vars'
   when: vault_ca_install_vault_cert | bool
 
-- name: "Request and sign certificate for {{ ansible_fqdn }} (vault webinterface)"
+- name: "Request and sign certificate for: {{ ansible_fqdn }} (vault webinterface)"
   ansible.builtin.uri:
     return_content: yes
     validate_certs: false
@@ -116,16 +116,16 @@
   delegate_to: localhost
   when: vault_ca_install_vault_cert | bool
 
-- name: "Installing public key to {{ mounts.certs.host }}/{{ cert_crt_name }}"
+- name: "Installing public key to {{ mounts.certs.host }}{{ cert_crt_name }}"
   ansible.builtin.copy:
     content: "{{ vault_generated_cert_vault.json.data.certificate }}"
-    dest: "{{ mounts.certs.host }}/{{ cert_crt_name }}"
+    dest: "{{ mounts.certs.host }}{{ cert_crt_name }}"
   when: vault_ca_install_vault_cert | bool
 
-- name: "Installing private key to {{ mounts.certs.host }}/{{ cert_key_name }}"
+- name: "Installing private key to {{ mounts.certs.host }}{{ cert_key_name }}"
   ansible.builtin.copy:
     content: "{{ vault_generated_cert_vault.json.data.private_key }}"
-    dest: "{{ mounts.certs.host }}/{{ cert_key_name }}"
+    dest: "{{ mounts.certs.host }}{{ cert_key_name }}"
   when: vault_ca_install_vault_cert | bool
 
 - name: Note
