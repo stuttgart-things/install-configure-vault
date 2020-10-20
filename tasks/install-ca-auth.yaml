@@ -18,7 +18,6 @@
     method: GET
     status_code: 200
   register: vault_install_ca_cert_download
-  delegate_to: localhost
 
 - name: CA cert downloaded, installing following cert to system
   ansible.builtin.debug:
