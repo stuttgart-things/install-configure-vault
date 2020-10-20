@@ -9,6 +9,7 @@
     body_format: json
     body:
       common_name: "{{ vault_gen_cert_fqdn }}"
+      ttl: "{{ vault_gen_cert_ttl }}"
     headers:
       X-Vault-Request: true
       X-Vault-Token: "{{ vault_token }}"
