@@ -14,7 +14,7 @@
       X-Vault-Request: true
       X-Vault-Token: "{{ vault_token }}"
   register: vault_generated_cert
-  delegate_to: localhost
+  delegate_to: "{{ vault_api_executor }}"
 
 - name: Debug api cert information
   ansible.builtin.debug:

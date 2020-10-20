@@ -20,7 +20,7 @@
   until: vault_api_data_website_status.status == 200
   retries: 60
   delay: 1
-  delegate_to: localhost
+  delegate_to: "{{ vault_api_executor }}"
 
 - name: Request a vault init
   ansible.builtin.uri:
@@ -33,7 +33,7 @@
       secret_shares: "{{ install_vault_init_secret_shares }}"
       secret_threshold: "{{ install_vault_init_secret_threshold }}"
   register: vault_api_data_init
-  delegate_to: localhost
+  delegate_to: "{{ vault_api_executor }}"
 
 - name: Debug api init information
   ansible.builtin.debug:
@@ -72,4 +72,4 @@
       reset: false
       migrate: false
   register: vault_api_data_init
-  delegate_to: localhost
+  delegate_to: "{{ vault_api_executor }}"

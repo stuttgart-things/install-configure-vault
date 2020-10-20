@@ -4,7 +4,7 @@ vault_url: https://vault.example.com:8200
 vault_username: username
 vault_password: password
 debug: false
-
+vault_api_executor: "{{ inventory_hostname }}"
 vault_install_json_packages:
   - name: jmespath
 

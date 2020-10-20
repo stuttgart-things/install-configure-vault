@@ -21,7 +21,7 @@
     headers:
       X-Vault-Request: true
       X-Vault-Token: "{{ vault_token }}"
-  delegate_to: localhost
+  delegate_to: "{{ vault_api_executor }}"
 
 - name: Create local vault user(s) via userpass engine
   ansible.builtin.uri:
@@ -38,4 +38,4 @@
       X-Vault-Token: "{{ vault_token }}"
   with_items:
     - "{{ vault_crate_user_data }}"
-  delegate_to: localhost
+  delegate_to: "{{ vault_api_executor }}"

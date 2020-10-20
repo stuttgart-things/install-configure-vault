@@ -11,7 +11,7 @@
     headers:
       X-Vault-Request: true
   register: vault_api_data_token
-  delegate_to: localhost
+  delegate_to: "{{ vault_api_executor }}"
 
 - name: Save requested vault api token to vars
   ansible.builtin.set_fact:

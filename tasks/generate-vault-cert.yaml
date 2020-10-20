@@ -22,7 +22,7 @@
       X-Vault-Request: true
       X-Vault-Token: "{{ vault_token }}"
   register: vault_generated_cert_vault
-  delegate_to: localhost
+  delegate_to: "{{ vault_api_executor }}"
 
 - name: "Installing public key to {{ mounts.certs.host }}{{ cert_crt_name }}"
   ansible.builtin.copy:

@@ -22,4 +22,4 @@
     headers:
       X-Vault-Request: true
       X-Vault-Token: "{{ vault_token }}"
-  delegate_to: localhost
+  delegate_to: "{{ vault_api_executor }}"
