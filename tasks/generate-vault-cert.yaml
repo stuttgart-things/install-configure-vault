@@ -35,4 +35,4 @@
     dest: "{{ mounts.certs.host }}{{ cert_key_name }}"
 
 - name: Restart podman container to apply new cert
-  ansible.builtin.shell: "podman restart {{ container_name }}"
+  ansible.builtin.command: "podman restart {{ container_name }}"
