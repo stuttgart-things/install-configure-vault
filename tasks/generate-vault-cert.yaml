@@ -35,8 +35,10 @@
     content: "{{ vault_generated_cert_vault.json.data.private_key }}"
     dest: "{{ mounts.certs.host }}{{ cert_key_name }}"
 
-- name: Restart podman container to apply new cert
-  command: podman restart "{{ container_name }}"
+- name: Restart vault container to apply new certificate
+  ansible.builtin.service:
+    name: "{{ service_name }}"
+    state: restarted
 
 - name: "Wait for webservice {{ vault_url }} come up"
   ansible.builtin.uri:
