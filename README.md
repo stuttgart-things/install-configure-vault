@@ -368,6 +368,7 @@ DATE         WHO            WHAT
 20201014     Marcel Zapf    Implementet new Features
 20201015     Marcel Zapf    Bug fixing
 20201019     Marcel Zapf    Logic added that allows further vault tasks to be linked directly after installation
+20201020     Marcel Zapf    Better logic vault creates his own cert for webinterface and api, api awx bugfix move execution host from localhost to vars
 ```
 
 License
