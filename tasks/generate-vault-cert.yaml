@@ -36,3 +36,30 @@
 
 - name: Restart podman container to apply new cert
   command: podman restart "{{ container_name }}"
+
+- name: "Wait for webservice {{ vault_url }} come up"
+  ansible.builtin.uri:
+    validate_certs: false
+    url: "{{ vault_url }}"
+    status_code: 200
+  register: vault_api_data_website_status
+  until: vault_api_data_website_status.status == 200
+  retries: 60
+  delay: 1
+  delegate_to: "{{ vault_api_executor }}"
+  when: vault_unseal is defined
+
+- name: Make initial vault unsealing
+  ansible.builtin.uri:
+    validate_certs: false
+    url: "{{ vault_url }}/v1/sys/unseal"
+    method: PUT
+    status_code: 200
+    body_format: json
+    body:
+      key: "{{ vault_unseal }}"
+      reset: false
+      migrate: false
+  register: vault_api_data_init
+  delegate_to: "{{ vault_api_executor }}"
+  when: vault_unseal is defined
