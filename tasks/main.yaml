@@ -24,6 +24,10 @@
   include_tasks: create-ca.yaml
   when: vault_create_ca|bool
 
+- name: Recreate vault cert with vault ca
+  include_tasks: generate-vault-cert.yaml
+  when: vault_ca_install_vault_cert | bool
+
 - name: Generate trusted certificate via vault server
   include_tasks: generate-cert.yaml
   when: vault_gen_cert|bool

@@ -89,44 +89,9 @@
       X-Vault-Token: "{{ vault_token }}"
   delegate_to: localhost
 
-- name: Load vault server podman-profile
-  include_vars: "{{lookup('first_found', params)}}"
-  vars:
-    params:
-      files:
-        - 'vault-server.yaml'
-      paths:
-        - 'vars'
-  when: vault_ca_install_vault_cert | bool
-
-- name: "Request and sign certificate for: {{ ansible_fqdn }} (vault webinterface)"
-  ansible.builtin.uri:
-    return_content: yes
-    validate_certs: false
-    url: "{{ vault_url }}/v1/{{ vault_ca_path }}/issue/{{ vault_ca_cert_role_name }}"
-    method: PUT
-    status_code: 200
-    body_format: json
-    body:
-      common_name: "{{ ansible_fqdn }}"
-    headers:
-      X-Vault-Request: true
-      X-Vault-Token: "{{ vault_token }}"
-  register: vault_generated_cert_vault
-  delegate_to: localhost
-  when: vault_ca_install_vault_cert | bool
-
-- name: "Installing public key to {{ mounts.certs.host }}{{ cert_crt_name }}"
-  ansible.builtin.copy:
-    content: "{{ vault_generated_cert_vault.json.data.certificate }}"
-    dest: "{{ mounts.certs.host }}{{ cert_crt_name }}"
-  when: vault_ca_install_vault_cert | bool
-
-- name: "Installing private key to {{ mounts.certs.host }}{{ cert_key_name }}"
-  ansible.builtin.copy:
-    content: "{{ vault_generated_cert_vault.json.data.private_key }}"
-    dest: "{{ mounts.certs.host }}{{ cert_key_name }}"
-  when: vault_ca_install_vault_cert | bool
+- name: Enable vars for automatic vault cert replacement
+  ansible.builtin.set_fact:
+    vault_ca_install_vault_cert: true
 
 - name: Note
   ansible.builtin.debug:
