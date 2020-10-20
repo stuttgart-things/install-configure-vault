@@ -33,3 +33,6 @@
   ansible.builtin.copy:
     content: "{{ vault_generated_cert_vault.json.data.private_key }}"
     dest: "{{ mounts.certs.host }}{{ cert_key_name }}"
+
+- name: Restart podman container to apply new cert
+  ansible.builtin.shell: podman restart {{ container_name }}
