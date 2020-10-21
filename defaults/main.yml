@@ -12,14 +12,14 @@ vault_install_json_packages:
 vault_create_ca: false
 vault_ca_install_vault_cert: false
 vault_ca_path: pki
-vault_ca_max_lease_ttl: 8760h0m0s
+vault_ca_max_lease_ttl: 87600h0m0s
 
 # CA root certificate default configuration
 vault_ca_cert_common_name: example.com # Best pratice the name of the domain managed by vault CA
 vault_ca_cert_key_bits: 4096
 vault_ca_cert_organization: company
 vault_ca_cert_ou: example-ou
-vault_ca_cert_ttl: 8760h # One year by default
+vault_ca_cert_ttl: 87600h # One year by default
 
 # CA root role
 vault_ca_cert_role_name: example.com
