@@ -24,12 +24,14 @@ vault_ca_cert_ttl: 87600h # One year by default
 # CA root role
 vault_ca_cert_role_name: example.com
 vault_ca_role_allow_subdomains: true
+vault_ca_role_ip_sans: true
 vault_ca_role_allowed_domains: example.com
 vault_ca_role_max_ttl: 8700h
 
 # Generate cert
 vault_gen_cert: false
 vault_gen_cert_fqdn: host.example.com
+vault_gen_cert_ip_sans: 192.0.2.1
 vault_gen_cert_install: false
 vault_gen_cert_install_pub_path: /tmp/certs/vault/public_key.pem
 vault_gen_cert_install_priv_path: /tmp/certs/vault/private_key.pem
