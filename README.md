@@ -237,6 +237,7 @@ ansible-playbook playbook.yml
     # Generate cert
     vault_gen_cert: true
     vault_gen_cert_fqdn: hostname.example.com
+    #vault_gen_cert_ip_sans: 192.168.1.1 #Only set if access via the ip should be permitted or if there is an alternative
     vault_gen_cert_install: true # true for installing cert directly to the path 
     vault_gen_cert_install_pub_path: /tmp/public_key.pem
     vault_gen_cert_install_priv_path: /tmp/private_key.pem
@@ -279,6 +280,8 @@ ansible-playbook playbook.yml
     # Generate cert
     vault_gen_cert: true
     vault_gen_cert_fqdn: hostname.example.com
+    #vault_gen_cert_ip_sans: 192.168.1.1 #Only set if access via the ip should be permitted or if there is an alternative
+
 
   roles:
     - install-configure-vault
