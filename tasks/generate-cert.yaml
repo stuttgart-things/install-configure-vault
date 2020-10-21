@@ -9,7 +9,7 @@
     body_format: json
     body:
       common_name: "{{ vault_gen_cert_fqdn }}"
-      ip_sans: "{{ vault_gen_cert_ip_sans }}"
+      ip_sans: "{{ vault_gen_cert_ip_sans | default(omit) }}"
       ttl: "{{ vault_gen_cert_ttl }}"
     headers:
       X-Vault-Request: true
