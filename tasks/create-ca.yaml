@@ -83,7 +83,6 @@
     body:
       allow_subdomains: "{{ vault_ca_role_allow_subdomains }}"
       allowed_domains: "{{ vault_ca_role_allowed_domains }}"
-      allow_ip_sans: "{{ vaul_ca_role_allow_ip_sans }}"
       max_ttl: "{{ vault_ca_role_max_ttl }}"
     headers:
       X-Vault-Request: true
