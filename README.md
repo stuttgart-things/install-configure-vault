@@ -373,6 +373,7 @@ DATE         WHO            WHAT
 20201019     Marcel Zapf    Logic added that allows further vault tasks to be linked directly after installation
 20201020     Marcel Zapf    Better logic vault creates his own cert for webinterface and api, api awx bugfix move execution host from localhost to vars
 20201021     Marcel Zapf    Added support for additionally ip address with domain name (Vault CA)
+20201022     Marcel Zapf    Move error handler to own file, fix json override bug, add ip_sans to ca installation
 ```
 
 License
