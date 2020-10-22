@@ -74,6 +74,7 @@ vault_install_ca_cert_ca_path:
 
 # Install vault server
 install_vault: false
+destroy_vault: false
 install_vault_init_secret_shares: 2
 install_vault_init_secret_threshold: 1
 
