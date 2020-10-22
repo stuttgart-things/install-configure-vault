@@ -5,7 +5,7 @@
   when: not debug
 
 - name: destroy vault server
-  include_tasks: install-vault.yaml
+  include_tasks: destroy.yaml
   when: destroy_vault|bool
 
 - name: Install vault server
