@@ -375,6 +375,7 @@ DATE         WHO            WHAT
 20201021     Marcel Zapf    Added support for additionally ip address with domain name (Vault CA)
 20201022     Marcel Zapf    Move error handler to own file, fix json override bug, add ip_sans to ca installation
 20201023     Marcel Zapf    Add missing task for installing issuing ca key
+20201026     Marcel Zapf    Fixed ip_san error while running error handler
 ```
 
 License
