@@ -17,10 +17,10 @@ In addition to the installation, this role can also be used to fill the vault wi
 - Automated certificate installation
 
 ### Role installation:
-<details><summary><b>Install this role on your ansible host (klick here)</b></summary>
+<details><summary><b>Install this role on your ansible host (click here)</b></summary>
 
 ```
-cat <<EOF > ./requirements.yaml
+cat <<EOF > /tmp/requirements.yaml
 roles:
 - src: git@codehub.sva.de:Lab/stuttgart-things/supporting-roles/install-configure-vault.git
   scm: git
@@ -42,13 +42,13 @@ collections:
 - name: community.general
 - name: community.crypto
 EOF
-ansible-galaxy install -r ./requirements.yaml --force && ansible-galaxy collection install -r ./requirements.yaml -f
+ansible-galaxy install -r /tmp/requirements.yaml --force && ansible-galaxy collection install -r /tmp/requirements.yaml -f
 ```
 </details>
 
 ## Example playbooks to use this role
 
-<details><summary>Install and initializing a vault server within a podman container (klick here)</summary>
+<details><summary>Install and initializing a vault server within a podman container (click here)</summary>
 
 ### Ansible command:
 ```
@@ -81,7 +81,7 @@ example.com
 ```
 </details>
 
-<details><summary>Create new local users (klick here)</summary>
+<details><summary>Create new local users (click here)</summary>
 
 ### Ansible command:
 ```
@@ -117,7 +117,7 @@ ansible-playbook -i inventory.ini playbook.yml
 
 </details>
 
-<details><summary>Create certification authority (klick here)</summary>
+<details><summary>Create certification authority (click here)</summary>
 
 ### Ansible command:
 ```
@@ -155,7 +155,7 @@ ansible-playbook playbook.yml
 
 </details>
 
-<details><summary>Install the vault certification authority ca certificate on remote system (klick here)</summary>
+<details><summary>Install the vault certification authority ca certificate on remote system (click here)</summary>
 
 ### Ansible command:
 ```
@@ -186,7 +186,7 @@ example.com
 ```
 </details>
 
-<details><summary>Install the vault certification authority ca certificate locally (klick here)</summary>
+<details><summary>Install the vault certification authority ca certificate locally (click here)</summary>
 
 ### Ansible command:
 ```
@@ -211,7 +211,7 @@ ansible-playbook playbook.yml
 ```
 </details>
 
-<details><summary>Request a certificate from the vault server to sign on remote system with installation (klick here) </summary>
+<details><summary>Request a certificate from the vault server to sign on remote system with installation (click here) </summary>
 
 ### Ansible command:
 ```
@@ -254,7 +254,7 @@ example.com
 ```
 </details>
 
-<details><summary>Request a certificate from the vault server to sign locally without installation (klick here)</summary>
+<details><summary>Request a certificate from the vault server to sign locally without installation (click here)</summary>
 
 ### Ansible command:
 ```
@@ -288,7 +288,7 @@ ansible-playbook playbook.yml
 ```
 </details>
 
-<details><summary>Upload file from local machine to vault (klick here)</summary>
+<details><summary>Upload file from local machine to vault (click here)</summary>
 
 ### Ansible command:
 ```
@@ -320,7 +320,7 @@ ansible-playbook playbook.yml
 ```
 </details>
 
-<details><summary>Upload file from remote machine to vault (klick here)</summary>
+<details><summary>Upload file from remote machine to vault (click here)</summary>
 
 ### Ansible command:
 ```
