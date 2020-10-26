@@ -31,6 +31,12 @@
     msg: "Certificate information from ca: {{ vault_generated_cert.json }}"
   when: debug | bool
 
+- name: Installing ca key
+  ansible.builtin.copy:
+    content: "{{ vault_generated_cert.json.data.issuing_ca }}"
+    dest: "{{ vault_gen_cert_install_ca_path }}"
+  when: vault_gen_cert_install | bool
+
 - name: Installing public key
   ansible.builtin.copy:
     content: "{{ vault_generated_cert.json.data.certificate }}"
