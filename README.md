@@ -231,38 +231,6 @@ example.com
 ```
 </details>
 
-<details><summary>Upload file from local machine to vault (click here)</summary>
-
-### Ansible command:
-```
-ansible-playbook playbook.yml
-```
-
-### Playbook: playbook.yml
-```
----
-- hosts: "localhost"
-  gather_facts: true
-  become: false
-  vars:
-    # default configuration
-    vault_url: https://example.com:8200
-    #vault_username: username
-    #vault_password: password
-    vault_token: <root_token> # or uncomment vault user+pw and use a admin user account
-
-    vault_kv_write: true
-    vault_kv_write_file_data:
-      - secret_name: test
-        secret_engine: labul
-        path: /tmp/test.txt
-        filename: test # The key on vault server, needed for extracting 
-
-  roles:
-    - install-configure-vault
-```
-</details>
-
 <details><summary>Upload file from remote machine to vault (click here)</summary>
 
 ### Ansible command:
