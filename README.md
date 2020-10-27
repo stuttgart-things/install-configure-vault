@@ -19,8 +19,6 @@ In addition to the installation, this role can also be used to fill the vault wi
 ### Role installation:
 <details><summary><b>Install this role on your ansible host (click here)</b></summary>
 
-For more information about stuttgart-things role installation visit: [Link to stgt-things how-to](https://codehub.sva.de/Lab/stuttgart-things/meta/documentation/doc-as-code/-/blob/master/howtos/howto-install-role.md)
-
 ```
 cat <<EOF > /tmp/requirements.yaml
 roles:
@@ -47,6 +45,8 @@ EOF
 ansible-galaxy install -r /tmp/requirements.yaml --force && ansible-galaxy collection install -r /tmp/requirements.yaml -f
 ```
 </details>
+
+For more information about stuttgart-things role installation visit: [Link to stgt-things how-to](https://codehub.sva.de/Lab/stuttgart-things/meta/documentation/doc-as-code/-/blob/master/howtos/howto-install-role.md)
 
 ## Example playbooks to use this role
 
