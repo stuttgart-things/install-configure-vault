@@ -46,7 +46,7 @@ ansible-galaxy install -r /tmp/requirements.yaml --force && ansible-galaxy colle
 ```
 </details>
 
-For more information about stuttgart-things role installation visit: [Link to stgt-things how-to](https://codehub.sva.de/Lab/stuttgart-things/meta/documentation/doc-as-code/-/blob/master/howtos/howto-install-role.md)
+For more information about stuttgart-things role installation visit: [Stuttgart-Things howto install role](https://codehub.sva.de/Lab/stuttgart-things/meta/documentation/doc-as-code/-/blob/master/howtos/howto-install-role.md)
 
 ## Example playbooks to use this role
 
