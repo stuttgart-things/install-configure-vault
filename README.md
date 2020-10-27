@@ -188,31 +188,6 @@ example.com
 ```
 </details>
 
-<details><summary>Install the vault certification authority ca certificate locally (click here)</summary>
-
-### Ansible command:
-```
-ansible-playbook playbook.yml
-```
-
-### Playbook: playbook.yml
-```
----
-- hosts: "localhost"
-  gather_facts: true
-  become: true
-  vars:
-    # default configuration
-    vault_url: https://example.com:8200
-
-    # Install ca on system
-    vault_install_ca_cert: true
-
-  roles:
-    - install-configure-vault
-```
-</details>
-
 <details><summary>Request a certificate from the vault server to sign on remote system with installation (click here) </summary>
 
 ### Ansible command:
@@ -253,40 +228,6 @@ ansible-playbook playbook.yml
 ```
 [myserver]
 example.com
-```
-</details>
-
-<details><summary>Request a certificate from the vault server to sign locally without installation (click here)</summary>
-
-### Ansible command:
-```
-ansible-playbook playbook.yml
-```
-
-### Playbook: playbook.yml
-```
----
-- hosts: "localhost"
-  gather_facts: true
-  become: false
-  vars:
-    # default configuration
-    vault_url: https://example.com:8200
-    #vault_username: username
-    #vault_password: password
-    vault_token: <root_token> # or uncomment vault user+pw and use a admin user account
-
-    # CA root role
-    vault_ca_cert_role_name: example.com
-
-    # Generate cert
-    vault_gen_cert: true
-    vault_gen_cert_fqdn: hostname.example.com
-    #vault_gen_cert_ip_sans: 192.168.1.1 #Only set if access via the ip should be permitted or if there is an alternative
-
-
-  roles:
-    - install-configure-vault
 ```
 </details>
 
