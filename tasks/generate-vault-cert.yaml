@@ -19,6 +19,7 @@
     body:
       common_name: "{{ ansible_fqdn }}"
       ttl: "{{ vault_gen_cert_ttl }}"
+      ip_sans: "{{ ansible_default_ipv4.address }}"
     headers:
       X-Vault-Request: true
       X-Vault-Token: "{{ vault_token }}"

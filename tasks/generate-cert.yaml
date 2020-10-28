@@ -9,6 +9,7 @@
     body_format: json
     body:
       common_name: "{{ vault_gen_cert_fqdn }}"
+      ip_sans: "{{ vault_gen_cert_ip_sans | default(omit) }}"
       ttl: "{{ vault_gen_cert_ttl }}"
     headers:
       X-Vault-Request: true
@@ -16,32 +17,25 @@
   register: vault_generated_cert
   delegate_to: "{{ vault_api_executor }}"
 
-- name: Error handling - vault cert generation 
-  ansible.builtin.debug:
-    msg: "The default ttl for this cert is to long, it crosses the ca cert expiration. Try again with automatic ttl detection."
+- name: Error detected - set fail vars true
+  set_fact:
+    vault_gen_cert_fail: true
   when: vault_generated_cert.status != 200
 
-- name: "Error handling - try again to request and sign certificate for {{ vault_gen_cert_fqdn }}"
-  ansible.builtin.uri:
-    return_content: yes
-    validate_certs: false
-    url: "{{ vault_url }}/v1/{{ vault_ca_path }}/issue/{{ vault_ca_cert_role_name }}"
-    method: PUT
-    status_code: 200
-    body_format: json
-    body:
-      common_name: "{{ vault_gen_cert_fqdn }}"
-    headers:
-      X-Vault-Request: true
-      X-Vault-Token: "{{ vault_token }}"
-  register: vault_generated_cert
-  delegate_to: "{{ vault_api_executor }}"
-  when: vault_generated_cert.status != 200
+- name: Go to error handler when error is detected
+  include_tasks: error-handler.yaml
+  when: vault_gen_cert_fail | bool
 
 - name: Debug api cert information
   ansible.builtin.debug:
     msg: "Certificate information from ca: {{ vault_generated_cert.json }}"
   when: debug | bool
+
+- name: Installing ca key
+  ansible.builtin.copy:
+    content: "{{ vault_generated_cert.json.data.issuing_ca }}"
+    dest: "{{ vault_gen_cert_install_ca_path }}"
+  when: vault_gen_cert_install | bool
 
 - name: Installing public key
   ansible.builtin.copy:

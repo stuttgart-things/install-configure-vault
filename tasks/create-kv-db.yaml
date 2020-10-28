@@ -4,7 +4,7 @@
     validate_certs: false
     url: "{{ vault_url }}/v1/sys/mounts/{{ vault_ceate_kv_db_name }}"
     method: POST
-    status_code: 200
+    status_code: [204, 400]
     body_format: json
     body:
       type: kv

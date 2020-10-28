@@ -7,7 +7,7 @@ debug: false
 vault_api_executor: "{{ inventory_hostname }}"
 vault_install_json_packages:
   - name: jmespath
-
+vault_gen_cert_fail: false
 # CA default configuration
 vault_create_ca: false
 vault_ca_install_vault_cert: false
@@ -30,6 +30,7 @@ vault_ca_role_max_ttl: 8700h
 # Generate cert
 vault_gen_cert: false
 vault_gen_cert_fqdn: host.example.com
+#vault_gen_cert_ip_sans: 192.0.2.1,192.0.2.2
 vault_gen_cert_install: false
 vault_gen_cert_install_pub_path: /tmp/certs/vault/public_key.pem
 vault_gen_cert_install_priv_path: /tmp/certs/vault/private_key.pem
@@ -69,6 +70,7 @@ vault_install_ca_cert_ca_path:
 
 # Install vault server
 install_vault: false
+destroy_vault: false
 install_vault_init_secret_shares: 2
 install_vault_init_secret_threshold: 1
 

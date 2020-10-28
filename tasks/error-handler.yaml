@@ -1,0 +1,24 @@
+---
+- name: Starting error handling if certificate request failed
+  block:
+    - name: Error handling - vault cert generation 
+      ansible.builtin.debug:
+        msg: "The default ttl for this cert is to long, it crosses the ca cert expiration. Try again with automatic ttl detection."
+
+    - name: "Error handling - try again to request and sign certificate for {{ vault_gen_cert_fqdn }}"
+      ansible.builtin.uri:
+        return_content: yes
+        validate_certs: false
+        url: "{{ vault_url }}/v1/{{ vault_ca_path }}/issue/{{ vault_ca_cert_role_name }}"
+        method: PUT
+        status_code: 200
+        body_format: json
+        body:
+          common_name: "{{ vault_gen_cert_fqdn }}"
+          ip_sans: "{{ vault_gen_cert_ip_sans | default(omit) }}"
+        headers:
+          X-Vault-Request: true
+          X-Vault-Token: "{{ vault_token }}"
+      register: vault_generated_cert
+      delegate_to: "{{ vault_api_executor }}"
+  when: vault_gen_cert_fail | bool
