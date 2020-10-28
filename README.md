@@ -308,6 +308,7 @@ ansible-playbook -i inventory.ini playbook.yml
   roles:
     - install-configure-vault
 ```
+</details>
 
 <details><summary>Generate alias for inject vault secrets to environment</summary>
 
