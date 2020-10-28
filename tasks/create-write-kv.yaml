@@ -10,6 +10,8 @@
     headers:
       X-Vault-Request: true
       X-Vault-Token: "{{ vault_token }}"
+  with_items:
+    - "{{ vault_kv_write_data }}"
   delegate_to: "{{ vault_api_executor }}"
   when: vault_kv_write_data is defined
 
