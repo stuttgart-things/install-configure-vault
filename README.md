@@ -11,7 +11,7 @@ In addition to the installation, this role can also be used to fill the vault wi
 - Provide and issue trusted certificates for services such as letsencrypt
 - Create local users
 - Create key value databases
-- Add key value data (WIP)
+- Add key value data
 - Upload local files to vault secret store
 - Generate .bashrc file for fully automated environment handling (WIP)
 - Automated certificate installation
