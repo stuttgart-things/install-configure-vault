@@ -269,6 +269,53 @@ example.com
 ```
 </details>
 
+<details><summary>Write key value secrets (kv)</summary>
+
+### Ansible command:
+```
+ansible-playbook -i inventory.ini playbook.yml
+```
+
+### Playbook: playbook.yml
+```
+---
+- hosts: "all"
+  gather_facts: true
+  become: false
+  vars:
+    # default configuration
+    vault_url: https://example.com:8200
+    #vault_username: username
+    #vault_password: password
+    vault_token: <root_token> # or uncomment vault user+pw and use a admin user account
+
+    # Write data to KV database
+    vault_kv_write: true
+    vault_kv_write_data:
+      - secret_name: awx_server
+        secret_engine: labul
+        kv:
+          ip: 1.2.3.4
+          username: user
+          password: secret
+      - secret_name: vcenter
+        secret_engine: labda
+        kv:
+          ip: 1.2.3.4
+          username: user
+          password: secret
+
+  roles:
+    - install-configure-vault
+```
+
+### Playbook: inventory.ini
+```
+[vault]
+example.com
+```
+</details>
+
 ## Requirements and Dependencies:
 - Ubuntu 20.04
 - Ubuntu 18.04
