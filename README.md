@@ -309,6 +309,46 @@ ansible-playbook -i inventory.ini playbook.yml
     - install-configure-vault
 ```
 
+<details><summary>Generate alias for inject vault secrets to environment</summary>
+
+### Ansible command:
+```
+ansible-playbook -i inventory.ini playbook.yml
+```
+
+### Playbook: playbook.yml
+```
+---
+- hosts: "all"
+  gather_facts: true
+  become: false
+  vars:
+    # default configuration
+    vault_url: https://example.com:8200
+    #vault_username: username
+    #vault_password: password
+    vault_token: <root_token> # or uncomment vault user+pw and use a admin user account
+
+    # Generate bashrc
+    vault_bashrc: true
+    vault_bashrc_mod:
+    labul_vault:              # <- alias command
+      labul:                  # <- secret engine
+        - awx                 # <- secret name
+        - vcenter             # <- another secret name
+      ocp4:                   # <- secret engine
+        - pull_secret         # <- secret name
+    labda_vault:              # <- alias command
+      labda:                  # <- secret engine
+        - awx                 # <- secret name
+        - vcenter             # <- another secret name
+      ocp4:                   # <- secret engine
+        - pull_secret         # <- secret name
+
+  roles:
+    - install-configure-vault
+```
+
 ### Playbook: inventory.ini
 ```
 [vault]
