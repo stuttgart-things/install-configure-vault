@@ -1,3 +1,3 @@
-{​​​​​​​​% for names in vault_bashrc_mod %}​​​​​​​​
-    {​​​​​​​​% for item in vault_bashrc_mod %}alias {{ item.name }}="eval $(vault kv get -field=data -format=json {{ item.secret_engine }}/{{ item.secret_name }} | jq -r 'keys[] as $k | "export \($k)=\(.[$k])"'){% if not loop.last %} && {% endif %}{​​​​​​​​% endfor %}
-{​​​​​​​​% endfor %}
+{% for name, paths in vault_bashrc_mod.items() %}
+alias {{ name }}="{% for engine, secrets in paths.items() %}{% for secret in secrets %}eval $(vault kv get -field=data -format=json {{ engine }}/{{ secret }} | jq -r 'keys[] as $k | "export \($k)=\(.[$k])"'){% if not loop.last %} && {% endif %}{% endfor %}{% if not loop.last %} && {% endif %}{% endfor %}"
+{% endfor %}

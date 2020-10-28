@@ -84,6 +84,15 @@ vault_crate_user_data:
 
 # Generate bashrc
 # vault_bashrc_mod:
-#   - name: vault_example
-#     secret_engine: se
-#     secret_name: example
+#  labul_vault:
+#    labul:
+#      - awx
+#      - vcenter
+#    ocp4:
+#      - pull_secret
+#  labda_vault:
+#    labda:
+#      - awx
+#      - vcenter
+#    ocp4:
+#      - pull_secret
