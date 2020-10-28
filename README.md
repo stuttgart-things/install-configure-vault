@@ -13,7 +13,7 @@ In addition to the installation, this role can also be used to fill the vault wi
 - Create key value databases
 - Add key value data
 - Upload local files to vault secret store
-- Generate .bashrc file for fully automated environment handling (WIP)
+- Generate .bashrc file for fully automated environment handling
 - Automated certificate installation
 
 ### Role installation:
