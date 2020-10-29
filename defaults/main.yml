@@ -83,6 +83,7 @@ vault_crate_user_data:
     policies: admins
 
 # Generate bashrc
+vault_bashrc: false
 # vault_bashrc_mod:
 #  labul_vault:
 #    labul:

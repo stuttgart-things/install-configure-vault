@@ -47,3 +47,7 @@
 - name: Install vault ca certificate to local system
   include_tasks: install-ca-auth.yaml
   when: vault_install_ca_cert|bool
+
+- name: Generate bashrc file and add vault alias
+  include_tasks: generate-bashrc.yaml
+  when: vault_bashrc|bool
