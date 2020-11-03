@@ -1,0 +1,26 @@
+          __          __              __  .__    .__                           /\                     .__   __   
+  _______/  |_  _____/  |_          _/  |_|  |__ |__| ____    ____  ______    / / ___  _______   __ __|  |_/  |_ 
+ /  ___/\   __\/ ___\   __\  ______ \   __\  |  \|  |/    \  / ___\/  ___/   / /  \  \/ /\__  \ |  |  \  |\   __\
+ \___ \  |  | / /_/  >  |   /_____/  |  | |   Y  \  |   |  \/ /_/  >___ \   / /    \   /  / __ \|  |  /  |_|  |  
+/____  > |__| \___  /|__|            |__| |___|  /__|___|  /\___  /____  > / /      \_/  (____  /____/|____/__|  
+     \/      /_____/                           \/        \//_____/     \/  \/                 \/                 
+
+### Installation summary:
+Vault URL: {{ vault_url }}
+Unseal key(s) list: {{ vault_unseal }}
+Root token: {{ vault_api_data_init.json.root_token }}
+
+### Note:
+If the secret engine has been activated, please install the root CA certificate on the target system:
+
+## Example playbook for installing Vault CA Root auth:
+---
+- hosts: "all"
+  gather_facts: true
+  become: true
+  vars:
+    vault_url: {{ vault_url }}
+    vault_install_ca_cert: true
+
+  roles:
+    - install-configure-vault
