@@ -73,7 +73,7 @@ ansible-playbook -i inventory.ini playbook.yml
     install_vault_init_secret_threshold: 1
 
     # Output install config
-    vault_install_save_conf_path: /tmp/vault_config.txt
+    vault_install_save_conf_path: /tmp/vault_config.txt #optional comment out if not needed
 
   roles:
     - install-configure-vault
