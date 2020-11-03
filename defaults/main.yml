@@ -40,7 +40,7 @@ vault_gen_cert_ttl: 8650h
 
 # Create KV database
 vault_create_kv_db: false
-vault_ceate_kv_db_name: mykvdb
+vault_create_kv_db_name: mykvdb
 
 # Write data to KV database
 vault_kv_write: false
