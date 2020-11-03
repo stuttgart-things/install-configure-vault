@@ -73,3 +73,9 @@
       migrate: false
   register: vault_api_data_init
   delegate_to: "{{ vault_api_executor }}"
+
+- name: Save generated vault configuration
+  ansible.builtin.copy:
+    content: "{{ lookup('template', './installation_configuration_output.txt.j2') }}"
+    dest: "{{ vault_install_save_conf_path }}"
+  when: vault_install_save_conf_path is defined
