@@ -379,6 +379,7 @@ DATE         WHO            WHAT
 20201023     Marcel Zapf    Add missing task for installing issuing ca key
 20201026     Marcel Zapf    Fixed ip_san error while running error handler
 20201028     Marcel Zapf    Add bashrc generator add kv upload
+20201103     Marcel Zapf    Add feature for saving config after vault installation
 ```
 
 License
