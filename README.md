@@ -48,6 +48,13 @@ ansible-galaxy install -r /tmp/requirements.yaml --force && ansible-galaxy colle
 
 For more information about stuttgart-things role installation visit: [Stuttgart-Things howto install role](https://codehub.sva.de/Lab/stuttgart-things/meta/documentation/doc-as-code/-/blob/master/howtos/howto-install-role.md)
 
+## Howto install Vault Root CA in windows 10 OS Systems
+
+- Download the powershell script located in /meta folder
+- Make sure your windows version have the version 2004 or greater
+- Run on a powershell commandline with admin privileges "Set-ExecutionPolicy RemoteSigned" to make sure scripts are allowed on your system
+- Run the downloaded script and follow the wizard
+
 ## Example playbooks to use this role
 
 <details><summary>Install and initializing a vault server within a podman container (click here)</summary>
