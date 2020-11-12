@@ -387,6 +387,7 @@ DATE         WHO            WHAT
 20201026     Marcel Zapf    Fixed ip_san error while running error handler
 20201028     Marcel Zapf    Add bashrc generator add kv upload
 20201103     Marcel Zapf    Add feature for saving config after vault installation
+20201112     Marcel Zapf    Add windows root ca installing process to readme
 ```
 
 License
