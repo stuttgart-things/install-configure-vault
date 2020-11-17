@@ -26,7 +26,7 @@ vault_ca_cert_ttl: 87600h # One year by default
 vault_ca_cert_role_name: example.com
 vault_ca_role_allow_subdomains: true
 vault_ca_role_allowed_domains: example.com
-vault_ca_role_max_ttl: 8700h
+vault_ca_role_max_ttl: 87600h
 
 # Generate cert
 vault_gen_cert: false
