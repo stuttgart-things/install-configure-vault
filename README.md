@@ -388,6 +388,7 @@ DATE         WHO            WHAT
 20201028     Marcel Zapf    Add bashrc generator add kv upload
 20201103     Marcel Zapf    Add feature for saving config after vault installation
 20201112     Marcel Zapf    Add windows root ca installing process to readme
+20201117     Marcel Zapf    Fix some known bugs and add aditional default vars for vault specific certificate
 ```
 
 License
