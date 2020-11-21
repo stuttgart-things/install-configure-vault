@@ -67,8 +67,8 @@ vault_install_ca_cert_ca_path:
   RedHat:
     7: /etc/pki/ca-trust/source/anchors/vault-ca.crt
     8: /etc/pki/ca-trust/source/anchors/vault-ca.crt
-   32: /etc/pki/ca-trust/source/anchors/vault-ca.crt
-   33: /etc/pki/ca-trust/source/anchors/vault-ca.crt
+    32: /etc/pki/ca-trust/source/anchors/vault-ca.crt
+    33: /etc/pki/ca-trust/source/anchors/vault-ca.crt
   Debian:
     18: /usr/local/share/ca-certificates/vault-ca.crt
     20: /usr/local/share/ca-certificates/vault-ca.crt
