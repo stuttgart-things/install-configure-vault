@@ -5,7 +5,7 @@
   vars:
     # default configuration
     vault_url: https://vault.labul.sva.de:8200
-    vault_token: "'{{ lookup('env', 'VAULT_TOKEN') }}'" # Only use if no user exists to auth
+    vault_token: s.1VsKZIhjq3DTJ2jzI1nSjS3Q # Only use if no user exists to auth
 
     # Create user
     vault_create_user: true
