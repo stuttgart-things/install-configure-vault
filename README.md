@@ -320,7 +320,7 @@ ansible-playbook -i inventory.ini playbook.yml
 ```
 </details>
 
-<details><summary>Generate alias for inject vault secrets to environment</summary>
+<details><summary>Generate bashrc config add alias for inject vault secrets to environment vars</summary>
 
 ### Ansible command:
 ```
