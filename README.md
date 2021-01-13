@@ -389,6 +389,7 @@ DATE         WHO            WHAT
 20201103     Marcel Zapf    Add feature for saving config after vault installation
 20201112     Marcel Zapf    Add windows root ca installing process to readme
 20201117     Marcel Zapf    Fix some known bugs and add aditional default vars for vault specific certificate
+20210113     Marcel Zapf    Readme update
 ```
 
 License
