@@ -15,6 +15,9 @@ roles:
   version: stable
 
 collections:
-- name: containers.podman 
+- name: containers.podman
+  version: 1.4.1
 - name: community.general
+  version: 1.3.4
 - name: community.crypto
+  version: 1.3.0
