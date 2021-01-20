@@ -101,3 +101,38 @@ vault_bashrc: false
 #      - vcenter
 #    ocp4:
 #      - pull_secret
+
+# Container vars
+container_name: vault-server
+permanent: true
+container_image: vault
+container_run_args: >-
+    -d --cap-add=IPC_LOCK
+container_cmd_args: >-
+    vault server -config=/vault/config/vault.json
+mounts:
+  logs:
+    host: /podman/pv/vault-server/logs/
+    container: /vault/logs/:z
+  file:
+    host: /podman/pv/vault-server/file/
+    container: /vault/file/:z
+  config:
+    host: /podman/pv/vault-server/config/
+    container: /vault/config/:z
+  certs:
+    host: /podman/pv/vault-server/certificate/
+    container: /etc/certificate/:z
+ports:
+  http:
+    host: 8200
+    container: 8200
+
+generate_certs: true
+certificate_option: selfsigned
+cert_ssl_subject: "{{ ansible_fqdn }}"
+cert_ssl_ip: "{{ ansible_default_ipv4.address }}"
+cert_mount_target: "{{ mounts.certs.host }}"
+cert_key_name: vault.key
+cert_crt_name: vault.crt
+service_name: "{{ container_name }}.service"
