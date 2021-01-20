@@ -38,9 +38,15 @@ roles:
   version: stable
 
 collections:
-- name: containers.podman 
+- name: containers.podman
+  version: 1.4.1
 - name: community.general
+  version: 1.3.4
 - name: community.crypto
+  version: 1.3.0
+- name: ansible.posix
+  version: 1.1.1
+
 EOF
 ansible-galaxy install -r /tmp/requirements.yaml --force && ansible-galaxy collection install -r /tmp/requirements.yaml -f
 ```
