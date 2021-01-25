@@ -1,23 +1,23 @@
 ---
 container_name: vault-server
 permanent: true
-container_image: vault
+container_image: vault:1.6.0
 container_run_args: >-
     -d --cap-add=IPC_LOCK
 container_cmd_args: >-
     vault server -config=/vault/config/vault.json
 mounts:
   logs:
-    host: /podman/pv/vault-server/logs/
+    host: "/podman/pv/{{ container_name }}/logs/"
     container: /vault/logs/:z
   file:
-    host: /podman/pv/vault-server/file/
+    host: /podman/pv/{{ container_name }}/file/
     container: /vault/file/:z
   config:
-    host: /podman/pv/vault-server/config/
+    host: /podman/pv/{{ container_name }}/config/
     container: /vault/config/:z
   certs:
-    host: /podman/pv/vault-server/certificate/
+    host: /podman/pv/{{ container_name }}/certificate/
     container: /etc/certificate/:z
 ports:
   http:
