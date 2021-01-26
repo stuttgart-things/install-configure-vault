@@ -1,7 +1,7 @@
 ---
 container_name: vault-server
 permanent: true
-container_image: vault:1.6.0
+container_image: vault:1.6.1
 container_run_args: >-
     -d --cap-add=IPC_LOCK
 container_cmd_args: >-
