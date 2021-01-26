@@ -10,6 +10,9 @@
       os_packages: "{{ vault_install_ca_cert_packages }}"
       state: present
 
+- name: Generate CA ID
+  vault_ca_id: "{{ 999 | random }}"
+
 - name: Download vault CA certificate
   ansible.builtin.uri:
     return_content: yes
