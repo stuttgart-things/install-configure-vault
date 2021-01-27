@@ -396,7 +396,8 @@ DATE         WHO            WHAT
 20201112     Marcel Zapf    Add windows root ca installing process to readme
 20201117     Marcel Zapf    Fix some known bugs and add aditional default vars for vault specific certificate
 20210113     Marcel Zapf    Readme update
-20210120     Marcel Zapf    Move container vars to defaults for better freze collections version 
+20210120     Marcel Zapf    Move container vars to defaults for better freze collections version
+20210127     Marcel Zapf    ID for the CA certificate added to support more Vault CAs
 ```
 
 License
