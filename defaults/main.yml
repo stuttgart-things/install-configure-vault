@@ -35,7 +35,7 @@ vault_gen_cert_fqdn: host.example.com
 vault_gen_cert_install: false
 vault_gen_cert_install_pub_path: /tmp/certs/vault/public_key.pem
 vault_gen_cert_install_priv_path: /tmp/certs/vault/private_key.pem
-vault_gen_cert_install_ca_path: "/tmp/certs/vault/ca_key-{{ vault_ca_id }}.crt"
+vault_gen_cert_install_ca_path: /tmp/certs/vault/ca_key.crt
 vault_gen_cert_ttl: 8650h
 vault_gen_vault_cert_ttl: 87500h
 
@@ -65,13 +65,13 @@ vault_install_ca_cert_packages:
   - ca-certificates
 vault_install_ca_cert_ca_path:
   RedHat:
-    7: /etc/pki/ca-trust/source/anchors/vault-ca.crt
-    8: /etc/pki/ca-trust/source/anchors/vault-ca.crt
-    32: /etc/pki/ca-trust/source/anchors/vault-ca.crt
-    33: /etc/pki/ca-trust/source/anchors/vault-ca.crt
+    7: "/etc/pki/ca-trust/source/anchors/vault-ca-{{ vault_ca_id }}.crt"
+    8: "/etc/pki/ca-trust/source/anchors/vault-ca-{{ vault_ca_id }}.crt"
+    32: "/etc/pki/ca-trust/source/anchors/vault-ca-{{ vault_ca_id }}.crt"
+    33: "/etc/pki/ca-trust/source/anchors/vault-ca-{{ vault_ca_id }}.crt"
   Debian:
-    18: /usr/local/share/ca-certificates/vault-ca.crt
-    20: /usr/local/share/ca-certificates/vault-ca.crt
+    18: "/usr/local/share/ca-certificates/vault-ca-{{ vault_ca_id }}.crt"
+    20: "/usr/local/share/ca-certificates/vault-ca-{{ vault_ca_id }}.crt"
 
 # Install vault server
 install_vault: false
