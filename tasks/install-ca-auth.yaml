@@ -11,7 +11,8 @@
       state: present
 
 - name: Generate CA ID
-  vault_ca_id: "{{ 999 | random }}"
+  set_fact:
+    vault_ca_id: "{{ 999 | random }}"
 
 - name: Download vault CA certificate
   ansible.builtin.uri:
