@@ -13,7 +13,7 @@
   with_items:
     - "{{ vault_kv_write_data }}"
   delegate_to: "{{ vault_api_executor }}"
-  when: vault_kv_write_data is defined
+  when: vault_kv_write_data is defined and not vault_kv_delete_secret
 
 - name: Write file data in base64 to kv secret engine
   ansible.builtin.uri:
@@ -31,7 +31,7 @@
   with_items:
     - "{{ vault_kv_write_file_data }}"
   delegate_to: "{{ vault_api_executor }}"
-  when: vault_kv_write_file_data is defined
+  when: vault_kv_write_file_data is defined and not vault_kv_delete_secret
 
 - name: Delete KV secret for file type
   ansible.builtin.uri:
