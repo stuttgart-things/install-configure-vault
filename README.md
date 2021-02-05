@@ -398,6 +398,7 @@ DATE         WHO            WHAT
 20210113     Marcel Zapf    Readme update
 20210120     Marcel Zapf    Move container vars to defaults for better freze collections version
 20210127     Marcel Zapf    ID for the CA certificate added to support more Vault CAs
+20210205     Marcel Zapf    Added feature to delete a secret
 ```
 
 License

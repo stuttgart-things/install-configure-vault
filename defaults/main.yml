@@ -43,7 +43,7 @@ vault_gen_vault_cert_ttl: 87500h
 # Create KV database
 vault_create_kv_db: false
 vault_create_kv_db_name: mykvdb
-
+vault_kv_delete_secret: false
 # Write data to KV database
 vault_kv_write: false
 # vault_kv_write_data:

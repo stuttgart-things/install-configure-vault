@@ -33,3 +33,30 @@
   delegate_to: "{{ vault_api_executor }}"
   when: vault_kv_write_file_data is defined
 
+- name: Delete KV secret for file type
+  ansible.builtin.uri:
+    validate_certs: false
+    url: "{{ vault_url }}/v1/{{ item.secret_engine }}/metadata/{{ item.secret_name }}"
+    method: DELETE
+    status_code: 204
+    headers:
+      X-Vault-Request: true
+      X-Vault-Token: "{{ vault_token }}"
+  with_items:
+    - "{{ vault_kv_write_file_data }}"
+  delegate_to: "{{ vault_api_executor }}"
+  when: vault_kv_write_file_data is defined and vault_kv_delete_secret | bool
+
+- name: Delete KV secret for normal type
+  ansible.builtin.uri:
+    validate_certs: false
+    url: "{{ vault_url }}/v1/{{ item.secret_engine }}/metadata/{{ item.secret_name }}"
+    method: DELETE
+    status_code: 204
+    headers:
+      X-Vault-Request: true
+      X-Vault-Token: "{{ vault_token }}"
+  with_items:
+    - "{{ vault_kv_write_data }}"
+  delegate_to: "{{ vault_api_executor }}"
+  when: vault_kv_write_data is defined and vault_kv_delete_secret | bool
