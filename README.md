@@ -381,24 +381,24 @@ example.com
 
 ## Version:
 ```
-DATE         WHO            WHAT
-20201013     Marcel Zapf    Init readme, role wip
-20201014     Marcel Zapf    Implementet new Features
-20201015     Marcel Zapf    Bug fixing
-20201019     Marcel Zapf    Logic added that allows further vault tasks to be linked directly after installation
-20201020     Marcel Zapf    Better logic vault creates his own cert for webinterface and api, api awx bugfix move execution host from localhost to vars
-20201021     Marcel Zapf    Added support for additionally ip address with domain name (Vault CA)
-20201022     Marcel Zapf    Move error handler to own file, fix json override bug, add ip_sans to ca installation
-20201023     Marcel Zapf    Add missing task for installing issuing ca key
-20201026     Marcel Zapf    Fixed ip_san error while running error handler
-20201028     Marcel Zapf    Add bashrc generator add kv upload
-20201103     Marcel Zapf    Add feature for saving config after vault installation
-20201112     Marcel Zapf    Add windows root ca installing process to readme
-20201117     Marcel Zapf    Fix some known bugs and add aditional default vars for vault specific certificate
-20210113     Marcel Zapf    Readme update
-20210120     Marcel Zapf    Move container vars to defaults for better freze collections version
-20210127     Marcel Zapf    ID for the CA certificate added to support more Vault CAs
-20210205     Marcel Zapf    Added feature to delete a secret
+DATE            WHO            WHAT
+2020-10-13      Marcel Zapf    Init readme, role wip
+2020-10-14      Marcel Zapf    Implementet new Features
+2020-10-15      Marcel Zapf    Bug fixing
+2020-10-19      Marcel Zapf    Logic added that allows further vault tasks to be linked directly after installation
+2020-10-20      Marcel Zapf    Better logic vault creates his own cert for webinterface and api, api awx bugfix move execution host from localhost to vars
+2020-10-21      Marcel Zapf    Added support for additionally ip address with domain name (Vault CA)
+2020-10-22      Marcel Zapf    Move error handler to own file, fix json override bug, add ip_sans to ca installation
+2020-10-23      Marcel Zapf    Add missing task for installing issuing ca key
+2020-10-26      Marcel Zapf    Fixed ip_san error while running error handler
+2020-10-28      Marcel Zapf    Add bashrc generator add kv upload
+2020-11-03      Marcel Zapf    Add feature for saving config after vault installation
+2020-11-12      Marcel Zapf    Add windows root ca installing process to readme
+2020-11-17      Marcel Zapf    Fix some known bugs and add aditional default vars for vault specific certificate
+2021-01-13      Marcel Zapf    Readme update
+2021-01-20      Marcel Zapf    Move container vars to defaults for better freze collections version
+2021-01-27      Marcel Zapf    ID for the CA certificate added to support more Vault CAs
+2021-02-05      Marcel Zapf    Added feature to delete a secret
 ```
 
 License
