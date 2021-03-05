@@ -24,18 +24,14 @@ cat <<EOF > /tmp/requirements.yaml
 roles:
 - src: git@codehub.sva.de:Lab/stuttgart-things/supporting-roles/install-configure-vault.git
   scm: git
-  version: stable
 - src: git@codehub.sva.de:Lab/stuttgart-things/supporting-roles/install-requirements.git
   scm: git
-  version: stable
 - src: git@codehub.sva.de:Lab/stuttgart-things/supporting-roles/deploy-podman-container.git
   scm: git
 - src: git@codehub.sva.de:Lab/stuttgart-things/supporting-roles/generate-selfsigned-certs.git
   scm: git
-  version: stable
 - src: git@codehub.sva.de:Lab/stuttgart-things/supporting-roles/install-configure-podman.git
   scm: git
-  version: stable
 
 collections:
 - name: containers.podman
