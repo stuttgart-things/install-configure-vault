@@ -1,0 +1,2 @@
+include:
+  remote: 'https://codehub.sva.de/patrick.hermann/gitlab-pipelines/-/raw/master/archive-roles-pipeline.yaml'
