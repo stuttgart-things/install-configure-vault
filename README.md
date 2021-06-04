@@ -395,6 +395,7 @@ DATE            WHO            WHAT
 2021-01-20      Marcel Zapf    Move container vars to defaults for better freze collections version
 2021-01-27      Marcel Zapf    ID for the CA certificate added to support more Vault CAs
 2021-02-05      Marcel Zapf    Added feature to delete a secret
+2021-06-04      Marcel Zapf    Added support for storage backend filesystem (default), S3, RAFT Cluster
 ```
 
 License
