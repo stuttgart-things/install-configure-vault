@@ -1,8 +1,5 @@
 {
-  "backend": {
-    "file": {
-      "path": "/vault/file"
-    }
+{% include './templates/' + sb_ + 'vault_storage_backend' %}
   },
   "listener": {
     "tcp":{
