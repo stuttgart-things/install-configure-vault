@@ -23,7 +23,9 @@ ports:
   http:
     host: 8200
     container: 8200
-
+  raft_storage_backend:
+    host: 8201
+    container: 8201
 generate_certs: true
 certificate_option: selfsigned
 cert_ssl_subject: "{{ ansible_fqdn }}"
