@@ -13,6 +13,9 @@ mounts:
   file:
     host: /podman/pv/{{ container_name }}/file/
     container: /vault/file/:z
+  raft:
+    host: /podman/pv/{{ container_name }}/raft/
+    container: /vault/raft/:z
   config:
     host: /podman/pv/{{ container_name }}/config/
     container: /vault/config/:z
