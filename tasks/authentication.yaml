@@ -12,7 +12,7 @@
           password: "{{ vault_password }}"
         headers:
           X-Vault-Request: true
-          X-Vault-Namespace: "{{ vault_namespace }}"
+          X-Vault-Namespace: "{{ vault_namespace | default(omit) }}"
       register: vault_api_data_token_userpass
       delegate_to: "{{ vault_api_executor }}"
 
@@ -25,7 +25,7 @@
 
 - name: Get vault token via approle
   block:
-    - name: API request vault auth token via userpass
+    - name: API request vault auth token via approle
       ansible.builtin.uri:
         return_content: yes
         validate_certs: false
@@ -37,7 +37,7 @@
           secret_id: "{{ vault_secret_id }}"
         headers:
           X-Vault-Request: true
-          X-Vault-Namespace: "{{ vault_namespace }}"
+          X-Vault-Namespace: "{{ vault_namespace | default(omit) }}"
       register: vault_api_data_token_approle
 
     - name: Save requested vault api token to vars
