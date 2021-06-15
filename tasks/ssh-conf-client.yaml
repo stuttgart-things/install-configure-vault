@@ -1,0 +1,22 @@
+---
+- name: API sign public key via vault
+  ansible.builtin.uri:
+    return_content: yes
+    validate_certs: false
+    url: "{{ vault_url }}/v1/{{ vault_ssh_ca_path }}/sign/{{ vault_ssh_ca_role }}"
+    method: POST
+    status_code: 200
+    body_format: json
+    body:
+      public_key: "{{ lookup('file', '{{ vault_ssh_local_public_key_path }}') }}"
+      valid_principals: "{{ vault_ssh_local_valid_principals }}"
+    headers:
+      X-Vault-Request: true
+      X-Vault-Token: "{{ vault_token }}"
+      X-Vault-Namespace: "{{ vault_namespace }}"
+  register: vault_api_data_signed_pub_key
+
+- name: Write signed public key to system
+  ansible.builtin.copy:
+    content: "{{ vault_api_data_signed_pub_key.json.data.signed_key }}"
+    dest: "{{ vault_ssh_local_signed_public_key_path }}"
