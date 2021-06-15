@@ -36,6 +36,10 @@ vault_ca_role_max_ttl: 87600h
 # CA SSH
 vault_ssh_sign_public_key: false
 vault_ssh_conf_server: false
+vault_ssh_local_public_key_path: "~/.ssh/id_rsa.pub"
+vault_ssh_local_signed_public_key_path: "~/.ssh/id_rsa-cert.pub"
+vault_ssh_pub_path: /etc/ssh/trusted-user-ca-keys.pem
+vault_ssh_deamon_conf_path: /etc/ssh/sshd_config
 
 # Generate cert
 vault_gen_cert: false
