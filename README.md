@@ -59,39 +59,31 @@ For more information about stuttgart-things role installation visit: [Stuttgart-
 
 ## Example playbooks to use this role
 
-<details><summary>Install and initializing a vault server within a podman container (click here)</summary>
+<details><summary>Have your own public key signed by vault to access machines (click here)</summary>
 
 ### Ansible command:
 ```
-ansible-playbook -i inventory.ini playbook.yml
+ansible-playbook playbook.yml
 ```
 
 ### Playbook: playbook.yml
 ```
 ---
-- hosts: "vault"
+- name: Manage client
   gather_facts: true
-  become: true
+  hosts: localhost
+  become: false
+
   vars:
-    # default configuration
-    vault_url: https://example.com:8200
-
-    # Install vault server
-    install_vault: true
-    install_vault_init_secret_shares: 1
-    install_vault_init_secret_threshold: 1
-
-    # Output install config
-    vault_install_save_conf_path: /tmp/vault_config.txt #optional comment out if not needed
+    vault_url: "{{ lookup('env','VAULT_ADDR') }}"
+    vault_secret_id: "{{ lookup('env','VAULT_SECRET_ID') }}"
+    vault_role_id: "{{ lookup('env','VAULT_ROLE_ID') }}"
+    vault_namespace: "{{ lookup('env','VAULT_NAMESPACE') }}"
+    vault_ssh_sign_public_key: true
 
   roles:
-    - install-configure-vault
-```
+    - vault-ssh-manager
 
-### Playbook: inventory.ini
-```
-[vault]
-example.com
 ```
 </details>
 
