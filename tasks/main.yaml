@@ -48,6 +48,14 @@
   include_tasks: install-ca-auth.yaml
   when: vault_install_ca_cert|bool
 
+- name: Server - configure vault ssh
+  include_tasks: ssh-conf-server.yml
+  when: vault_ssh_conf_server | bool
+
+- name: Client - sign public key by vault
+  include_tasks: ssh-conf-client.yml
+  when: vault_ssh_sign_public_key | bool
+
 - name: Generate bashrc file and add vault alias
   include_tasks: generate-bashrc.yaml
   when: vault_bashrc|bool
