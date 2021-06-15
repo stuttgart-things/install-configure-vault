@@ -1,0 +1,34 @@
+---
+- name: API get vault public key
+  ansible.builtin.uri:
+    return_content: yes
+    validate_certs: false
+    url: "{{ vault_url }}/v1/{{ vault_ssh_ca_path }}/public_key"
+    method: GET
+    headers:
+      X-Vault-Request: true
+      X-Vault-Namespace: "{{ vault_namespace }}"
+  register: vault_api_data_pub_key
+
+- name: Show received public key
+  ansible.builtin.debug:
+    msg: "Vault responded with the public key: {{ vault_api_data_pub_key.content }}"
+  when: vault_api_data_pub_key is defined
+
+- name: Add the shown key to host
+  ansible.builtin.copy:
+    content: "{{ vault_api_data_pub_key.content }}"
+    dest: "{{ vault_ssh_pub_path }}"
+  when: vault_api_data_pub_key is defined
+
+- name: Add the shown key to the SSH Daemon config
+  ansible.builtin.lineinfile:
+    path: "{{ vault_ssh_deamon_conf_path }}"
+    insertafter: EOF
+    line: "TrustedUserCAKeys {{ vault_ssh_pub_path }}"
+  when: vault_api_data_pub_key is defined
+
+- name: Restart SSH service to apply the configuration
+  ansible.builtin.service:
+    name: sshd
+    state: restarted
