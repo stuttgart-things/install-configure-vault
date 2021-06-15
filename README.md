@@ -5,6 +5,7 @@ This Ansible role can completely set up and configure a hashicorp vault. The ent
 In addition to the installation, this role can also be used to fill the vault with data and issue certificates and much more.
 
 ### Features:
+- Vault token is automatically obtained from userpass or approle if not given
 - Install vault (within a podman container)
 - Initialize new vault installation
 - Create a vault root certification authority
@@ -15,6 +16,8 @@ In addition to the installation, this role can also be used to fill the vault wi
 - Upload local files to vault secret store
 - Generate .bashrc file for fully automated environment handling
 - Automated certificate installation
+- Sign your own SSH public keys via vault and then return them to the system
+- Register the server via vault and configure sshd to enable vault ssh logins
 
 ### Role installation:
 <details><summary><b>Install this role on your ansible host (click here)</b></summary>
@@ -396,6 +399,7 @@ DATE            WHO            WHAT
 2021-01-27      Marcel Zapf    ID for the CA certificate added to support more Vault CAs
 2021-02-05      Marcel Zapf    Added feature to delete a secret
 2021-06-04      Marcel Zapf    Added support for storage backend filesystem (default), S3, RAFT Cluster
+2021-06-15      Marcel Zapf    Added support for automated SSH CA handling
 ```
 
 License
