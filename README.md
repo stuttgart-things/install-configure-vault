@@ -365,6 +365,62 @@ ansible-playbook -i inventory.ini playbook.yml
     - install-configure-vault
 ```
 
+<details><summary>Have your own public key signed by vault to access machines (click here)</summary>
+
+### Ansible command:
+```
+ansible-playbook playbook.yml
+```
+
+### Playbook: playbook.yml
+```
+---
+- name: Manage client
+  gather_facts: true
+  hosts: localhost
+  become: false
+
+  vars:
+    vault_url: "{{ lookup('env','VAULT_ADDR') }}"
+    vault_secret_id: "{{ lookup('env','VAULT_SECRET_ID') }}"
+    vault_role_id: "{{ lookup('env','VAULT_ROLE_ID') }}"
+    vault_namespace: "{{ lookup('env','VAULT_NAMESPACE') }}"
+    vault_ssh_sign_public_key: true
+
+  roles:
+    - vault-ssh-manager
+
+```
+</details>
+
+<details><summary>Prepare the server for access via the vault ssh ca (click here)</summary>
+
+### Ansible command:
+```
+ansible-playbook -i inventory playbook.yml
+```
+
+### Playbook: playbook.yml
+```
+---
+- name: Manage server
+  gather_facts: true
+  hosts: yourhost
+  become: true
+
+  vars:
+    vault_url: "{{ lookup('env','VAULT_ADDR') }}"
+    vault_secret_id: "{{ lookup('env','VAULT_SECRET_ID') }}"
+    vault_role_id: "{{ lookup('env','VAULT_ROLE_ID') }}"
+    vault_namespace: "{{ lookup('env','VAULT_NAMESPACE') }}"
+    vault_ssh_conf_server: true
+
+  roles:
+    - vault-ssh-manager
+
+```
+</details>
+
 ### Playbook: inventory.ini
 ```
 [vault]
