@@ -364,6 +364,7 @@ ansible-playbook -i inventory.ini playbook.yml
   roles:
     - install-configure-vault
 ```
+</details>
 
 <details><summary>Have your own public key signed by vault to access machines (click here)</summary>
 
