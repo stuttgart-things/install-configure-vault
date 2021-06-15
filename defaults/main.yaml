@@ -33,6 +33,10 @@ vault_ca_role_allow_subdomains: true
 vault_ca_role_allowed_domains: example.com
 vault_ca_role_max_ttl: 87600h
 
+# CA SSH
+vault_ssh_sign_public_key: false
+vault_ssh_conf_server: false
+
 # Generate cert
 vault_gen_cert: false
 vault_gen_cert_fqdn: host.example.com
