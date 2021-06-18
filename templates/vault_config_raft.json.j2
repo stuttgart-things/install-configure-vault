@@ -2,9 +2,10 @@
   "backend": {
     "raft": {
       "path": "/vault/raft"
-      "cluster_addr": "{{ vault_raft_cluster_addr }}"
     }
   },
+  "cluster_addr": "https://{{ vault_raft_cluster_addr }}",
+  "api_addr": "https://{{ ansible_fqdn }}",
   "listener": {
     "tcp":{
       "address": "0.0.0.0:8200",
