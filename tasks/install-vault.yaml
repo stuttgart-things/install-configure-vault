@@ -21,3 +21,14 @@
 - name: Deploy Vault
   include_role:
     name: deploy-podman-container
+
+- name: "Wait for webservice {{ vault_url }} come up"
+  ansible.builtin.uri:
+    validate_certs: false
+    url: "{{ vault_url }}"
+    status_code: 200
+  register: vault_api_data_website_status
+  until: vault_api_data_website_status.status == 200
+  retries: 60
+  delay: 1
+  delegate_to: "{{ vault_api_executor }}"

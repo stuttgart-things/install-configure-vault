@@ -10,18 +10,6 @@
       python_modules: "{{ vault_install_json_packages }}"
       state: present
 
-
-- name: "Wait for webservice {{ vault_url }} come up"
-  ansible.builtin.uri:
-    validate_certs: false
-    url: "{{ vault_url }}"
-    status_code: 200
-  register: vault_api_data_website_status
-  until: vault_api_data_website_status.status == 200
-  retries: 60
-  delay: 1
-  delegate_to: "{{ vault_api_executor }}"
-
 - name: Request a vault init
   ansible.builtin.uri:
     validate_certs: false

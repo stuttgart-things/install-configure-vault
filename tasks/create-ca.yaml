@@ -1,4 +1,19 @@
 ---
+- name: Make vault unsealing
+  ansible.builtin.uri:
+    validate_certs: false
+    url: "{{ vault_url }}/v1/sys/unseal"
+    method: PUT
+    status_code: 200
+    body_format: json
+    body:
+      key: "{{ vault_unseal }}"
+      reset: false
+      migrate: false
+  register: vault_api_data_init
+  delegate_to: "{{ vault_api_executor }}"
+  when: upgrade_vault|bool
+
 - name: Enable vault secret engine for CA
   ansible.builtin.uri:
     validate_certs: false
