@@ -10,7 +10,7 @@
 
 - name: Install vault server
   include_tasks: install-vault.yaml
-  when: install_vault|bool
+  when: install_vault|bool or upgrade_vault|bool
 
 - name: Init vault server after installation
   include_tasks: init-vault.yaml
