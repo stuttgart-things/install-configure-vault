@@ -5,57 +5,57 @@
   when: not debug
 
 - name: destroy vault server
-  include_tasks: destroy.yaml
+  ansible.builtin.include_tasks: destroy.yaml
   when: destroy_vault|bool
 
 - name: Install vault server
-  include_tasks: install-vault.yaml
+  ansible.builtin.include_tasks: install-vault.yaml
   when: install_vault|bool or upgrade_vault|bool
 
 - name: Init vault server after installation
-  include_tasks: init-vault.yaml
+  ansible.builtin.include_tasks: init-vault.yaml
   when: install_vault|bool
 
 - name: Create user via userpass engine
-  include_tasks: create-user.yaml
+  ansible.builtin.include_tasks: create-user.yaml
   when: vault_create_user|bool
 
 - name: Authenticate to the vault server
-  include_tasks: authentication.yaml
+  ansible.builtin.include_tasks: authentication.yaml
   when: vault_token is undefined and not install_vault and not vault_install_ca_cert
 
 - name: Create vault certification authority
-  include_tasks: create-ca.yaml
+  ansible.builtin.include_tasks: create-ca.yaml
   when: vault_create_ca|bool
 
 - name: Recreate vault cert with vault ca
-  include_tasks: generate-vault-cert.yaml
+  ansible.builtin.include_tasks: generate-vault-cert.yaml
   when: vault_ca_install_vault_cert | bool
 
 - name: Generate trusted certificate via vault server
-  include_tasks: generate-cert.yaml
+  ansible.builtin.include_tasks: generate-cert.yaml
   when: vault_gen_cert|bool
 
 - name: Create KV database
-  include_tasks: create-kv-db.yaml
+  ansible.builtin.include_tasks: create-kv-db.yaml
   when: vault_create_kv_db|bool
 
 - name: Write data to KV database
-  include_tasks: create-write-kv.yaml
+  ansible.builtin.include_tasks: create-write-kv.yaml
   when: vault_kv_write|bool
 
 - name: Install vault ca certificate to local system
-  include_tasks: install-ca-auth.yaml
+  ansible.builtin.include_tasks: install-ca-auth.yaml
   when: vault_install_ca_cert|bool
 
 - name: Server - configure vault ssh
-  include_tasks: ssh-conf-server.yml
+  ansible.builtin.include_tasks: ssh-conf-server.yml
   when: vault_ssh_conf_server | bool
 
 - name: Client - sign public key by vault
-  include_tasks: ssh-conf-client.yml
+  ansible.builtin.include_tasks: ssh-conf-client.yml
   when: vault_ssh_sign_public_key | bool
 
 - name: Generate bashrc file and add vault alias
-  include_tasks: generate-bashrc.yaml
+  ansible.builtin.include_tasks: generate-bashrc.yaml
   when: vault_bashrc|bool
