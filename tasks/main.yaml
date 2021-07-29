@@ -14,7 +14,7 @@
 
 - name: Init vault server after installation
   include_tasks: init-vault.yaml
-  when: install_vault|bool
+  when: install_vault|bool not upgrade_vault
 
 - name: Create user via userpass engine
   include_tasks: create-user.yaml
