@@ -1,4 +1,4 @@
 include:
   - project: Lab/stuttgart-things/meta/meta
-    file: pipelines/archive-roles-pipeline.yaml
+    file: pipelines/ansible-role-pipeline.yaml
     ref: master
