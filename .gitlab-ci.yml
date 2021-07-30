@@ -1,2 +1,4 @@
 include:
-  remote: 'https://codehub.sva.de/patrick.hermann/gitlab-pipelines/-/raw/master/archive-roles-pipeline.yaml'
+  - project: Lab/stuttgart-things/meta/meta
+    file: pipelines/archive-roles-pipeline.yaml
+    ref: master
