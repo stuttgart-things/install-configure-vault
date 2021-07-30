@@ -429,6 +429,48 @@ all:
 ```
 </details>
 
+<details><summary>Upgrade Vault Server to specific version (click here)</summary>
+
+### Ansible command:
+```
+ansible-playbook -i inventory playbook.yml
+```
+
+### Playbook: playbook.yml
+```
+---
+- name: Manage server
+  gather_facts: true
+  hosts: vault
+  become: true
+
+  vars:
+    # default configuration
+    vault_url: https://vault.example.com:8200
+    vault_token: <secret> # or uncomment vault user+pw and use a admin user account
+
+    vault_version: 1.8.0 #hub.docker.com/_/vault?
+
+    #add_registry_mirrors: true
+    #registry_mirrors:
+    #  - http://rancher-things-dev-w.tiab.labda.sva.de:30869
+
+  roles:
+    - install-configure-vault
+
+```
+
+### Playbook: inventory.yaml
+```
+all:
+  children:
+    ungrouped: {}
+    vault:
+      hosts:
+        example.com: {}
+```
+</details>
+
 ## Requirements and Dependencies:
 - Ubuntu 20.04
 - Fedora 34
