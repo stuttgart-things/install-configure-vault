@@ -23,13 +23,13 @@ roles:
 
 collections:
 - name: containers.podman
-  version: 1.4.1
+  version: 1.6.1
 - name: community.general
-  version: 1.3.4
+  version: 3.4.0
 - name: community.crypto
-  version: 1.3.0
+  version: 1.7.1
 - name: ansible.posix
-  version: 1.1.1
+  version: 1.2.0
 
 EOF
 ansible-galaxy install -r /tmp/requirements.yaml --force && ansible-galaxy collection install -r /tmp/requirements.yaml -f
@@ -435,6 +435,23 @@ all:
 - Fedora 34
 - CentOS 8
 - CentOS 7
+
+### Features:
+- Vault token is automatically obtained from userpass or approle if not given
+- Install vault (within a podman container)
+- Initialize new vault installation
+- Create a vault root certification authority
+- Provide and issue trusted certificates for services such as letsencrypt
+- Create local users
+- Create key value databases
+- Add key value data
+- Upload local files to vault secret store
+- Generate .bashrc file for fully automated environment handling
+- Automated certificate installation
+- Sign your own SSH public keys via vault and then return them to the system
+- Register the server via vault and configure sshd to enable vault ssh logins
+- Support for update Vault Server
+- Support for upgrade CA 
 
 ## Version:
 ```
