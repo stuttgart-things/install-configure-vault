@@ -417,7 +417,6 @@ ansible-playbook -i inventory playbook.yml
     - vault-ssh-manager
 
 ```
-</details>
 
 ### Playbook: inventory.yaml
 ```
