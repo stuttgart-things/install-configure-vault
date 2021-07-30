@@ -4,21 +4,6 @@ stuttgart-things/install-configure-vault
 This Ansible role can completely set up and configure a hashicorp vault. The entire ansible logic is based on api calls. No client binary is required.
 In addition to the installation, this role can also be used to fill the vault with data and issue certificates and much more.
 
-### Features:
-- Vault token is automatically obtained from userpass or approle if not given
-- Install vault (within a podman container)
-- Initialize new vault installation
-- Create a vault root certification authority
-- Provide and issue trusted certificates for services such as letsencrypt
-- Create local users
-- Create key value databases
-- Add key value data
-- Upload local files to vault secret store
-- Generate .bashrc file for fully automated environment handling
-- Automated certificate installation
-- Sign your own SSH public keys via vault and then return them to the system
-- Register the server via vault and configure sshd to enable vault ssh logins
-
 ### Role installation:
 <details><summary><b>Install this role on your ansible host (click here)</b></summary>
 
@@ -198,8 +183,12 @@ ansible-playbook -i inventory.ini playbook.yml
 
 ### Playbook: inventory.ini
 ```
-[vault]
-example.com
+all:
+  children:
+    ungrouped: {}
+    vault:
+      hosts:
+        example.com: {}
 ```
 </details>
 
@@ -241,8 +230,12 @@ ansible-playbook playbook.yml
 
 ### Playbook: inventory.ini
 ```
-[myserver]
-example.com
+all:
+  children:
+    ungrouped: {}
+    vault:
+      hosts:
+        example.com: {}
 ```
 </details>
 
@@ -279,8 +272,12 @@ ansible-playbook -i inventory.ini playbook.yml
 
 ### Playbook: inventory.ini
 ```
-[vault]
-example.com
+all:
+  children:
+    ungrouped: {}
+    vault:
+      hosts:
+        example.com: {}
 ```
 </details>
 
@@ -422,41 +419,48 @@ ansible-playbook -i inventory playbook.yml
 ```
 </details>
 
-### Playbook: inventory.ini
+### Playbook: inventory.yaml
 ```
-[vault]
-example.com
+all:
+  children:
+    ungrouped: {}
+    vault:
+      hosts:
+        example.com: {}
 ```
 </details>
 
 ## Requirements and Dependencies:
 - Ubuntu 20.04
-- Ubuntu 18.04
+- Fedora 34
 - CentOS 8
 - CentOS 7
 
 ## Version:
 ```
 DATE            WHO            WHAT
-2020-10-13      Marcel Zapf    Init readme, role wip
-2020-10-14      Marcel Zapf    Implementet new Features
-2020-10-15      Marcel Zapf    Bug fixing
-2020-10-19      Marcel Zapf    Logic added that allows further vault tasks to be linked directly after installation
-2020-10-20      Marcel Zapf    Better logic vault creates his own cert for webinterface and api, api awx bugfix move execution host from localhost to vars
-2020-10-21      Marcel Zapf    Added support for additionally ip address with domain name (Vault CA)
-2020-10-22      Marcel Zapf    Move error handler to own file, fix json override bug, add ip_sans to ca installation
-2020-10-23      Marcel Zapf    Add missing task for installing issuing ca key
-2020-10-26      Marcel Zapf    Fixed ip_san error while running error handler
-2020-10-28      Marcel Zapf    Add bashrc generator add kv upload
-2020-11-03      Marcel Zapf    Add feature for saving config after vault installation
-2020-11-12      Marcel Zapf    Add windows root ca installing process to readme
-2020-11-17      Marcel Zapf    Fix some known bugs and add aditional default vars for vault specific certificate
-2021-01-13      Marcel Zapf    Readme update
-2021-01-20      Marcel Zapf    Move container vars to defaults for better freze collections version
-2021-01-27      Marcel Zapf    ID for the CA certificate added to support more Vault CAs
-2021-02-05      Marcel Zapf    Added feature to delete a secret
-2021-06-04      Marcel Zapf    Added support for storage backend filesystem (default), S3, RAFT Cluster
+2021-07-30      Marcel Zapf    Readme update
+2021-07-29      Marcel Zapf    Added support for upgrade SSH CA and Vault version
 2021-06-15      Marcel Zapf    Added support for automated SSH CA handling
+2021-06-04      Marcel Zapf    Added support for storage backend filesystem (default), S3, RAFT Cluster
+2021-02-05      Marcel Zapf    Added feature to delete a secret
+2021-01-27      Marcel Zapf    ID for the CA certificate added to support more Vault CAs
+2021-01-20      Marcel Zapf    Move container vars to defaults for better freze collections version
+2021-01-13      Marcel Zapf    Readme update
+2020-11-17      Marcel Zapf    Fix some known bugs and add aditional default vars for vault specific certificate
+2020-11-12      Marcel Zapf    Add windows root ca installing process to readme
+2020-11-03      Marcel Zapf    Add feature for saving config after vault installation
+2020-10-28      Marcel Zapf    Add bashrc generator add kv upload
+2020-10-26      Marcel Zapf    Fixed ip_san error while running error handler
+2020-10-23      Marcel Zapf    Add missing task for installing issuing ca key
+2020-10-22      Marcel Zapf    Move error handler to own file, fix json override bug, add ip_sans to ca installation
+2020-10-21      Marcel Zapf    Added support for additionally ip address with domain name (Vault CA)
+2020-10-20      Marcel Zapf    Better logic vault creates his own cert for webinterface and api, api awx bugfix move execution host from localhost to vars
+2020-10-19      Marcel Zapf    Logic added that allows further vault tasks to be linked directly after installation
+2020-10-15      Marcel Zapf    Bug fixing
+2020-10-14      Marcel Zapf    Implementet new Features
+2020-10-13      Marcel Zapf    Init readme, role wip
+
 ```
 
 License
