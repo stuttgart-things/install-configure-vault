@@ -87,6 +87,8 @@ vault_install_ca_cert_ca_path:
     20: "/usr/local/share/ca-certificates/vault-ca-{{ vault_ca_id }}.crt"
   Alpine:
     3: "/usr/local/share/ca-certificates//vault-ca-{{ vault_ca_id }}.crt"
+  Suse:
+    15: "/etc/pki/trust/anchors/vault-ca-{{ vault_ca_id }}.crt"
     
 # Install vault server
 install_vault: false
