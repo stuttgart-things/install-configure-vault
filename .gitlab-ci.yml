@@ -1,5 +1,5 @@
 ---
 include:
   - project: Lab/stuttgart-things/stuttgart-things
-    file: kubernetes/gitlab/ansible-role-pipeline.yaml
+    file: build/gitlab/ansible-role-pipeline.yaml
     ref: master
