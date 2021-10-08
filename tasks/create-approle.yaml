@@ -11,7 +11,6 @@
     headers:
       X-Vault-Token: "{{ vault_token }}"
   delegate_to: "{{ vault_api_executor }}"
-  when: create_approle_endpoint|bool
 
 - name: Create AppRole
   ansible.builtin.uri:
@@ -29,6 +28,30 @@
       token_policies: "{{ item.approle_token_policies }}"
     headers:
       X-Vault-Token: "{{ vault_token }}"
-  register: vault_approle_api_result
   delegate_to: "{{ vault_api_executor }}"
-  when: create_approle|bool
+
+- name: Get role-id
+  ansible.builtin.uri:
+    validate_certs: false
+    url: "{{ vault_url }}/v1/auth/{{ item.approle_name }}/role/{{ item.role_name }}/role-id"
+    method: GET
+    status_code: 200
+    headers:
+      X-Vault-Token: "{{ vault_token }}"
+  register: vault_approle_api_result_role_id
+  delegate_to: "{{ vault_api_executor }}"
+
+- name: Create secret-id
+  ansible.builtin.uri:
+    validate_certs: false
+    url: "{{ vault_url }}/v1/auth/{{ item.approle_name }}/role/{{ item.role_name }}/secret-id"
+    method: POST
+    status_code: 200
+    headers:
+      X-Vault-Token: "{{ vault_token }}"
+  register: vault_approle_api_result_secret_id
+  delegate_to: "{{ vault_api_executor }}"
+
+- name: Print result
+  ansible.builtin.debug:
+    msg: "{{ item.role_name }} role-id {{ vault_approle_api_result_role_id.json.data.role_id }} secret-id {{ vault_approle_api_result_secret_id.json.data.secret_id }}"
