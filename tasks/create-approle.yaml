@@ -2,7 +2,7 @@
 - name: Enable AppRole endpoint
   ansible.builtin.uri:
     validate_certs: false
-    url: "{{ vault_url }}/v1/sys/auth/{{ item.approle_name }}"
+    url: "{{ vault_url }}/v1/sys/auth/{{ item.approle_endpoint_name }}"
     method: POST
     status_code: [204, 400]
     body_format: json
@@ -15,7 +15,7 @@
 - name: Create AppRole
   ansible.builtin.uri:
     validate_certs: false
-    url: "{{ vault_url }}/v1/auth/{{ item.approle_name }}/role/{{ item.role_name }}"
+    url: "{{ vault_url }}/v1/auth/{{ item.approle_endpoint_name }}/role/{{ item.name }}"
     method: POST
     status_code: 204
     body_format: json
@@ -33,7 +33,7 @@
 - name: Get role-id
   ansible.builtin.uri:
     validate_certs: false
-    url: "{{ vault_url }}/v1/auth/{{ item.approle_name }}/role/{{ item.role_name }}/role-id"
+    url: "{{ vault_url }}/v1/auth/{{ item.approle_endpoint_name }}/role/{{ item.name }}/role-id"
     method: GET
     status_code: 200
     headers:
@@ -44,7 +44,7 @@
 - name: Create secret-id
   ansible.builtin.uri:
     validate_certs: false
-    url: "{{ vault_url }}/v1/auth/{{ item.approle_name }}/role/{{ item.role_name }}/secret-id"
+    url: "{{ vault_url }}/v1/auth/{{ item.approle_endpoint_name }}/role/{{ item.name }}/secret-id"
     method: POST
     status_code: 200
     headers:
@@ -54,4 +54,4 @@
 
 - name: Print result
   ansible.builtin.debug:
-    msg: "{{ item.role_name }} role-id {{ vault_approle_api_result_role_id.json.data.role_id }} secret-id {{ vault_approle_api_result_secret_id.json.data.secret_id }}"
+    msg: "{{ item.name }} role-id {{ vault_approle_api_result_role_id.json.data.role_id }} secret-id {{ vault_approle_api_result_secret_id.json.data.secret_id }}"

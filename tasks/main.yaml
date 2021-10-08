@@ -59,3 +59,9 @@
 - name: Generate bashrc file and add vault alias
   ansible.builtin.include_tasks: generate-bashrc.yaml
   when: vault_bashrc|bool
+
+- name: Create AppRole
+  ansible.builtin.include_tasks: create-approle.yaml
+  when: create_approle|bool
+  with_items:
+    - "{{ vault_approle }}"
