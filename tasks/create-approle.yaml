@@ -1,0 +1,34 @@
+---
+- name: Enable AppRole endpoint
+  ansible.builtin.uri:
+    validate_certs: false
+    url: "{{ vault_url }}/v1/sys/auth/{{ item.approle_name }}"
+    method: POST
+    status_code: [204, 400]
+    body_format: json
+    body:
+      type: approle
+    headers:
+      X-Vault-Token: "{{ vault_token }}"
+  delegate_to: "{{ vault_api_executor }}"
+  when: create_approle_endpoint|bool
+
+- name: Create AppRole
+  ansible.builtin.uri:
+    validate_certs: false
+    url: "{{ vault_url }}/v1/auth/{{ item.approle_name }}/role/{{ item.role_name }}"
+    method: POST
+    status_code: 204
+    body_format: json
+    body:
+      secret_id_ttl: "{{ item.approle_secret_id_ttl }}"
+      token_num_uses: "{{ item.approle_token_num_uses }}"
+      token_ttl: "{{ item.approle_token_ttl }}"
+      token_max_ttl: "{{ item.approle_token_max_ttl }}"
+      secret_id_num_uses: "{{ item.approle_secret_id_num_uses }}"
+      token_policies: "{{ item.approle_token_policies }}"
+    headers:
+      X-Vault-Token: "{{ vault_token }}"
+  register: vault_approle_api_result
+  delegate_to: "{{ vault_api_executor }}"
+  when: create_approle|bool
