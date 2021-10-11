@@ -1,6 +1,6 @@
 ---
 - name: Load vault server podman-profile
-  include_vars: "{{lookup('first_found', params)}}"
+  ansible.builtin.include_vars: "{{lookup('first_found', params)}}"
   vars:
     params:
       files:
@@ -19,7 +19,7 @@
     dest: "{{ mounts.config.host }}vault.json"
 
 - name: Deploy Vault
-  include_role:
+  ansible.builtin.include_role:
     name: deploy-podman-container
 
 - name: "Wait for webservice {{ vault_url }} come up"

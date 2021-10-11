@@ -29,7 +29,7 @@
   when: debug | bool
 
 - name: "Search unseal key in json string"
-  set_fact:
+  ansible.builtin.set_fact:
     vault_unseal: '{{ vault_api_data_init.json | json_query(query) }}'
   vars:
     query: "keys[0]"
@@ -37,7 +37,7 @@
 
 
 - name: Save auth information from init to vars
-  set_fact:
+  ansible.builtin.set_fact:
     vault_token: "{{ vault_api_data_init.json.root_token }}"
 
 - name: Output root token

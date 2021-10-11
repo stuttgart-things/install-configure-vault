@@ -18,12 +18,12 @@
   delegate_to: "{{ vault_api_executor }}"
 
 - name: Error detected - set fail vars true
-  set_fact:
+  ansible.builtin.include_tasks:
     vault_gen_cert_fail: true
   when: vault_generated_cert.status != 200
 
 - name: Go to error handler when error is detected
-  include_tasks: error-handler.yaml
+  ansible.builtin.include_tasks: error-handler.yaml
   when: vault_gen_cert_fail | bool
 
 - name: Debug api cert information
