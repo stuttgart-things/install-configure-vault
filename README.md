@@ -471,6 +471,62 @@ all:
 ```
 </details>
 
+<details><summary>Create AppRole</summary>
+
+### Ansible command:
+```
+ansible-playbook -i inventory playbook.yml
+```
+
+### Playbook: playbook.yml
+```
+---
+- name: Manage server
+  gather_facts: true
+  hosts: vault
+  become: true
+
+  vars:
+    # default configuration
+    vault_url: https://vault.example.com:8200
+    vault_token: <secret> # or uncomment vault user+pw and use a admin user account
+
+    create_approle: true
+
+    vault_approle:
+      - name: argo-ci
+        approle_endpoint_name: approle
+        approle_secret_id_ttl: 8760h
+        approle_token_num_uses: 2000
+        approle_token_ttl: 20m
+        approle_token_max_ttl: 30m
+        approle_secret_id_num_uses: 2000
+        approle_token_policies: admin
+      - name: sthings
+        approle_endpoint_name: approle
+        approle_secret_id_ttl: 8760h
+        approle_token_num_uses: 2000
+        approle_token_ttl: 20m
+        approle_token_max_ttl: 30m
+        approle_secret_id_num_uses: 2000
+        approle_token_policies: admin
+
+  roles:
+    - install-configure-vault
+
+```
+
+### Playbook: inventory.yaml
+```
+all:
+  children:
+    ungrouped: {}
+    vault:
+      hosts:
+        example.com: {}
+```
+</details>
+
 ## Requirements and Dependencies:
 - Ubuntu 20.04
 - Fedora 34
@@ -493,10 +549,12 @@ all:
 - Register the server via vault and configure sshd to enable vault ssh logins
 - Support for update Vault Server
 - Support for upgrade CA 
+- Create AppRoles based on profiles
 
 ## Version:
 ```
 DATE            WHO            WHAT
+2021-10-08      Marcel Zapf    Added support for creating AppRole based on profiles
 2021-07-30      Marcel Zapf    Readme update
 2021-07-29      Marcel Zapf    Added support for upgrade SSH CA and Vault version
 2021-06-15      Marcel Zapf    Added support for automated SSH CA handling
@@ -518,7 +576,6 @@ DATE            WHO            WHAT
 2020-10-15      Marcel Zapf    Bug fixing
 2020-10-14      Marcel Zapf    Implementet new Features
 2020-10-13      Marcel Zapf    Init readme, role wip
-
 ```
 
 License
