@@ -10,6 +10,7 @@ vault_install_json_packages:
   - name: jmespath
 vault_install_save_conf_path: /tmp/vault.txt
 vault_gen_cert_fail: false
+create_approle: false
 
 # storage backend configuration
 vault_storage_backend: filesystem
