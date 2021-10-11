@@ -1,6 +1,6 @@
 ---
 # default configuration
-vault_version: 1.8.0
+vault_version: 1.8.4
 vault_url: https://vault.example.com:8200
 vault_username: username
 vault_password: password
