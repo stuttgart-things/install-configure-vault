@@ -471,7 +471,7 @@ all:
 ```
 </details>
 
-<details><summary>Create AppRole</summary>
+<details><summary>Create AppRole (click here)</summary>
 
 ### Ansible command:
 ```
