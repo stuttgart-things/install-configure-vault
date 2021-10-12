@@ -18,7 +18,7 @@
   delegate_to: "{{ vault_api_executor }}"
 
 - name: Error detected - set fail vars true
-  ansible.builtin.include_tasks:
+  ansible.builtin.set_fact:
     vault_gen_cert_fail: true
   when: vault_generated_cert.status != 200
 
