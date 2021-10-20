@@ -17,7 +17,7 @@
     status_code: 200
     body_format: json
     body:
-      common_name: "{{ ansible_fqdn }}"
+      common_name: "{{ vault_ca_webinterface_common_name }}"
       ttl: "{{ vault_gen_vault_cert_ttl }}"
       ip_sans: "{{ ansible_default_ipv4.address }}"
     headers:
