@@ -13,7 +13,7 @@
   when: install_vault|bool or upgrade_vault|bool
 
 - name: Init vault server after installation
-  include_tasks: init-vault.yaml
+  ansible.builtin.include_tasks: init-vault.yaml
   when: install_vault|bool and not upgrade_vault
 
 - name: Create user via userpass engine
