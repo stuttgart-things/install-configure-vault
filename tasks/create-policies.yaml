@@ -7,7 +7,7 @@
     status_code: [204, 400]
     body_format: json
     body:
-      policy: "{{ item.policy| b64encode }}"
+      policy: "{{ item.policy | b64encode }}"
     headers:
       X-Vault-Request: true
       X-Vault-Token: "{{ vault_token }}"
