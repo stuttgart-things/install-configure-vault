@@ -1,5 +1,5 @@
 ---
-- name: Create ldap auth
+- name: Create LDAP auth
   ansible.builtin.uri:
     validate_certs: false
     url: "{{ vault_url }}/v1/sys/auth/{{ item.name }}"
@@ -13,7 +13,7 @@
       X-Vault-Token: "{{ vault_token }}"
   delegate_to: "{{ vault_api_executor }}"
 
-- name: Configure ldap auth
+- name: Configure LDAP auth
   ansible.builtin.uri:
     validate_certs: false
     url: "{{ vault_url }}/v1/auth/ldap/config"
