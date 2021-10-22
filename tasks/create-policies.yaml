@@ -1,0 +1,14 @@
+---
+- name: Create vault policy
+  ansible.builtin.uri:
+    validate_certs: false
+    url: "{{ vault_url }}/v1/sys/policies/acl/{{ vault_conf_policy_name }}"
+    method: POST
+    status_code: [204, 400]
+    body_format: json
+    body:
+      policy: "{{ | b64encode }}"
+    headers:
+      X-Vault-Request: true
+      X-Vault-Token: "{{ vault_token }}"
+  delegate_to: "{{ vault_api_executor }}"

@@ -1,0 +1,50 @@
+---
+- name: Create ldap auth
+  ansible.builtin.uri:
+    validate_certs: false
+    url: "{{ vault_url }}/v1/sys/auth/ldap"
+    method: POST
+    status_code: [204, 400]
+    body_format: json
+    body:
+      type: ldap
+    headers:
+      X-Vault-Request: true
+      X-Vault-Token: "{{ vault_token }}"
+  delegate_to: "{{ vault_api_executor }}"
+
+- name: Configure ldap auth
+  ansible.builtin.uri:
+    validate_certs: false
+    url: "{{ vault_url }}/v1/auth/ldap/config"
+    method: POST
+    status_code: [204, 400]
+    body_format: json
+    body:
+      url: 
+      case_sensitive_names: 
+      certificate: 
+      binddn: 
+      bindpass: 
+      userdn: 
+      deny_null_bind: 
+      groupfilter: 
+      groupdn: 
+    headers:
+      X-Vault-Request: true
+      X-Vault-Token: "{{ vault_token }}"
+  delegate_to: "{{ vault_api_executor }}"
+
+- name: Add LDAP group-policy mapping
+  ansible.builtin.uri:
+    validate_certs: false
+    url: "{{ vault_url }}/v1/auth/ldap/groups/vault-admins"
+    method: POST
+    status_code: [204, 400]
+    body_format: json
+    body:
+      policies:
+    headers:
+      X-Vault-Request: true
+      X-Vault-Token: "{{ vault_token }}"
+  delegate_to: "{{ vault_api_executor }}"
