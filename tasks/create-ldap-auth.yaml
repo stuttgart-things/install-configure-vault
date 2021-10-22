@@ -2,7 +2,7 @@
 - name: Create ldap auth
   ansible.builtin.uri:
     validate_certs: false
-    url: "{{ vault_url }}/v1/sys/auth/ldap"
+    url: "{{ vault_url }}/v1/sys/auth/{{ item.name }}"
     method: POST
     status_code: [204, 400]
     body_format: json
@@ -21,15 +21,15 @@
     status_code: [204, 400]
     body_format: json
     body:
-      url: 
-      case_sensitive_names: 
-      certificate: 
-      binddn: 
-      bindpass: 
-      userdn: 
-      deny_null_bind: 
-      groupfilter: 
-      groupdn: 
+      url: "{{ item.url }}"
+      case_sensitive_names: "{{ item.case_sensitive_names }}"
+      certificate: "{{ item.certificate }}"
+      binddn: "{{ item.binddn }}"
+      bindpass: "{{ item.bindpass }}"
+      userdn: "{{ item.userdn }}"
+      deny_null_bind: "{{ item.deny_null_bind }}"
+      groupfilter: "{{ item.groupfilter }}"
+      groupdn: "{{ item.groupdn }}"
     headers:
       X-Vault-Request: true
       X-Vault-Token: "{{ vault_token }}"
