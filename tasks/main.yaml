@@ -68,10 +68,10 @@
 
 - name: Create policies
   ansible.builtin.include_tasks: create-policies.yaml
-  when: vault_policies is defined
+  when: create_policies|bool
   with_items:
     - "{{ vault_policies }}"
 
 - name: Create LDAP config
   ansible.builtin.include_tasks: create-ldap-auth.yaml
-  when: vault_policies is defined
+  when: create_ldap_conf|bool
