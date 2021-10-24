@@ -11,7 +11,7 @@ vault_install_json_packages:
 vault_install_save_conf_path: /tmp/vault.txt
 vault_gen_cert_fail: false
 create_approle: false
-
+create_ldap_conf: false
 # storage backend configuration
 vault_storage_backend: filesystem
 vault_raft_cluster_addr: "http://127.0.0.1:8201"
