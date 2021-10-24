@@ -106,6 +106,8 @@ vault_crate_user_data:
     password: secret
     policies: admins
 
+create_policies: false
+
 # Generate bashrc
 vault_bashrc: false
 # vault_bashrc_mod:
