@@ -43,7 +43,7 @@
     status_code: [204, 400]
     body_format: json
     body:
-      policies: "{{ group_policy_mapping_policies }}"
+      policies: "{{ item.group_policy_mapping_policies }}"
     headers:
       X-Vault-Request: true
       X-Vault-Token: "{{ vault_token }}"
