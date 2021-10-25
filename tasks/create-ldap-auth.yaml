@@ -38,7 +38,7 @@
 - name: Add LDAP group-policy mapping
   ansible.builtin.uri:
     validate_certs: false
-    url: "{{ vault_url }}/v1/auth/ldap/groups/{{ group_policy_mapping_name }}"
+    url: "{{ vault_url }}/v1/auth/ldap/groups/{{ item.group_policy_mapping_name }}"
     method: POST
     status_code: [204, 400]
     body_format: json
