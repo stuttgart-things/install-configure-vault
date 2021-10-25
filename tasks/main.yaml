@@ -75,3 +75,6 @@
 - name: Create LDAP config
   ansible.builtin.include_tasks: create-ldap-auth.yaml
   when: create_ldap_conf|bool
+  with_items:
+    - "{{ vault_ldap_auth }}"
+  
