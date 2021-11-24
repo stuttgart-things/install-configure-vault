@@ -9,6 +9,7 @@
       update_packages: false
       python_modules: "{{ vault_install_json_packages }}"
       state: present
+  delegate_to: "{{ vault_api_executor }}"
 
 - name: Request a vault init
   ansible.builtin.uri:
