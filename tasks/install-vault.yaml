@@ -8,6 +8,14 @@
       paths:
         - 'vars'
 
+- name: Set enterprice licence var for enterprise installation
+  ansible.builtin.set_fact:
+    env_vars:
+      ENTERPRISE_KEY:
+        key: VAULT_LICENSE
+        value: "{{ vault_enterprise_licence }}"
+  when: vault_product_type == 'enterprise'
+
 - name: Create vault config dir
   ansible.builtin.file:
     path: "{{ mounts.config.host }}"

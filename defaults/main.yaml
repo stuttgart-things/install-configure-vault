@@ -1,6 +1,6 @@
 ---
 # default configuration
-vault_version: 1.9.0
+vault_version: "{{ '1.9.1' if vault_product_type == 'community' else '1.9.1-ent' }}"
 vault_url: https://vault.example.com:8200
 vault_username: username
 vault_password: password
@@ -20,6 +20,7 @@ vault_create_ca: false
 vault_ca_install_vault_cert: false
 vault_ca_path: pki
 vault_ca_max_lease_ttl: 87600h0m0s
+vault_product_type: community
 
 # CA root certificate default configuration
 vault_ca_cert_common_name: example.com # Best pratice the name of the domain managed by vault CA

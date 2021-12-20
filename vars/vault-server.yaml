@@ -1,7 +1,7 @@
 ---
 container_name: vault-server
 permanent: true
-container_image: "vault:{{ vault_version }}"
+container_image: "{{ 'vault' if vault_product_type == 'community' else 'hashicorp/vault-enterprise' }}:{{ vault_version }}"
 container_run_args: >-
     -d --cap-add=IPC_LOCK
 container_cmd_args: >-
