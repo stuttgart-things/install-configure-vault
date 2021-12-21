@@ -11,7 +11,7 @@
   delegate_to: "{{ vault_api_executor }}"
   with_items:
     - "{{ vault_kv_write_data }}"
-  when: vault_kv_write_data.namespace is defined
+  when: item.namespace is defined
 
 - name: Create KV database
   ansible.builtin.uri:
