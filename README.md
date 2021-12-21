@@ -554,6 +554,7 @@ all:
 ## Version:
 ```
 DATE            WHO            WHAT
+2021-12-21      Marcel Zapf    Added namespace support
 2021-12-08      Marcel Zapf    Improved webinterface cert issuing process, fixed bug replace cert in webinterface on upgrade
 2021-10-08      Marcel Zapf    Added support for creating AppRole based on profiles
 2021-07-30      Marcel Zapf    Readme update
