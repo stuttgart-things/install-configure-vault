@@ -1,4 +1,18 @@
 ---
+- name: Create namespace
+  ansible.builtin.uri:
+    validate_certs: false
+    url: "{{ vault_url }}/v1/sys/namespaces/{{ item.namespace }}"
+    method: POST
+    status_code: [204, 400]
+    headers:
+      X-Vault-Request: true
+      X-Vault-Token: "{{ vault_token }}"
+  delegate_to: "{{ vault_api_executor }}"
+  with_items:
+    - "{{ vault_kv_write_data }}"
+  when: vault_kv_write_data.namespace is defined
+
 - name: Create KV database
   ansible.builtin.uri:
     validate_certs: false
