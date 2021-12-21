@@ -22,7 +22,7 @@
     headers:
       X-Vault-Request: true
       X-Vault-Token: "{{ vault_token }}"
-      X-Vault-Namespace: "{{ vault_namespace | default(omit) }}"
+      X-Vault-Namespace: "{{ item.namespace | default(omit) }}"
   delegate_to: "{{ vault_api_executor }}"
   with_items:
     - "{{ vault_kv_write_data }}"
