@@ -4,7 +4,7 @@
     validate_certs: false
     url: "{{ vault_url }}/v1/sys/namespaces/{{ item.namespace }}"
     method: POST
-    status_code: [204, 400]
+    status_code: [200, 400]
     headers:
       X-Vault-Request: true
       X-Vault-Token: "{{ vault_token }}"
