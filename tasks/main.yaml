@@ -38,11 +38,11 @@
 
 - name: Create KV database
   ansible.builtin.include_tasks: create-kv-db.yaml
-  when: vault_create_kv_db|bool
+  when: vault_kv_write_data is defined
 
 - name: Write data to KV database
   ansible.builtin.include_tasks: create-write-kv.yaml
-  when: vault_kv_write|bool
+  when: vault_kv_write_data is defined
 
 - name: Install vault ca certificate to local system
   ansible.builtin.include_tasks: install-ca-auth.yaml
