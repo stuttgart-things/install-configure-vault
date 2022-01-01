@@ -60,6 +60,7 @@ vault_create_kv_db_name: mykvdb
 vault_kv_delete_secret: false
 # Write data to KV database
 vault_kv_write: false
+create_vault_namespace: true
 # vault_kv_write_data:
 #   - secret_name: infra
 #     secret_engine: example
