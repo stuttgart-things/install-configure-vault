@@ -2,13 +2,13 @@
   "backend": {
     "raft": {
       "path": "/vault/raft",
-      "node_id" = "node{{ 999 | random }}",
-      "retry_join" {
-        "leader_tls_servername" = "{{ hostvars[groups['leader'][0]]['ansible_hostname'] }}",
-        "leader_api_addr" = "{{ hostvars[groups['leader'][0]]['ansible_fqdn'] }}",
-        "leader_ca_cert_file" = "/path/to/ca",
-        "leader_client_cert_file" = "/etc/certificate/{{ cert_crt_name }}",
-        "leader_client_key_file" = "/etc/certificate/{{ cert_key_name }}"
+      "node_id": "node{{ 999 | random }}",
+      "retry_join": {
+        "leader_tls_servername": "{{ hostvars[groups['leader'][0]]['ansible_hostname'] }}",
+        "leader_api_addr": "{{ hostvars[groups['leader'][0]]['ansible_fqdn'] }}",
+        "leader_ca_cert_file": "/path/to/ca",
+        "leader_client_cert_file": "/etc/certificate/{{ cert_crt_name }}",
+        "leader_client_key_file": "/etc/certificate/{{ cert_key_name }}"
       }
     }
   },
