@@ -39,4 +39,5 @@
       X-Vault-Namespace: "{{ item.namespace | default(omit) }}"
   delegate_to: "{{ vault_api_executor }}"
   with_items:
-    - "{{ vault_kv_write_data }}"
+    - "{{ vault_kv_write_data | default(omit) }}"
+    - "{{ vault_kv_write_file_data | default(omit) }}"
