@@ -1,7 +1,14 @@
 {
   "backend": {
     "raft": {
-      "path": "/vault/raft"
+      "path": "/vault/raft",
+      "node_id" = "node1"
+      "retry_join" {
+        leader_api_addr = "{{ hostvars[groups['leader'][0]]['ansible_fqdn'] }}"
+        leader_ca_cert_file = "/path/to/ca"
+        leader_client_cert_file = "/path/to/client/cert"
+        leader_client_key_file = "/path/to/client/key"
+      }
     }
   },
   "cluster_addr": "https://{{ vault_raft_cluster_addr }}",
