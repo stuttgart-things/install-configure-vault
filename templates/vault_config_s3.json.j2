@@ -1,21 +1,21 @@
 {
-  "backend": {
-    "s3": {
-      "access_key": "{{ vault_s3_access_key }}",
-      "secret_key": "{{ vault_s3_secret_key }}",
-      "bucket": "{{ vault_s3_bucket }}",
-      "endpoint": "{{ vault_s3_endpoint }}"
-    }
-  },
-  "listener": {
-    "tcp":{
-      "address": "0.0.0.0:8200",
-      "tls_disable": 0,
-      "proxy_protocol_behaviour": "use_always",
-      "tls_cert_file": "/etc/certificate/{{ cert_crt_name }}",
-      "tls_key_file": "/etc/certificate/{{ cert_key_name }}"
-    }
-  },
-  "ui": true,
-  "log_level": "Debug"
+   "backend":{
+      "s3":{
+         "access_key":"{{ vault_s3_access_key }}",
+         "secret_key":"{{ vault_s3_secret_key }}",
+         "bucket":"{{ vault_s3_bucket }}",
+         "endpoint":"{{ vault_s3_endpoint }}"
+      }
+   },
+   "listener":{
+      "tcp":{
+         "address":"0.0.0.0:8200",
+         "tls_disable":0,
+         "proxy_protocol_behaviour":"use_always",
+         "tls_cert_file":"/etc/certificate/{{ cert_crt_name }}",
+         "tls_key_file":"/etc/certificate/{{ cert_key_name }}"
+      }
+   },
+   "ui":true,
+   "log_level":"Debug"
 }
