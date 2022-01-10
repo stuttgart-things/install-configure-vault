@@ -3,13 +3,15 @@
       "raft":{
          "path":"/vault/raft",
          "node_id":"node{{ 999 | random }}",
+{% for inventory_hostname in groups['member'] %}
          "retry_join":{
-            "leader_tls_servername":"{{ hostvars[groups['leader'][0]]['ansible_hostname'] }}",
-            "leader_api_addr":"{{ hostvars[groups['leader'][0]]['ansible_fqdn'] }}",
+            "leader_tls_servername":"{{ hostvars[groups['leader']]['ansible_hostname'] }}",
+            "leader_api_addr":"{{ hostvars[groups['leader']]['ansible_fqdn'] }}",
             "leader_ca_cert_file":"/path/to/ca",
-            "leader_client_cert_file":"/etc/certificate/{{ cert_crt_name }}",
-            "leader_client_key_file":"/etc/certificate/{{ cert_key_name }}"
-         }
+            "leader_client_cert_file":"/etc/certificate/{{ ansible_hostname }}",
+            "leader_client_key_file":"/etc/certificate/{{ ansible_hostname }}"
+         }{{ ", " if not loop.last else "" }}
+{% endfor %}
       }
    },
    "cluster_addr":"https://{{ vault_raft_cluster_addr }}",
