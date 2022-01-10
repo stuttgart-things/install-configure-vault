@@ -3,7 +3,7 @@
       "raft":{
          "path":"/vault/raft",
          "node_id":"node{{ 999 | random }}",
-         {% for host in groups['member'] %}
+{% for host in groups['member'] %}
          "retry_join":{
             "leader_tls_servername":"{{ hostvars[host]['ansible_hostname'] }}",
             "leader_api_addr":{{ hostvars[host]['ansible_fqdn'] }},
@@ -11,7 +11,7 @@
             "leader_client_cert_file":"/etc/certificate/{{ hostvars[host]['ansible_hostname'] }}",
             "leader_client_key_file":"/etc/certificate/{{ hostvars[host]['ansible_hostname'] }}"
          }{{ ", " if not loop.last else "" }}
-         {% endfor %}
+{% endfor %}
       }
    },
    "cluster_addr":"https://{{ vault_raft_cluster_addr }}",
