@@ -14,6 +14,13 @@
    },
    "cluster_addr":"https://{{ vault_raft_cluster_addr }}",
    "api_addr":"https://{{ ansible_fqdn }}",
+   "replication":{
+      "resolver_discover_servers":true,
+      "logshipper_buffer_length":1000,
+      "logshipper_buffer_size":"5gb",
+      "allow_forwarding_via_header":false,
+      "best_effort_wal_wait_duration":"2s"
+   },
    "listener":{
       "tcp":{
          "address":"0.0.0.0:8200",
