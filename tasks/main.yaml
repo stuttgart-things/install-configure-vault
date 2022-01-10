@@ -38,7 +38,7 @@
 
 - name: Create KV database
   ansible.builtin.include_tasks: create-kv-db.yaml
-  when: vault_kv_write_data is defined
+  when: vault_kv_write_data is defined or vault_kv_write_file_data is defined
 
 - name: Write data to KV database
   ansible.builtin.include_tasks: create-write-kv.yaml
