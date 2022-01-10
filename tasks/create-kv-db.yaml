@@ -10,7 +10,8 @@
       X-Vault-Token: "{{ vault_token }}"
   delegate_to: "{{ vault_api_executor }}"
   with_items:
-    - "{{ vault_kv_write_data }}"
+    - "{{ vault_kv_write_data | default(omit) }}"
+    - "{{ vault_kv_write_file_data | default(omit) }}"
   when: item.namespace is defined and create_vault_namespace|bool
 
 - name: Create KV database
