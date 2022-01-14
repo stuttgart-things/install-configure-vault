@@ -11,6 +11,7 @@
     headers:
       X-Vault-Request: true
       X-Vault-Token: "{{ vault_token }}"
+      X-Vault-Namespace: "{{ item.namespace | default(omit) }}"
   with_items:
     - "{{ vault_policies }}"
   delegate_to: "{{ vault_api_executor }}"
