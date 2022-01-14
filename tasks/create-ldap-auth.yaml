@@ -11,6 +11,7 @@
     headers:
       X-Vault-Request: true
       X-Vault-Token: "{{ vault_token }}"
+      X-Vault-Namespace: "{{ item.namespace | default(omit) }}"
   delegate_to: "{{ vault_api_executor }}"
 
 - name: Configure LDAP auth
@@ -33,6 +34,7 @@
     headers:
       X-Vault-Request: true
       X-Vault-Token: "{{ vault_token }}"
+      X-Vault-Namespace: "{{ item.namespace | default(omit) }}"
   delegate_to: "{{ vault_api_executor }}"
 
 - name: Add LDAP group-policy mapping
@@ -47,4 +49,5 @@
     headers:
       X-Vault-Request: true
       X-Vault-Token: "{{ vault_token }}"
+      X-Vault-Namespace: "{{ item.namespace | default(omit) }}"
   delegate_to: "{{ vault_api_executor }}"
