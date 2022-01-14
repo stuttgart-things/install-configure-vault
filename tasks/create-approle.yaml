@@ -10,6 +10,7 @@
       type: approle
     headers:
       X-Vault-Token: "{{ vault_token }}"
+      X-Vault-Namespace: "{{ item.namespace | default(omit) }}"
   delegate_to: "{{ vault_api_executor }}"
 
 - name: Create AppRole
@@ -28,6 +29,7 @@
       token_policies: "{{ item.approle_token_policies }}"
     headers:
       X-Vault-Token: "{{ vault_token }}"
+      X-Vault-Namespace: "{{ item.namespace | default(omit) }}"
   delegate_to: "{{ vault_api_executor }}"
 
 - name: Get role-id
@@ -38,6 +40,7 @@
     status_code: 200
     headers:
       X-Vault-Token: "{{ vault_token }}"
+      X-Vault-Namespace: "{{ item.namespace | default(omit) }}"
   register: vault_approle_api_result_role_id
   delegate_to: "{{ vault_api_executor }}"
 
@@ -49,9 +52,10 @@
     status_code: 200
     headers:
       X-Vault-Token: "{{ vault_token }}"
+      X-Vault-Namespace: "{{ item.namespace | default(omit) }}"
   register: vault_approle_api_result_secret_id
   delegate_to: "{{ vault_api_executor }}"
 
 - name: Print result
   ansible.builtin.debug:
-    msg: "{{ item.name }} role-id {{ vault_approle_api_result_role_id.json.data.role_id }} secret-id {{ vault_approle_api_result_secret_id.json.data.secret_id }}"
+    msg: "{{ item.name }} role_id={{ vault_approle_api_result_role_id.json.data.role_id }} secret_id={{ vault_approle_api_result_secret_id.json.data.secret_id }}"
