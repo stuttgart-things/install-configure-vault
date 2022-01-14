@@ -60,15 +60,15 @@
   ansible.builtin.include_tasks: generate-bashrc.yaml
   when: vault_bashrc|bool
 
-- name: Create AppRole
-  ansible.builtin.include_tasks: create-approle.yaml
-  when: create_approle|bool
-  with_items:
-    - "{{ vault_approle }}"
-
 - name: Create policies
   ansible.builtin.include_tasks: create-policies.yaml
-  when: create_policies|bool
+  when: vault_policies is defined
+
+- name: Create AppRole
+  ansible.builtin.include_tasks: create-approle.yaml
+  when: vault_approle is defined
+  with_items:
+    - "{{ vault_approle }}"
 
 - name: Create LDAP config
   ansible.builtin.include_tasks: create-ldap-auth.yaml
