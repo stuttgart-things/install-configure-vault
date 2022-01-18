@@ -1,0 +1,24 @@
+---
+- name: Set up ca - Generate an OpenSSL private key for CA
+  community.crypto.openssl_privatekey:
+    path: "{{ ansible_ca.path }}/{{ ansible_ca.key }}"
+
+- name: Set up ca - Create certificate signing request (CSR) for CA
+  community.crypto.openssl_csr_pipe:
+    privatekey_path: "{{ ansible_ca.path }}/{{ ansible_ca.key }}"
+    common_name: "{{ ansible_ca.common_name }}"
+    organization_name: "{{ ansible_ca.organization_name }}"
+    country_name: "{{ ansible_ca.country_name }}"
+    basic_constraints:
+      - 'CA:TRUE'
+    key_usage:
+      - keyCertSign
+    key_usage_critical: true
+  register: ca_csr
+
+- name: Set up ca - Create self-signed CA certificate from CSR
+  community.crypto.x509_certificate:
+    path: "{{ ansible_ca.path }}/{{ ansible_ca.crt }}"
+    csr_content: "{{ ca_csr.csr }}"
+    privatekey_path: "{{ ansible_ca.path }}/{{ ansible_ca.key }}"
+    provider: selfsigned
