@@ -127,3 +127,20 @@ vault_bashrc: false
 #      - vcenter
 #    ocp4:
 #      - pull_secret
+
+# Raft
+ansible_ca:
+  path: /tmp
+  key: ca.key
+  crt: ca.crt
+  common_name: Ansible CA
+  organization_name: stuttgart-things
+  country_name: DE
+ansible_ca_cert:
+  path: /tmp
+  key: cert.key
+  crt: cert.pem
+  valid: +356d
+  subject_alt_name:
+    - "DNS:{{ ansible_fqdn }}"
+    - "DNS:{{ ansible_default_ipv4.address }}"
