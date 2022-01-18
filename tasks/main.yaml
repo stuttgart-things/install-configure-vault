@@ -8,6 +8,10 @@
   ansible.builtin.include_tasks: destroy.yaml
   when: destroy_vault|bool
 
+- name: Prepare raft backend
+  ansible.builtin.include_tasks: raft-temp-ca.yaml
+  when: install_vault|bool and vault_storage_backend == "raft"
+
 - name: Install vault server
   ansible.builtin.include_tasks: install-vault.yaml
   when: install_vault|bool or upgrade_vault|bool
