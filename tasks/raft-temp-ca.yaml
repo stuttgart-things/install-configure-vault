@@ -22,3 +22,26 @@
     csr_content: "{{ ca_csr.csr }}"
     privatekey_path: "{{ ansible_ca.path }}/{{ ansible_ca.key }}"
     provider: selfsigned
+
+- name: Generate cert - Create private key for new certificate
+  community.crypto.openssl_privatekey:
+    path: "{{ ansible_ca_cert.path }}/{{ ansible_ca_cert.key }}"
+  run_once: true
+
+- name: Generate cert - Create certificate signing request (CSR) for new certificate
+  community.crypto.openssl_csr_pipe:
+    privatekey_path: "{{ ansible_ca_cert.path }}/{{ ansible_ca_cert.key }}"
+    subject_alt_name: "{{ ansible_ca_cert.subject_alt_name }}"
+  run_once: true
+  register: csr
+
+- name: Generate cert - Sign certificate with ansible CA
+  community.crypto.x509_certificate:
+    csr_content: "{{ csr.csr }}"
+    path: "{{ ansible_ca_cert.path }}/{{ ansible_ca_cert.crt }}"
+    provider: ownca
+    ownca_path: "{{ ansible_ca.path }}/{{ ansible_ca.crt }}"
+    ownca_privatekey_path: "{{ ansible_ca.path }}/{{ ansible_ca.key }}"
+    ownca_not_after: "{{ ansible_ca_cert.valid }}"
+    ownca_not_before: "-1d"
+  run_once: true
