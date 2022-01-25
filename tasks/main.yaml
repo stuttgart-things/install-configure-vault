@@ -22,7 +22,7 @@
 
 - name: Init vault server after installation
   ansible.builtin.include_tasks: init-vault.yaml
-  when: install_vault|bool and not upgrade_vault
+  when: install_vault_podman|bool or install_vault_k8s|bool and not upgrade_vault
 
 - name: Create user via userpass engine
   ansible.builtin.include_tasks: create-user.yaml
