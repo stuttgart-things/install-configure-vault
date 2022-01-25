@@ -17,7 +17,7 @@
   when: install_vault_podman|bool or upgrade_vault|bool
 
 - name: Install vault on k8s
-  ansible.builtin.include_tasks: install-vault.yaml
+  ansible.builtin.include_tasks: install-vault-k8s.yaml
   when: install_vault_k8s|bool
 
 - name: Init vault server after installation
