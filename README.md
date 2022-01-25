@@ -65,7 +65,7 @@ ansible-playbook -i inventory.ini playbook.yml
     vault_url: https://example.com:8200
 
     # Install vault server
-    install_vault: true
+    install_vault_podman: true
     install_vault_init_secret_shares: 1
     install_vault_init_secret_threshold: 1
 
