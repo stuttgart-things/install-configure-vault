@@ -1,0 +1,16 @@
+---
+- name: Load vault server k8s-profile
+  ansible.builtin.include_vars: "{{lookup('first_found', params)}}"
+  vars:
+    params:
+      files:
+        - 'vault-server-k8s.yaml'
+      paths:
+        - 'vars'
+
+- name: Deploy vault-server
+  ansible.builtin.include_role:
+    name: deploy-helm-chart
+  vars:
+    kubeconfig_path: "{{ kubeconfigfile }}"
+  when: "'Running' not in certmanager_pod_status"

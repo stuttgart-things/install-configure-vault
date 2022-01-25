@@ -12,9 +12,13 @@
   ansible.builtin.include_tasks: raft-temp-ca.yaml
   when: install_vault|bool and vault_storage_backend == "raft"
 
-- name: Install vault server
+- name: Install vault on podman
   ansible.builtin.include_tasks: install-vault.yaml
-  when: install_vault|bool or upgrade_vault|bool
+  when: install_vault_podman|bool or upgrade_vault|bool
+
+- name: Install vault on k8s
+  ansible.builtin.include_tasks: install-vault.yaml
+  when: install_vault_k8s|bool or upgrade_vault|bool
 
 - name: Init vault server after installation
   ansible.builtin.include_tasks: init-vault.yaml

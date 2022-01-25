@@ -1,0 +1,18 @@
+---
+namespace_name: "{{ k8s.namespace }}" 
+helm_release_name: vault
+helm_chart_name: vault
+helm_chart_version: "{{ k8s.version }}"
+helm_repository_name: hashicorp
+helm_repository_url: https://helm.releases.hashicorp.com
+
+helm_parameter:
+  - parameter: wait 
+    value: "{{ True | lower }}"
+
+values: |
+  server:
+    ingress:
+      enabled: true
+      hosts:
+        - host: "{{ k8s.ingress_hostname }}"
