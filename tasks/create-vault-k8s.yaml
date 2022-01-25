@@ -13,4 +13,3 @@
     name: deploy-helm-chart
   vars:
     kubeconfig_path: "{{ kubeconfigfile }}"
-  when: "'Running' not in certmanager_pod_status"
