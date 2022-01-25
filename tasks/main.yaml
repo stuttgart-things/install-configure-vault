@@ -38,7 +38,7 @@
 
 - name: Recreate vault cert with vault ca
   ansible.builtin.include_tasks: generate-vault-cert.yaml
-  when: vault_ca_install_vault_cert | bool
+  when: vault_ca_install_vault_cert | bool and install_vault_podman|bool
 
 - name: Generate trusted certificate via vault server
   ansible.builtin.include_tasks: generate-cert.yaml
