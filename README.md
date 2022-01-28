@@ -20,16 +20,20 @@ roles:
   scm: git
 - src: git@codehub.sva.de:Lab/stuttgart-things/supporting-roles/install-configure-podman.git
   scm: git
+- src: git@codehub.sva.de:Lab/stuttgart-things/kubernetes/deploy-helm-chart.git
+  scm: git
 
 collections:
 - name: containers.podman
-  version: 1.6.1
+  version: 1.9.1
 - name: community.general
-  version: 3.4.0
+  version: 4.3.0
 - name: community.crypto
-  version: 1.7.1
+  version: 1.9.9
 - name: ansible.posix
-  version: 1.2.0
+  version: 1.3.0
+- name: community.kubernetes
+  version: 2.0.1
 
 EOF
 ansible-galaxy install -r /tmp/requirements.yaml --force && ansible-galaxy collection install -r /tmp/requirements.yaml -f
