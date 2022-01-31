@@ -1,6 +1,6 @@
 ---
 # default configuration
-vault_version: "{{ '1.9.2' if vault_product_type == 'community' else '1.9.2-ent' }}"
+vault_version: "{{ '1.9.3' if vault_product_type == 'community' else '1.9.3-ent' }}"
 vault_url: https://vault.example.com:8200
 vault_username: username
 vault_password: password
