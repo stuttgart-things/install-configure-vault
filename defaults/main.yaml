@@ -132,14 +132,14 @@ vault_bashrc: false
 
 # Raft
 ansible_ca:
-  path: /tmp
+  path: ~/ansible_ca/ca
   key: ca.key
   crt: ca.crt
   common_name: Ansible CA
   organization_name: stuttgart-things
   country_name: DE
 ansible_ca_cert:
-  path: /tmp
+  path: ~/ansible_ca/certificate
   key: cert.key
   crt: cert.pem
   valid: +356d
