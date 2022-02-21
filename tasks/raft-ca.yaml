@@ -34,14 +34,14 @@
 
 - name: Generate cert - Create private key for new certificate
   community.crypto.openssl_privatekey:
-    path: "{{ ansible_ca_cert.path }}/{{ item.key }}"
+    path: "{{ ansible_ca_cert.path }}/{{ item }}.key"
   delegate_to: "{{ groups['member'][0] }}"
   run_once: true
   with_items: "{{ query('inventory_hostnames', 'member') }}"
 
 - name: Generate cert - Create certificate signing request (CSR) for new certificate
   community.crypto.openssl_csr_pipe:
-    privatekey_path: "{{ ansible_ca_cert.path }}/{{ item.key }}"
+    privatekey_path: "{{ ansible_ca_cert.path }}/{{ item }}.key"
     subject_alt_name: "{{ ansible_ca_cert.subject_alt_name }}"
   run_once: true
   register: csr
@@ -50,17 +50,17 @@
 
 - name: Generate cert - Create certificate signing request (CSR) for new certificate
   community.crypto.openssl_csr:
-    path: "{{ ansible_ca_cert.path }}/{{ item.csr }}"
-    privatekey_path: "{{ ansible_ca_cert.path }}/{{ item.key }}"
-    subject_alt_name: 'DNS:{{ item }}'
+    path: "{{ ansible_ca_cert.path }}/{{ item }}.csr"
+    privatekey_path: "{{ ansible_ca_cert.path }}/{{ item }}.key"
+    subject_alt_name: "{{ ansible_ca_cert.subject_alt_name }}"
   run_once: true
   delegate_to: "{{ groups['member'][0] }}"
   with_items: "{{ query('inventory_hostnames', 'member') }}"
 
 - name: Generate cert - Sign certificate with ansible CA
   community.crypto.x509_certificate:
-    csr_path : "{{ ansible_ca_cert.path }}/{{ item.csr }}"
-    path: "{{ ansible_ca_cert.path }}/{{ item.crt }}"
+    csr_path : "{{ ansible_ca_cert.path }}/{{ item }}.csr"
+    path: "{{ ansible_ca_cert.path }}/{{ item }}.crt"
     provider: ownca
     ownca_path: "{{ ansible_ca.path }}/{{ ansible_ca.crt }}"
     ownca_privatekey_path: "{{ ansible_ca.path }}/{{ ansible_ca.key }}"
