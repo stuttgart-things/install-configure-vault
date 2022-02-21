@@ -2,6 +2,9 @@
 - name: Set up ca - Generate an OpenSSL private key for CA
   community.crypto.openssl_privatekey:
     path: "{{ ansible_ca.path }}/{{ ansible_ca.key }}"
+  delegate_to: "{{ groups['member'][0] }}"
+  run_once: true
+  when: inventory_hostname  == groups['member'][0]
 
 - name: Set up ca - Create certificate signing request (CSR) for CA
   community.crypto.openssl_csr_pipe:
@@ -15,6 +18,9 @@
       - keyCertSign
     key_usage_critical: true
   register: ca_csr
+  delegate_to: "{{ groups['member'][0] }}"
+  run_once: true
+  when: inventory_hostname  == groups['member'][0]
 
 - name: Set up ca - Create self-signed CA certificate from CSR
   community.crypto.x509_certificate:
@@ -22,26 +28,44 @@
     csr_content: "{{ ca_csr.csr }}"
     privatekey_path: "{{ ansible_ca.path }}/{{ ansible_ca.key }}"
     provider: selfsigned
+  delegate_to: "{{ groups['member'][0] }}"
+  run_once: true
+  when: inventory_hostname  == groups['member'][0]
 
 - name: Generate cert - Create private key for new certificate
   community.crypto.openssl_privatekey:
-    path: "{{ ansible_ca_cert.path }}/{{ ansible_ca_cert.key }}"
+    path: "{{ ansible_ca_cert.path }}/{{ item.key }}"
+  delegate_to: "{{ groups['member'][0] }}"
   run_once: true
+  with_items: "{{ query('inventory_hostnames', 'member') }}"
 
 - name: Generate cert - Create certificate signing request (CSR) for new certificate
   community.crypto.openssl_csr_pipe:
-    privatekey_path: "{{ ansible_ca_cert.path }}/{{ ansible_ca_cert.key }}"
+    privatekey_path: "{{ ansible_ca_cert.path }}/{{ item.key }}"
     subject_alt_name: "{{ ansible_ca_cert.subject_alt_name }}"
   run_once: true
   register: csr
+  delegate_to: "{{ groups['member'][0] }}"
+  with_items: "{{ query('inventory_hostnames', 'member') }}"
+
+- name: Generate cert - Create certificate signing request (CSR) for new certificate
+  community.crypto.openssl_csr:
+    path: "{{ ansible_ca_cert.path }}/{{ item.csr }}"
+    privatekey_path: "{{ ansible_ca_cert.path }}/{{ item.key }}"
+    subject_alt_name: 'DNS:{{ item }}'
+  run_once: true
+  delegate_to: "{{ groups['member'][0] }}"
+  with_items: "{{ query('inventory_hostnames', 'member') }}"
 
 - name: Generate cert - Sign certificate with ansible CA
   community.crypto.x509_certificate:
-    csr_content: "{{ csr.csr }}"
-    path: "{{ ansible_ca_cert.path }}/{{ ansible_ca_cert.crt }}"
+    csr_path : "{{ ansible_ca_cert.path }}/{{ item.csr }}"
+    path: "{{ ansible_ca_cert.path }}/{{ item.crt }}"
     provider: ownca
     ownca_path: "{{ ansible_ca.path }}/{{ ansible_ca.crt }}"
     ownca_privatekey_path: "{{ ansible_ca.path }}/{{ ansible_ca.key }}"
     ownca_not_after: "{{ ansible_ca_cert.valid }}"
     ownca_not_before: "-1d"
   run_once: true
+  delegate_to: "{{ groups['member'][0] }}"
+  with_items: "{{ query('inventory_hostnames', 'member') }}"
