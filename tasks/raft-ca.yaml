@@ -1,4 +1,9 @@
 ---
+- name: Set up ca - Make sure ansible_ca dir exists
+  ansible.builtin.file:
+    path: "{{ ansible_ca.path }}"
+    state: directory
+
 - name: Set up ca - Generate an OpenSSL private key for CA
   community.crypto.openssl_privatekey:
     path: "{{ ansible_ca.path }}/{{ ansible_ca.key }}"
@@ -31,6 +36,11 @@
   delegate_to: "{{ groups['member'][0] }}"
   run_once: true
   when: inventory_hostname  == groups['member'][0]
+
+- name: Generate cert - Make sure ansible_ca_cert dir exists
+  ansible.builtin.file:
+    path: "{{ ansible_ca_cert.path }}"
+    state: directory
 
 - name: Generate cert - Create private key for new certificate
   community.crypto.openssl_privatekey:
@@ -69,3 +79,28 @@
   run_once: true
   delegate_to: "{{ groups['member'][0] }}"
   with_items: "{{ query('inventory_hostnames', 'member') }}"
+
+- name: Copy cert - Copy ca crt to ansible_ca_cert dest
+  ansible.builtin.copy:
+    src: "{{ ansible_ca.path }}/{{ ansible_ca.crt }}"
+    dest: "{{ ansible_ca_cert.path }}/ca.crt"
+    remote_src: yes
+  run_once: true
+  delegate_to: "{{ groups['member'][0] }}"
+
+- name: Copy cert - Get cert files
+  ansible.builtin.find: 
+    paths: "{{ ansible_ca_cert.path }}"
+    patterns: "*"
+  register: ansible_ca_files
+  run_once: true
+  delegate_to: "{{ groups['member'][0] }}"
+
+- name: Copy cert - Copy certs to localhost
+  ansible.builtin.fetch:
+    src: "{{ item.path }}"
+    dest: /tmp/certificate/
+    flat: yes
+  run_once: true
+  delegate_to: "{{ groups['member'][0] }}"
+  with_items: "{{ ansible_ca_files.files }}"
