@@ -104,3 +104,17 @@
   run_once: true
   delegate_to: "{{ groups['member'][0] }}"
   with_items: "{{ ansible_ca_files.files }}"
+
+- name: Create PV directory if not exist
+  ansible.builtin.file:
+    path: "/podman/pv/{{ container_name }}/certificate/"
+    state: directory
+
+- name: Copy file with owner and permissions
+  ansible.builtin.copy:
+    src: "{{ item.src }}"
+    dest: "{{ item.dest }}"
+  with_items:
+    - { src: '/tmp/certificate/{{ inventory_hostname }}.key', dest: '/podman/pv/{{ container_name }}/certificate/' }
+    - { src: '/tmp/certificate/{{ inventory_hostname }}.crt', dest: '/podman/pv/{{ container_name }}/certificate/' }
+    - { src: '/tmp/certificate/{{ ansible_ca.crt }}', dest: '/podman/pv/{{ container_name }}/certificate/' }

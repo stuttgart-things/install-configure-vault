@@ -140,8 +140,6 @@ ansible_ca:
   country_name: DE
 ansible_ca_cert:
   path: ~/ansible_ca/certificate
-  key: cert.key
-  crt: cert.pem
   valid: +356d
   subject_alt_name:
     - "DNS:{{ ansible_fqdn }}"
