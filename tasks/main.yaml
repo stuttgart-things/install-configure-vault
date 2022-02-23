@@ -9,7 +9,7 @@
   when: destroy_vault|bool
 
 - name: Prepare raft backend
-  ansible.builtin.include_tasks: raft-temp-ca.yaml
+  ansible.builtin.include_tasks: raft-ca.yaml
   when: install_vault_podman|bool and vault_storage_backend == "raft"
 
 - name: Install vault on podman with filesystem backend
