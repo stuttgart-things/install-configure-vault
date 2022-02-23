@@ -2,11 +2,10 @@
    "backend":{
       "raft":{
          "path":"/vault/raft",
-         "node_id":"node{{ 999 | random }}",
 {% for host in groups['member'] %}
          "retry_join":{
-            "leader_tls_servername":"{{ inventory_hostname }}",
-            "leader_api_addr":"{{ inventory_hostname }}",
+            "leader_tls_servername":"{{ hostvars[host]['ansible_hostname'] }}",
+            "leader_api_addr":"{{ hostvars[host]['ansible_fqdn'] }}",
             "leader_ca_cert_file":"{{ ansible_ca.crt }}",
             "leader_client_cert_file":"/etc/certificate/{{ inventory_hostname }}.crt",
             "leader_client_key_file":"/etc/certificate/{{ inventory_hostname }}.key"
@@ -14,14 +13,9 @@
 {% endfor %}
       }
    },
-   "cluster_addr":"https://{{ vault_raft_cluster_addr }}",
-   "api_addr":"https://{{ ansible_fqdn }}",
-#   "replication":{
-#      "resolver_discover_servers":true,
-#      "logshipper_buffer_length":1000,
-#      "logshipper_buffer_size":"5gb",
-#      "allow_forwarding_via_header":false,
-#      "best_effort_wal_wait_duration":"2s"
+   "cluster_addr":"{{ hostvars[groups['member'][0]].ansible_fqdn }}",
+   "api_addr":"https://{{ hostvars[groups['member'][0]].ansible_fqdn }}",
+
    },
    "listener":{
       "tcp":{
