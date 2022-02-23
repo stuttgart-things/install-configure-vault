@@ -95,6 +95,8 @@ vault_install_ca_cert_ca_path:
     3: "/usr/local/share/ca-certificates//vault-ca-{{ vault_ca_id }}.crt"
   Suse:
     15: "/etc/pki/trust/anchors/vault-ca-{{ vault_ca_id }}.crt"
+  Darwin:
+    12: "/etc/pki/trust/anchors/vault-ca-{{ vault_ca_id }}.crt"
     
 # Install vault server
 install_vault_podman: false
