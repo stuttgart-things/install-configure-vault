@@ -1,4 +1,13 @@
 ---
+- name: Load vault server podman-profile
+  ansible.builtin.include_vars: "{{lookup('first_found', params)}}"
+  vars:
+    params:
+      files:
+        - 'vault-server.yaml'
+      paths:
+        - 'vars'
+
 - name: Set up ca - Make sure ansible_ca dir exists
   ansible.builtin.file:
     path: "{{ ansible_ca.path }}"
