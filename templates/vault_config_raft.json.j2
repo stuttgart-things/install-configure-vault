@@ -6,7 +6,7 @@
          "retry_join":{
             "leader_tls_servername":"{{ hostvars[host]['ansible_hostname'] }}",
             "leader_api_addr":"{{ hostvars[host]['ansible_fqdn'] }}",
-            "leader_ca_cert_file":"{{ ansible_ca.crt }}",
+            "leader_ca_cert_file":"/etc/certificate/{{ ansible_ca.crt }}",
             "leader_client_cert_file":"/etc/certificate/{{ inventory_hostname }}.crt",
             "leader_client_key_file":"/etc/certificate/{{ inventory_hostname }}.key"
          }{{ ", " if not loop.last else "" }}
