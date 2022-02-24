@@ -13,7 +13,7 @@
 {% endfor %}
       }
    },
-   "cluster_addr":"{{ hostvars[groups['member'][0]].ansible_fqdn }}",
+   "cluster_addr":"https://{{ hostvars[groups['member'][0]].ansible_fqdn }}",
    "api_addr":"https://{{ hostvars[groups['member'][0]].ansible_fqdn }}",
 
    },
