@@ -22,11 +22,13 @@
       secret_shares: "{{ install_vault_init_secret_shares }}"
       secret_threshold: "{{ install_vault_init_secret_threshold }}"
   register: vault_api_data_init
+  run_once: true
   delegate_to: "{{ vault_api_executor }}"
 
 - name: Debug api init information
   ansible.builtin.debug:
     msg: "Init confirmation message from server: {{ vault_api_data_init.json }}"
+  run_once: true
   when: debug | bool
 
 - name: "Search unseal key in json string"
@@ -34,19 +36,23 @@
     vault_unseal: '{{ vault_api_data_init.json | json_query(query) }}'
   vars:
     query: "keys[0]"
+  run_once: true
   when: vault_api_data_init is defined
 
 
 - name: Save auth information from init to vars
   ansible.builtin.set_fact:
+  run_once: true
     vault_token: "{{ vault_api_data_init.json.root_token }}"
 
 - name: Output root token
   ansible.builtin.debug:
+  run_once: true
     msg: "Generated root token: {{ vault_api_data_init.json.root_token }}"
 
 - name: Output unseal shamir key(s)
   ansible.builtin.debug:
+  run_once: true
     msg: "Generated unseal key(s): {{ vault_unseal }}"
 
 - name: Make initial vault unsealing
@@ -61,6 +67,7 @@
       reset: false
       migrate: false
   register: vault_api_data_init
+  run_once: true
   delegate_to: "{{ vault_api_executor }}"
 
 - name: Save generated vault configuration
