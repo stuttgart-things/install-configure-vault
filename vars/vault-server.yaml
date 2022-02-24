@@ -5,7 +5,7 @@ container_image: "{{ 'vault' if vault_product_type == 'community' else 'hashicor
 container_run_args: >-
     -d --cap-add=IPC_LOCK
 container_cmd_args: >-
-    "vault server -config=/vault/config/vault.{% if vault_storage_backend == 'raft' %}hcl{% else %}json{% endif %}"
+    vault server -config=/vault/config/vault.{% if vault_storage_backend == 'raft' %}hcl{% else %}json{% endif %}
 mounts:
   logs:
     host: "/podman/pv/{{ container_name }}/logs/"
