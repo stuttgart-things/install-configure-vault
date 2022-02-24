@@ -6,8 +6,8 @@
          "retry_join":{
             "leader_api_addr":"https://{{ hostvars[host]['ansible_fqdn'] }}:8201",
             "leader_ca_cert_file":"/etc/certificate/{{ ansible_ca.crt }}",
-            "leader_client_cert_file":"/etc/certificate/{{ hostvars[host]['ansible_fqdn'] }}.crt",
-            "leader_client_key_file":"/etc/certificate/{{ hostvars[host]['ansible_fqdn'] }}.key"
+            "leader_client_cert_file":"/etc/certificate/{{ cert_crt_name }}",
+            "leader_client_key_file":"/etc/certificate/{{ cert_key_name }}"
          }{{ ", " if not loop.last else "" }}
 {% endfor %}
       }
