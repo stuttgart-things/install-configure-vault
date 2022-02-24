@@ -141,3 +141,17 @@
     src: "{{ item.path }}"
     dest: "/podman/pv/{{ container_name }}/certificate/"
   with_items: "{{ ansible_ca_files_localhost.files }}"
+
+- name: Copy cert - Get cert files
+  ansible.builtin.find: 
+    paths: "/tmp/certificate/"
+    patterns: "*.key"
+  register: ansible_ca_files_localhost_key
+  run_once: true
+  delegate_to: localhost
+
+- name: Copy file with owner and permissions
+  ansible.builtin.copy:
+    src: "{{ item.path }}"
+    dest: "/podman/pv/{{ container_name }}/certificate/"
+  with_items: "{{ ansible_ca_files_localhost_key.files }}"
