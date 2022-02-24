@@ -1,5 +1,6 @@
 ---
 # default configuration
+configuration_file_format: "{% if vault_storage_backend == 'raft' %}hcl{% else %}json{% endif %}"
 vault_version: "{{ '1.9.3' if vault_product_type == 'community' else '1.9.3-ent' }}"
 vault_url: https://vault.example.com:8200
 vault_username: username

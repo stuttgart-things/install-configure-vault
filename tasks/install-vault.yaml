@@ -23,8 +23,8 @@
 
 - name: Create vault configuration file on hosts
   ansible.builtin.template:
-    src: "vault_config_{{ vault_storage_backend }}.json.j2"
-    dest: "{{ mounts.config.host }}vault.json"
+    src: "vault_config_{{ vault_storage_backend }}.{{ configuration_file_format }}.j2"
+    dest: "{{ mounts.config.host }}vault.{{ configuration_file_format }}"
 
 - name: Deploy Vault
   ansible.builtin.include_role:
