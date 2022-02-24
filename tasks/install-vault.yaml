@@ -26,11 +26,6 @@
     src: "vault_config_{{ vault_storage_backend }}.json.j2"
     dest: "{{ mounts.config.host }}vault.json"
 
-- name: Copy file with owner and permissions
-  ansible.builtin.copy:
-    src: "{{ item.src }}"
-    dest: "{{ item.dest }}"
-
 - name: Deploy Vault
   ansible.builtin.include_role:
     name: deploy-podman-container
