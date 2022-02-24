@@ -4,8 +4,7 @@ cluster_addr = "https://{{ hostvars[groups['member'][0]].ansible_fqdn }}:8200"
 api_addr = "https://{{ hostvars[groups['member'][0]].ansible_fqdn }}:8201"
 listener "tcp" {
   tls_disable = 0
-  address = "https://[::]:8200"
-  cluster_address = "https://[::]:8201"
+  address = "[::]:8200"
   tls_cert_file = "/etc/certificate/{{ cert_crt_name }}"
   tls_key_file = "/etc/certificate/{{ cert_key_name }}"
 }
