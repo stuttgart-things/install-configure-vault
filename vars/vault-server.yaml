@@ -29,7 +29,7 @@ ports:
   raft_storage_backend:
     host: 8201
     container: 8201
-generate_certs: "{% if upgrade_vault == true %}false{% elif upgrade_vault == false %}true{% endif %}"
+generate_certs: "{% if upgrade_vault == true and install_vault_podman == true%}false{% elif upgrade_vault == false %}true{% endif %}"
 certificate_option: selfsigned
 cert_ssl_subject: "{{ ansible_fqdn }}"
 cert_ssl_ip: "{{ ansible_default_ipv4.address }}"
