@@ -119,11 +119,25 @@
     path: "/podman/pv/{{ container_name }}/certificate/"
     state: directory
 
+# - name: Copy file with owner and permissions
+#   ansible.builtin.copy:
+#     src: "{{ item.src }}"
+#     dest: "{{ item.dest }}"
+#   with_items:
+#     - { src: '/tmp/certificate/{{ inventory_hostname }}.key', dest: '/podman/pv/{{ container_name }}/certificate/' }
+#     - { src: '/tmp/certificate/{{ inventory_hostname }}.crt', dest: '/podman/pv/{{ container_name }}/certificate/' }
+#     - { src: '/tmp/certificate/{{ ansible_ca.crt }}', dest: '/podman/pv/{{ container_name }}/certificate/' }
+
+- name: Copy cert - Get cert files
+  ansible.builtin.find: 
+    paths: "/tmp/certificate/"
+    patterns: "*.crt"
+  register: ansible_ca_files_localhost
+  run_once: true
+  delegate_to: localhost
+
 - name: Copy file with owner and permissions
   ansible.builtin.copy:
-    src: "{{ item.src }}"
-    dest: "{{ item.dest }}"
-  with_items:
-    - { src: '/tmp/certificate/{{ inventory_hostname }}.key', dest: '/podman/pv/{{ container_name }}/certificate/' }
-    - { src: '/tmp/certificate/{{ inventory_hostname }}.crt', dest: '/podman/pv/{{ container_name }}/certificate/' }
-    - { src: '/tmp/certificate/{{ ansible_ca.crt }}', dest: '/podman/pv/{{ container_name }}/certificate/' }
+    src: "{{ item.path }}"
+    dest: "/podman/pv/{{ container_name }}/certificate/"
+  with_items: "{{ ansible_ca_files_localhost.files }}"
