@@ -115,7 +115,7 @@ vault_crate_user_data:
     policies: admins
 
 create_policies: false
-
+delete_pre_certs: false
 # Generate bashrc
 vault_bashrc: false
 # vault_bashrc_mod:
