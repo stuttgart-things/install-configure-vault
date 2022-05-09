@@ -91,6 +91,7 @@ vault_install_ca_cert_ca_path:
     18: "/usr/local/share/ca-certificates/vault-ca-{{ vault_ca_id }}.crt"
     20: "/usr/local/share/ca-certificates/vault-ca-{{ vault_ca_id }}.crt"
     21: "/usr/local/share/ca-certificates/vault-ca-{{ vault_ca_id }}.crt"
+    22: "/usr/local/share/ca-certificates/vault-ca-{{ vault_ca_id }}.crt"
     11: "/usr/local/share/ca-certificates/vault-ca-{{ vault_ca_id }}.crt"
   Alpine:
     3: "/usr/local/share/ca-certificates//vault-ca-{{ vault_ca_id }}.crt"
