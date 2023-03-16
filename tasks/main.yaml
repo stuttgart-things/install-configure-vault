@@ -4,6 +4,10 @@
     msg: "For more information and debuging you can enter the debug mode with the extra vars: -e 'debug=true'"
   when: not debug
 
+- name: Authenticate to the vault server
+  ansible.builtin.include_tasks: authentication.yaml
+  when: vault_token is undefined and not install_vault and not vault_install_ca_cert
+
 - name: destroy vault server
   ansible.builtin.include_tasks: destroy.yaml
   when: destroy_vault|bool
@@ -27,10 +31,6 @@
 - name: Create user via userpass engine
   ansible.builtin.include_tasks: create-user.yaml
   when: vault_create_user|bool
-
-- name: Authenticate to the vault server
-  ansible.builtin.include_tasks: authentication.yaml
-  when: vault_token is undefined and not install_vault and not vault_install_ca_cert
 
 - name: Create vault certification authority
   ansible.builtin.include_tasks: create-ca.yaml
