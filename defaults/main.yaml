@@ -104,6 +104,7 @@ vault_install_ca_cert_ca_path:
 # Install vault server
 install_vault_podman: false
 install_vault_k8s: false
+install_vault: false
 upgrade_vault: false
 destroy_vault: false
 install_vault_init_secret_shares: 2
