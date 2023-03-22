@@ -6,7 +6,7 @@
 
 - name: Authenticate to the vault server
   ansible.builtin.include_tasks: authentication.yaml
-  when: vault_token is undefined and not install_vault and not vault_install_ca_cert
+  when: vault_token is undefined and not install_vault_podman and not vault_install_ca_cert and not vault_install_ca_cert and not install_vault_k8s
 
 - name: destroy vault server
   ansible.builtin.include_tasks: destroy.yaml
