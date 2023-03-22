@@ -42,18 +42,18 @@
 
 - name: Save auth information from init to vars
   ansible.builtin.set_fact:
-  run_once: true
     vault_token: "{{ vault_api_data_init.json.root_token }}"
+  run_once: true
 
 - name: Output root token
   ansible.builtin.debug:
-  run_once: true
     msg: "Generated root token: {{ vault_api_data_init.json.root_token }}"
+  run_once: true
 
 - name: Output unseal shamir key(s)
   ansible.builtin.debug:
-  run_once: true
     msg: "Generated unseal key(s): {{ vault_unseal }}"
+  run_once: true
 
 - name: Make initial vault unsealing
   ansible.builtin.uri:
