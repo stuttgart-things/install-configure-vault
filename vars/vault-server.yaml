@@ -37,13 +37,3 @@ cert_mount_target: "{{ mounts.certs.host }}"
 cert_key_name: vault.key
 cert_crt_name: vault.crt
 service_name: "{{ container_name }}.service"
-
-
-
-
-
-
-
-
-
-

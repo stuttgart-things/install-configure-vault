@@ -1,0 +1,26 @@
+---
+ports: 
+  http:
+    host: 8200
+    container: 8200
+    protocol: tcp
+  raft_storage_backend:
+    host: 8201
+    container: 8201
+    protocol: tcp
+
+pod_name: vault-server
+
+containers:
+  hashicorp-vault:
+    image: "{{ vault_container_reg }}/{{ 'vault' if vault_product_type == 'community' else 'hashicorp/vault-enterprise' }}:{{ vault_version }}"
+    volumes:
+      - "/podman/pv/{{ pod_name }}/logs/:/vault/logs/:z"
+      - "/podman/pv/{{ pod_name }}/file/:/vault/file/:z"
+      - "/podman/pv/{{ pod_name }}/raft/:/vault/raft/:z"
+      - "/podman/pv/{{ pod_name }}/config/:/vault/config/:z"
+      - "/podman/pv/{{ pod_name }}/certificate/:/etc/certificate/:z"
+
+# generate_config: true
+# config_template: templates/nginx.conf.j2
+# config_mount_target: /podman/pv/powerdns/nginx/nginx.conf
