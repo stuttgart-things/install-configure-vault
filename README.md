@@ -10,15 +10,15 @@ In addition to the installation, this role can also be used to fill the vault wi
 ```
 cat <<EOF > /tmp/requirements.yaml
 roles:
-- src: git@codehub.sva.de:Lab/stuttgart-things/supporting-roles/install-configure-vault.git
+- src: https://github.com/stuttgart-things/install-configure-vault.git
   scm: git
-- src: git@codehub.sva.de:Lab/stuttgart-things/supporting-roles/install-requirements.git
+- src: https://github.com/stuttgart-things/install-requirements.git
   scm: git
-- src: git@codehub.sva.de:Lab/stuttgart-things/supporting-roles/deploy-podman-container.git
+- src: https://github.com/stuttgart-things/deploy-podman-container.git
   scm: git
-- src: git@codehub.sva.de:Lab/stuttgart-things/supporting-roles/generate-selfsigned-certs.git
+- src: https://github.com/stuttgart-things/generate-selfsigned-certs.git
   scm: git
-- src: git@codehub.sva.de:Lab/stuttgart-things/supporting-roles/install-configure-podman.git
+- src: https://github.com/stuttgart-things/install-configure-podman.git
   scm: git
 - src: git@codehub.sva.de:Lab/stuttgart-things/kubernetes/deploy-helm-chart.git
   scm: git
@@ -593,4 +593,4 @@ BSD
 Author Information
 ------------------
 
-Marcel Zapf; 02/2021; SVA GmbH
+Marcel Zapf; 02/2021; Stuttgart-Things
