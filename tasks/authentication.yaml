@@ -3,7 +3,7 @@
   block:
     - name: API request vault auth token via userpass
       ansible.builtin.uri:
-        return_content: yes
+        return_content: true
         validate_certs: false
         url: "{{ vault_url }}/v1/auth/userpass/login/{{ vault_username }}"
         method: PUT

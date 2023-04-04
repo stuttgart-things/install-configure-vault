@@ -1,6 +1,6 @@
 ---
 - name: Start install requirements task as become user
-  become: yes
+  become: true
   block:
   - name: Install jmespath library to provide json filtering
     include_role:

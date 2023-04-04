@@ -83,4 +83,3 @@
   when: vault_ldap_auth is defined
   with_items:
     - "{{ vault_ldap_auth }}"
-  

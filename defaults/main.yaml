@@ -48,7 +48,7 @@ vault_ssh_deamon_conf_path: /etc/ssh/sshd_config
 # Generate cert
 vault_gen_cert: false
 vault_gen_cert_fqdn: host.example.com
-#vault_gen_cert_ip_sans: 192.0.2.1,192.0.2.2
+# vault_gen_cert_ip_sans: 192.0.2.1,192.0.2.2
 vault_gen_cert_install: false
 vault_gen_cert_install_pub_path: /tmp/certs/vault/public_key.pem
 vault_gen_cert_install_priv_path: /tmp/certs/vault/private_key.pem
@@ -79,7 +79,7 @@ create_vault_namespace: true
 
 # Install ca on system
 vault_install_ca_cert: false
-vault_install_ca_cert_packages: 
+vault_install_ca_cert_packages:
   - ca-certificates
 vault_install_ca_cert_ca_path:
   RedHat:
@@ -100,7 +100,7 @@ vault_install_ca_cert_ca_path:
     15: "/etc/pki/trust/anchors/vault-ca-{{ vault_ca_id }}.crt"
   Darwin:
     12: "/etc/pki/trust/anchors/vault-ca-{{ vault_ca_id }}.crt"
-    
+
 # Install vault server
 install_vault_podman: false
 install_vault_k8s: false

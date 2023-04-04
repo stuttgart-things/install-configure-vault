@@ -9,7 +9,7 @@
     body:
       type: userpass
       description: ""
-      config: 
+      config:
         options: null
         default_lease_ttl: 0s
         max_lease_ttl: 0s

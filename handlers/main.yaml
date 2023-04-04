@@ -1,8 +1,8 @@
 ---
 - name: Install vault CA to Debian os system
-  shell: /usr/sbin/update-ca-certificates
+  ansible.builtin.shell: /usr/sbin/update-ca-certificates
   when: ansible_os_family == "Debian"
 
 - name: Install vault CA to RedHat os system
-  shell: /bin/update-ca-trust
+  ansible.builtin.shell: /bin/update-ca-trust
   when: ansible_os_family == "RedHat"
