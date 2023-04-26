@@ -20,7 +20,7 @@ roles:
   scm: git
 - src: https://github.com/stuttgart-things/install-configure-podman.git
   scm: git
-- src: git@codehub.sva.de:Lab/stuttgart-things/kubernetes/deploy-helm-chart.git
+- src: https://github.com/stuttgart-things/deploy-helm-chart.git
   scm: git
 
 collections:
