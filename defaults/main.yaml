@@ -88,11 +88,13 @@ vault_install_ca_cert_ca_path:
     9: "/etc/pki/ca-trust/source/anchors/vault-ca-{{ vault_ca_id }}.crt"
     34: "/etc/pki/ca-trust/source/anchors/vault-ca-{{ vault_ca_id }}.crt"
     35: "/etc/pki/ca-trust/source/anchors/vault-ca-{{ vault_ca_id }}.crt"
+    38: "/etc/pki/ca-trust/source/anchors/vault-ca-{{ vault_ca_id }}.crt"
   Debian:
     18: "/usr/local/share/ca-certificates/vault-ca-{{ vault_ca_id }}.crt"
     20: "/usr/local/share/ca-certificates/vault-ca-{{ vault_ca_id }}.crt"
     21: "/usr/local/share/ca-certificates/vault-ca-{{ vault_ca_id }}.crt"
     22: "/usr/local/share/ca-certificates/vault-ca-{{ vault_ca_id }}.crt"
+    23: "/usr/local/share/ca-certificates/vault-ca-{{ vault_ca_id }}.crt"
     11: "/usr/local/share/ca-certificates/vault-ca-{{ vault_ca_id }}.crt"
   Alpine:
     3: "/usr/local/share/ca-certificates//vault-ca-{{ vault_ca_id }}.crt"
