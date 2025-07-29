@@ -9,12 +9,24 @@ on:
     
   workflow_dispatch:
 jobs:
-  linting:
-    continue-on-error: true
-    runs-on: self-hosted
-    steps:
-      - uses: actions/checkout@v4.2.2
+  yaml-lint:
+    name: Lint yaml files
+    uses: stuttgart-things/github-workflow-templates/.github/workflows/call-yaml-lint.yaml@golang-1.24.0
+    with:
+      runs-on: ghr-install-configure-vault-in-cluster
+      environment-name: k8s
+      continue-error: true
+      yamllint-version: 1
+      lintprofile-path: .yamllint
+      artifact-name: yaml-lint
 
-      - name: Ansible Lint
-        uses: ansible/ansible-lint@main
-
+  ansible-lint:
+    name: Lint ansible code
+    uses: stuttgart-things/github-workflow-templates/.github/workflows/call-ansible-lint.yaml@golang-1.24.0
+    with:
+      runs-on: ghr-install-configure-vault-in-cluster
+      environment-name: k8s
+      continue-error: true
+      ansible-image: eu.gcr.io/stuttgart-things/sthings-ansible:10.3.0
+      playbook: tests/test.yml
+    needs: yaml-lint
