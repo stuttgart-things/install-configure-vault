@@ -1,3 +1,4 @@
+---
 name: linting
 on:
   # Triggers the workflow on push or pull request events but only for the "main" branch
@@ -12,7 +13,7 @@ jobs:
     continue-on-error: true
     runs-on: self-hosted
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v4.2.2
 
       - name: Ansible Lint
-        uses: ansible/ansible-lint-action@v6.11.0
+        uses: ansible/ansible-lint-action@v25.6.1
