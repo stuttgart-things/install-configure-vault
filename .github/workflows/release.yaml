@@ -11,14 +11,24 @@ on:
         type: string
 
 jobs:
-  release-ansible:
-    name: Release
-    uses: stuttgart-things/stuttgart-things/.github/workflows/call-release-module.yaml@main
+  yaml-lint:
+    name: Lint yaml files
+    uses: stuttgart-things/github-workflow-templates/.github/workflows/call-yaml-lint.yaml@golang-1.24.0
     with:
-      module-name: install-configure-vault
-      tag-name: "${{ github.event.inputs.release-tag }}"
-      release-message: "${{ github.event.inputs.release-message }}"
+      runs-on: ghr-download-install-binary-skyami-cicd
       environment-name: k8s
-      archive-kind: tar.gz
-      runs-on: ghr-install-configure-vault-labda-test
-      continue-error: false
+      continue-error: true
+      yamllint-version: 1
+      lintprofile-path: .yamllint
+      artifact-name: yaml-lint
+
+  ansible-lint:
+    name: Lint ansible code
+    uses: stuttgart-things/github-workflow-templates/.github/workflows/call-ansible-lint.yaml@golang-1.24.0
+    with:
+      runs-on: ghr-download-install-binary-skyami-cicd
+      environment-name: k8s
+      continue-error: true
+      ansible-image: eu.gcr.io/stuttgart-things/sthings-ansible:10.3.0
+      playbook: tests/test.yml
+    needs: yaml-lint
