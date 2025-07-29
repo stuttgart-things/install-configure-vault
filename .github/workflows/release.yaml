@@ -4,31 +4,23 @@ on:
   workflow_dispatch:
     inputs:
       release-tag:
+        description: release-tag
         required: true
         type: string
       release-message:
+        description: release-message
         required: true
         type: string
 
 jobs:
-  yaml-lint:
-    name: Lint yaml files
-    uses: stuttgart-things/github-workflow-templates/.github/workflows/call-yaml-lint.yaml@golang-1.24.0
+  release-ansible:
+    name: Release
+    uses: stuttgart-things/github-workflow-templates/.github/workflows/call-release-module.yaml@main
     with:
-      runs-on: ghr-download-install-binary-skyami-cicd
+      module-name: download-install-binary
+      tag-name: "${{ github.event.inputs.release-tag }}"
+      release-message: "${{ github.event.inputs.release-message }}"
       environment-name: k8s
-      continue-error: true
-      yamllint-version: 1
-      lintprofile-path: .yamllint
-      artifact-name: yaml-lint
-
-  ansible-lint:
-    name: Lint ansible code
-    uses: stuttgart-things/github-workflow-templates/.github/workflows/call-ansible-lint.yaml@golang-1.24.0
-    with:
-      runs-on: ghr-download-install-binary-skyami-cicd
-      environment-name: k8s
-      continue-error: true
-      ansible-image: eu.gcr.io/stuttgart-things/sthings-ansible:10.3.0
-      playbook: tests/test.yml
-    needs: yaml-lint
+      archive-kind: tar.gz
+      runs-on: ghr-install-configure-vault-in-cluster
+      continue-error: false
