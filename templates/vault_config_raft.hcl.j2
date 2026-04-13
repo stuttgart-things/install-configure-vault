@@ -1,7 +1,7 @@
 ui = true
 log_level = "Debug"
-cluster_addr = "https://{{ hostvars[groups['member'][0]].ansible_fqdn }}:8200"
-api_addr = "https://{{ hostvars[groups['member'][0]].ansible_fqdn }}:8201"
+cluster_addr = "https://{{ hostvars[groups['member'][0]]['ansible_facts']['fqdn'] }}:8200"
+api_addr = "https://{{ hostvars[groups['member'][0]]['ansible_facts']['fqdn'] }}:8201"
 listener "tcp" {
   tls_disable = 0
   address = "[::]:8200"
@@ -12,10 +12,10 @@ storage "raft" {
   path = "/vault/raft"
 {% for host in groups['member'] %}
   retry_join {
-    leader_api_addr = "https://{{ hostvars[host]['ansible_fqdn'] }}:8200"
+    leader_api_addr = "https://{{ hostvars[host]['ansible_facts']['fqdn'] }}:8200"
     leader_ca_cert_file = "/etc/certificate/{{ ansible_ca.crt }}"
-    leader_client_cert_file = "/etc/certificate/{{ hostvars[host]['ansible_fqdn'] }}.crt"
-    leader_client_key_file = "/etc/certificate/{{ hostvars[host]['ansible_fqdn'] }}.key"
+    leader_client_cert_file = "/etc/certificate/{{ hostvars[host]['ansible_facts']['fqdn'] }}.crt"
+    leader_client_key_file = "/etc/certificate/{{ hostvars[host]['ansible_facts']['fqdn'] }}.key"
    }
 {% endfor %}
 

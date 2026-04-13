@@ -31,8 +31,8 @@ ports:
     container: 8201
 generate_certs: "{% if upgrade_vault == true %}false{% elif upgrade_vault == false %}true{% endif %}"
 certificate_option: selfsigned
-cert_ssl_subject: "{{ ansible_fqdn }}"
-cert_ssl_ip: "{{ ansible_default_ipv4.address }}"
+cert_ssl_subject: "{{ ansible_facts['fqdn'] }}"
+cert_ssl_ip: "{{ ansible_facts['default_ipv4'].address }}"
 cert_mount_target: "{{ mounts.certs.host }}"
 cert_key_name: vault.key
 cert_crt_name: vault.crt

@@ -153,5 +153,5 @@ ansible_ca_cert:
   path: ~/ansible_ca/certificate
   valid: +356d
   subject_alt_name:
-    - "DNS:{{ ansible_fqdn }}"
-    - "DNS:{{ ansible_default_ipv4.address }}"
+    - "DNS:{{ ansible_facts['fqdn'] }}"
+    - "DNS:{{ ansible_facts['default_ipv4'].address }}"

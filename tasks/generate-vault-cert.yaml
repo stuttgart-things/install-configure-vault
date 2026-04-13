@@ -19,7 +19,7 @@
     body:
       common_name: "{{ vault_url | urlsplit('hostname') }}"
       ttl: "{{ vault_gen_vault_cert_ttl }}"
-      ip_sans: "{{ ansible_default_ipv4.address }}"
+      ip_sans: "{{ ansible_facts['default_ipv4'].address }}"
     headers:
       X-Vault-Request: true
       X-Vault-Token: "{{ vault_token }}"
