@@ -79,6 +79,11 @@ create_vault_namespace: true
 
 # Install ca on system
 vault_install_ca_cert: false
+
+# Remove vault-ca-<digits>.crt files left behind by the random-id versions of
+# this role. Opt-in: it removes trust, and a CA that is still needed but no
+# longer declared would go with it. See tasks/install-ca-auth.yaml.
+vault_ca_cleanup_legacy: false
 vault_install_ca_cert_packages:
   - ca-certificates
 vault_install_ca_cert_ca_path:

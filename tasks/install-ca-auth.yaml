@@ -10,9 +10,30 @@
       os_packages: "{{ vault_install_ca_cert_packages }}"
       state: present
 
-- name: Generate CA ID
+# The CA id becomes the FILENAME: vault-ca-<id>.crt in the OS trust store.
+#
+# It used to be `999 | random`, which made this role neither idempotent nor
+# reversible:
+#
+#   * every run dropped another copy of the same CA under a new name, so the
+#     trust store grew without bound on any host re-run;
+#   * removing a Vault from the caller's list left its CA installed FOREVER,
+#     under a name that says nothing about which CA it is -- so a CA migration
+#     could add trust but never retire it;
+#   * with 999 values, ~37 files give a better-than-even chance of a collision,
+#     and a collision between two DIFFERENT CAs silently drops one.
+#
+# Deriving it from the instance instead makes the file idempotent, greppable and
+# removable: vault-ca-vault-infra-sthings-lab.crt says where it came from.
+# Callers that install from several instances in a loop still get one file each,
+# because each iteration derives its own id.
+- name: Derive the CA id from the Vault instance it came from
   ansible.builtin.set_fact:
-    vault_ca_id: "{{ 999 | random }}"
+    vault_ca_id: >-
+      {{ vault_url
+         | regex_replace('^[a-zA-Z][a-zA-Z0-9+.-]*://', '')
+         | regex_replace('[:/].*$', '')
+         | regex_replace('[^A-Za-z0-9]', '-') }}
 
 - name: Download vault CA certificate
   ansible.builtin.uri:
@@ -38,3 +59,31 @@
   notify:
     - Install vault CA to Debian os system
     - Install vault CA to RedHat os system
+
+# Opt-in, because it removes trust: on by default it would silently drop a CA
+# that is genuinely still needed but no longer declared.
+#
+# Turn it on ONCE while migrating, after the new CA is installed, to clear the
+# vault-ca-<digits>.crt files the random-id versions of this role left behind.
+# The pattern matches digits only, so it can never match a derived name.
+- name: Remove CA files left by the random-id versions of this role
+  when: vault_ca_cleanup_legacy | bool
+  become: true
+  block:
+    - name: Find legacy vault-ca-<digits>.crt files
+      ansible.builtin.find:
+        paths: "{{ vault_install_ca_cert_ca_path[ansible_facts['os_family']][ansible_facts['distribution_major_version'] | int] | dirname }}"
+        patterns: '^vault-ca-[0-9]+\.crt$'
+        use_regex: true
+      register: vault_legacy_ca_files
+
+    - name: Delete them
+      ansible.builtin.file:
+        path: "{{ item.path }}"
+        state: absent
+      loop: "{{ vault_legacy_ca_files.files }}"
+      loop_control:
+        label: "{{ item.path }}"
+      notify:
+        - Install vault CA to Debian os system
+        - Install vault CA to RedHat os system

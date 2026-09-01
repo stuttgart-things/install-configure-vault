@@ -42,6 +42,45 @@ ansible-galaxy install -r /tmp/requirements.yaml --force && ansible-galaxy colle
 
 For more information about stuttgart-things role installation visit: [Stuttgart-Things howto install role](https://codehub.sva.de/Lab/stuttgart-things/meta/documentation/doc-as-code/-/blob/master/howtos/howto-install-role.md)
 
+## Installing a Vault CA into the OS trust store — `install-ca-auth`
+
+```yaml
+- ansible.builtin.include_role:
+    name: install-configure-vault
+    tasks_from: install-ca-auth
+  vars:
+    vault_url: https://vault.example.com:8200
+```
+
+The certificate lands as `vault-ca-<id>.crt` in the distribution's trust anchor
+directory, where `<id>` is **derived from `vault_url`**:
+
+| `vault_url` | file |
+|---|---|
+| `https://vault.infra.sthings.lab` | `vault-ca-vault-infra-sthings-lab.crt` |
+| `https://vault-vsphere.tiab.labda.sva.de:8200` | `vault-ca-vault-vsphere-tiab-labda-sva-de.crt` |
+
+That makes the task **idempotent** — a re-run overwrites its own file instead of
+adding another — and it makes a CA **identifiable and removable**: you can see
+which instance a trusted CA came from, and delete exactly that one.
+
+Called in a loop over several instances it installs one file per instance, which
+is what a CA migration needs: trust the new CA alongside the old one, switch
+issuance, then drop the old.
+
+### `vault_ca_cleanup_legacy`
+
+Before this, the id was `999 | random`. Every run left another copy of the same
+CA under a new name, nothing could ever be retired, and with 999 values roughly
+37 files give a better-than-even chance that two collide.
+
+Set `vault_ca_cleanup_legacy: true` **once**, after the wanted CAs are
+installed, to remove the `vault-ca-<digits>.crt` files those versions left
+behind. The pattern matches digits only, so it can never touch a derived name.
+
+It is opt-in because it removes trust: a CA that is still needed but no longer
+declared in the caller's list would go with it.
+
 ## Howto install Vault Root CA in windows 10 OS Systems (BETA)
 
 - Download the powershell script located in /meta folder
