@@ -1,7 +1,7 @@
 ---
 - name: API sign public key via vault
   ansible.builtin.uri:
-    return_content: yes
+    return_content: true
     validate_certs: false
     url: "{{ vault_url }}/v1/{{ vault_ssh_ca_path }}/sign/{{ vault_ssh_ca_role }}"
     method: POST
@@ -20,3 +20,4 @@
   ansible.builtin.copy:
     content: "{{ vault_api_data_signed_pub_key.json.data.signed_key }}"
     dest: "{{ vault_ssh_local_signed_public_key_path }}"
+    mode: "0644"

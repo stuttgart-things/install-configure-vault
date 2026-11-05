@@ -1,14 +1,14 @@
 ---
 - name: Start install requirements task as become user
-  become: yes
+  become: true
   block:
-  - name: Install required packages remote
-    include_role:
-      name: install-requirements 
-    vars:
-      update_packages: false
-      os_packages: "{{ vault_install_ca_cert_packages }}"
-      state: present
+    - name: Install required packages remote
+      ansible.builtin.include_role:
+        name: install-requirements
+      vars:
+        update_packages: false
+        os_packages: "{{ vault_install_ca_cert_packages }}"
+        state: present
 
 # The CA id becomes the FILENAME: vault-ca-<id>.crt in the OS trust store.
 #
@@ -37,7 +37,7 @@
 
 - name: Download vault CA certificate
   ansible.builtin.uri:
-    return_content: yes
+    return_content: true
     validate_certs: false
     url: "{{ vault_url }}/v1/{{ vault_ca_path }}/ca/pem"
     method: GET
@@ -52,10 +52,10 @@
 - name: Copy certificate authority to trusted ca path of the os
   ansible.builtin.copy:
     content: "{{ vault_install_ca_cert_download.content }}"
-    dest: "{{ vault_install_ca_cert_ca_path[ansible_facts['os_family']][ansible_facts['distribution_major_version']|int] }}"
+    dest: "{{ vault_install_ca_cert_ca_path[ansible_facts['os_family']][ansible_facts['distribution_major_version'] | int] }}"
     owner: root
     group: root
-    mode: 0644
+    mode: "0644"
   notify:
     - Install vault CA to Debian os system
     - Install vault CA to RedHat os system

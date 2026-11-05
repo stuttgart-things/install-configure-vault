@@ -58,4 +58,6 @@
 
 - name: Print result
   ansible.builtin.debug:
-    msg: "{{ item.name }} role_id={{ vault_approle_api_result_role_id.json.data.role_id }} secret_id={{ vault_approle_api_result_secret_id.json.data.secret_id }}"
+    msg: >-
+      {{ item.name }} role_id={{ vault_approle_api_result_role_id.json.data.role_id }}
+      secret_id={{ vault_approle_api_result_secret_id.json.data.secret_id }}

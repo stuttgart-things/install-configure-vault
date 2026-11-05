@@ -12,6 +12,7 @@
   ansible.builtin.file:
     path: "{{ ansible_ca.path }}"
     state: directory
+    mode: "0700"
 
 - name: Set up ca - Generate an OpenSSL private key for CA
   community.crypto.openssl_privatekey:
@@ -50,6 +51,7 @@
   ansible.builtin.file:
     path: "{{ ansible_ca_cert.path }}"
     state: directory
+    mode: "0700"
 
 - name: Generate cert - Create private key for new certificate
   community.crypto.openssl_privatekey:
@@ -78,7 +80,7 @@
 
 - name: Generate cert - Sign certificate with ansible CA
   community.crypto.x509_certificate:
-    csr_path : "{{ ansible_ca_cert.path }}/{{ item }}.csr"
+    csr_path: "{{ ansible_ca_cert.path }}/{{ item }}.csr"
     path: "{{ ansible_ca_cert.path }}/{{ item }}.crt"
     provider: ownca
     ownca_path: "{{ ansible_ca.path }}/{{ ansible_ca.crt }}"
@@ -93,12 +95,13 @@
   ansible.builtin.copy:
     src: "{{ ansible_ca.path }}/{{ ansible_ca.crt }}"
     dest: "{{ ansible_ca_cert.path }}/ca.crt"
-    remote_src: yes
+    mode: "0644"
+    remote_src: true
   run_once: true
   delegate_to: "{{ groups['member'][0] }}"
 
 - name: Copy cert - Get cert files
-  ansible.builtin.find: 
+  ansible.builtin.find:
     paths: "{{ ansible_ca_cert.path }}"
     patterns: "*"
   register: ansible_ca_files
@@ -109,7 +112,7 @@
   ansible.builtin.fetch:
     src: "{{ item.path }}"
     dest: /tmp/certificate/
-    flat: yes
+    flat: true
   run_once: true
   delegate_to: "{{ groups['member'][0] }}"
   with_items: "{{ ansible_ca_files.files }}"
@@ -118,6 +121,7 @@
   ansible.builtin.file:
     path: "/podman/pv/{{ container_name }}/certificate/"
     state: directory
+    mode: "0755"
 
 # - name: Copy file with owner and permissions
 #   ansible.builtin.copy:
@@ -129,7 +133,7 @@
 #     - { src: '/tmp/certificate/{{ ansible_ca.crt }}', dest: '/podman/pv/{{ container_name }}/certificate/' }
 
 - name: Copy cert - Get cert files
-  ansible.builtin.find: 
+  ansible.builtin.find:
     paths: "/tmp/certificate/"
     patterns: "*.crt"
   register: ansible_ca_files_localhost
@@ -140,10 +144,11 @@
   ansible.builtin.copy:
     src: "{{ item.path }}"
     dest: "/podman/pv/{{ container_name }}/certificate/"
+    mode: "0644"
   with_items: "{{ ansible_ca_files_localhost.files }}"
 
 - name: Copy cert - Get cert files
-  ansible.builtin.find: 
+  ansible.builtin.find:
     paths: "/tmp/certificate/"
     patterns: "*.key"
   register: ansible_ca_files_localhost_key
@@ -154,4 +159,8 @@
   ansible.builtin.copy:
     src: "{{ item.path }}"
     dest: "/podman/pv/{{ container_name }}/certificate/"
+    # 0644, not 0600: this dir is bind-mounted into the vault container,
+    # where vault runs as the unprivileged "vault" user and must read the
+    # TLS and raft client keys; the file is root-owned, so 0600/0640 would stop vault.
+    mode: "0644"
   with_items: "{{ ansible_ca_files_localhost_key.files }}"

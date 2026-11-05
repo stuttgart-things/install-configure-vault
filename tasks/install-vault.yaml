@@ -1,6 +1,6 @@
 ---
 - name: Load vault server podman-profile
-  ansible.builtin.include_vars: "{{lookup('first_found', params)}}"
+  ansible.builtin.include_vars: "{{ lookup('first_found', params) }}"
   vars:
     params:
       files:
@@ -20,17 +20,19 @@
   ansible.builtin.file:
     path: "{{ mounts.config.host }}"
     state: directory
+    mode: "0755"
 
 - name: Create vault configuration file on hosts
   ansible.builtin.template:
     src: "vault_config_{{ vault_storage_backend }}.{{ configuration_file_format }}.j2"
     dest: "{{ mounts.config.host }}vault.{{ configuration_file_format }}"
+    mode: "0644"
 
 - name: Deploy Vault
   ansible.builtin.include_role:
     name: deploy-podman-container
 
-- name: "Wait for webservice {{ vault_url }} come up"
+- name: "Wait for webservice to come up: {{ vault_url }}"
   ansible.builtin.uri:
     validate_certs: false
     url: "{{ vault_url }}"
