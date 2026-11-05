@@ -33,5 +33,6 @@ jobs:
       # 14.0.0 because ghcr carries no 9.x/10.x tag; it is the line the fleet
       # runs today and it lints clean in download-install-binary.
       ansible-image: ghcr.io/stuttgart-things/sthings-ansible:14.0.0
-      playbook: tests/test.yml
+      # The role has no tests/ playbook: lint the role's tasks.
+      playbook: tasks
     needs: yaml-lint
