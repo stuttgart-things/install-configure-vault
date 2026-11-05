@@ -8,7 +8,7 @@
   ansible.builtin.include_tasks: authentication.yaml
   when: vault_token is undefined and not install_vault_podman and not vault_install_ca_cert and not vault_install_ca_cert and not install_vault_k8s
 
-- name: destroy vault server
+- name: Destroy vault server
   ansible.builtin.include_tasks: destroy.yaml
   when: destroy_vault|bool
 
@@ -57,11 +57,11 @@
   when: vault_install_ca_cert|bool
 
 - name: Server - configure vault ssh
-  ansible.builtin.include_tasks: ssh-conf-server.yml
+  ansible.builtin.include_tasks: ssh-conf-server.yaml
   when: vault_ssh_conf_server | bool
 
 - name: Client - sign public key by vault
-  ansible.builtin.include_tasks: ssh-conf-client.yml
+  ansible.builtin.include_tasks: ssh-conf-client.yaml
   when: vault_ssh_sign_public_key | bool
 
 - name: Generate bashrc file and add vault alias

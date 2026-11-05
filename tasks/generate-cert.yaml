@@ -1,7 +1,7 @@
 ---
 - name: "Request and sign certificate for {{ vault_gen_cert_fqdn }}"
   ansible.builtin.uri:
-    return_content: yes
+    return_content: true
     validate_certs: false
     url: "{{ vault_url }}/v1/{{ vault_ca_path }}/issue/{{ vault_ca_cert_role_name }}"
     method: PUT
@@ -35,18 +35,21 @@
   ansible.builtin.copy:
     content: "{{ vault_generated_cert.json.data.issuing_ca }}"
     dest: "{{ vault_gen_cert_install_ca_path }}"
+    mode: "0644"
   when: vault_gen_cert_install | bool
 
 - name: Installing public key
   ansible.builtin.copy:
     content: "{{ vault_generated_cert.json.data.certificate }}"
     dest: "{{ vault_gen_cert_install_pub_path }}"
+    mode: "0644"
   when: vault_gen_cert_install | bool
 
 - name: Installing private key
   ansible.builtin.copy:
     content: "{{ vault_generated_cert.json.data.private_key }}"
     dest: "{{ vault_gen_cert_install_priv_path }}"
+    mode: "0600"
   when: vault_gen_cert_install | bool
 
 - name: Output private key
@@ -63,7 +66,9 @@
 
 - name: Note
   ansible.builtin.debug:
-    msg: "Please install the ca key on target system so that certificates classified as trusted or you can run this role that automaticly installs the ca cert on your system"
+    msg: >-
+      Please install the ca key on target system so that certificates classified as trusted
+      or you can run this role that automaticly installs the ca cert on your system
 
 - name: CA key linux link
   ansible.builtin.debug:

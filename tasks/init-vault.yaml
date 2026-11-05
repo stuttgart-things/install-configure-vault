@@ -1,15 +1,15 @@
 ---
 - name: Start install requirements task as become user
   become: true
-  block:
-  - name: Install jmespath library to provide json filtering
-    include_role:
-      name: install-requirements 
-    vars:
-      update_packages: false
-      python_modules: "{{ vault_install_json_packages }}"
-      state: present
   delegate_to: "{{ vault_api_executor }}"
+  block:
+    - name: Install jmespath library to provide json filtering
+      ansible.builtin.include_role:
+        name: install-requirements
+      vars:
+        update_packages: false
+        python_modules: "{{ vault_install_json_packages }}"
+        state: present
 
 - name: Request a vault init
   ansible.builtin.uri:
@@ -33,9 +33,9 @@
 
 - name: "Search unseal key in json string"
   ansible.builtin.set_fact:
-    vault_unseal: '{{ vault_api_data_init.json | json_query(query) }}'
+    vault_unseal: '{{ vault_api_data_init.json | json_query(vault_unseal_key_query) }}'
   vars:
-    query: "keys[0]"
+    vault_unseal_key_query: "keys[0]"
   run_once: true
   when: vault_api_data_init is defined
 
@@ -74,5 +74,6 @@
   ansible.builtin.copy:
     content: "{{ lookup('template', './installation_configuration_output.txt.j2') }}"
     dest: "{{ vault_install_save_conf_path }}"
+    mode: "0600"
   when: vault_install_save_conf_path is defined
   delegate_to: "{{ vault_api_executor }}"

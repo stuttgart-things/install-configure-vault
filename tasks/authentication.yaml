@@ -1,5 +1,8 @@
 ---
 - name: Get vault token via userpass
+  when:
+    - vault_username is defined
+    - vault_password is defined
   block:
     - name: API request vault auth token via userpass
       ansible.builtin.uri:
@@ -19,15 +22,15 @@
     - name: Save requested vault api token to vars
       ansible.builtin.set_fact:
         vault_token: "{{ vault_api_data_token_userpass.json.auth.client_token }}"
-  when:
-    - vault_username is defined
-    - vault_password is defined
 
 - name: Get vault token via approle
+  when:
+    - vault_role_id is defined
+    - vault_secret_id is defined
   block:
     - name: API request vault auth token via approle
       ansible.builtin.uri:
-        return_content: yes
+        return_content: true
         validate_certs: false
         url: "{{ vault_url }}/v1/auth/approle/login"
         method: POST
@@ -43,6 +46,3 @@
     - name: Save requested vault api token to vars
       ansible.builtin.set_fact:
         vault_token: "{{ vault_api_data_token_approle.json.auth.client_token }}"
-  when:
-    - vault_role_id is defined
-    - vault_secret_id is defined
