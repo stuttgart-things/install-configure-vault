@@ -1,4 +1,8 @@
 galaxy_info:
+  # ansible-lint derives the role name from the directory otherwise;
+  # "install-configure-vault" (dashes) is invalid and aborts the lint run.
+  role_name: install_configure_vault
+  namespace: sthings
   author: Marcel Zapf
   description: role to deploy, configure and manage hashicorp vault
   company: Stuttgart-Things
