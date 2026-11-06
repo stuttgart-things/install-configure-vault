@@ -81,6 +81,23 @@ behind. The pattern matches digits only, so it can never touch a derived name.
 It is opt-in because it removes trust: a CA that is still needed but no longer
 declared in the caller's list would go with it.
 
+## TLS key permissions — `vault_container_uid` / `vault_container_gid`
+
+The cert dir `/podman/pv/<container>/certificate/` is bind-mounted into the
+container, and vault reads its TLS (and raft client) keys there as the
+unprivileged `vault` user. The keys are therefore owned by that user's UID and
+are `0600`. Every other file there is `0644 root`, and the dir is `0755`. That
+also applies to the self-signed path, whose generator leaves the dir at `777`.
+
+| Variable | Default | |
+|---|---|---|
+| `vault_container_uid` | `100` | `id vault` in `docker.io/vault` and `hashicorp/vault-enterprise` (1.9.3 / 1.9.3-ent) |
+| `vault_container_gid` | `1000` | |
+
+Podman runs rootful here (no userns), so the container UID is the host UID.
+Override both only for an image whose `vault` user differs. A root-owned `0600`
+key stops the listener with `error loading TLS cert: … vault.key: permission denied`.
+
 ## Howto install Vault Root CA in windows 10 OS Systems (BETA)
 
 - Download the powershell script located in /meta folder

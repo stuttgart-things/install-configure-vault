@@ -36,10 +36,12 @@
   ansible.builtin.copy:
     content: "{{ vault_generated_cert_vault.json.data.private_key }}"
     dest: "{{ mounts.certs.host }}{{ cert_key_name }}"
-    # 0644, not 0600: this dir is bind-mounted into the vault container,
-    # where vault runs as the unprivileged "vault" user and must read the
-    # TLS key; the file is root-owned, so 0600/0640 would stop vault.
-    mode: "0644"
+    # This dir is bind-mounted into the vault container, where vault runs as
+    # the unprivileged "vault" user and must read the TLS key. Owned by that
+    # user's UID (vault_container_uid), so 0600 is enough.
+    owner: "{{ vault_container_uid }}"
+    group: "{{ vault_container_gid }}"
+    mode: "0600"
 
 - name: Restart vault container to apply new certificate
   ansible.builtin.service:
