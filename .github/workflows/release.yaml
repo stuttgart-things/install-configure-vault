@@ -17,7 +17,7 @@ jobs:
     name: Release
     uses: stuttgart-things/github-workflow-templates/.github/workflows/call-release-module.yaml@main
     with:
-      module-name: download-install-binary
+      module-name: install-configure-vault
       tag-name: "${{ github.event.inputs.release-tag }}"
       release-message: "${{ github.event.inputs.release-message }}"
       environment-name: k8s
