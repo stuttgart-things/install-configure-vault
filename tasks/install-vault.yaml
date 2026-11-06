@@ -32,6 +32,37 @@
   ansible.builtin.include_role:
     name: deploy-podman-container
 
+# The self-signed path (deploy-podman-container -> generate-selfsigned-certs)
+# ends with `chmod -R 777` on the cert dir, so the TLS key would be world
+# readable AND writable. Tighten what is there once the container runs: keys
+# 0600 owned by the container's vault user, everything else 0644 root, the
+# dir 0755. Vault has the key loaded already; a later restart reads it as its
+# owner.
+- name: Find the files in the cert dir
+  ansible.builtin.find:
+    paths: "{{ mounts.certs.host }}"
+    file_type: file
+  register: vault_cert_dir_files
+
+- name: Restrict the cert dir
+  ansible.builtin.file:
+    path: "{{ mounts.certs.host }}"
+    state: directory
+    owner: root
+    group: root
+    mode: "0755"
+  when: vault_cert_dir_files.matched > 0
+
+- name: Restrict the cert files (keys 0600 to the container's vault user)
+  ansible.builtin.file:
+    path: "{{ item.path }}"
+    owner: "{{ vault_container_uid if item.path.endswith('.key') else 'root' }}"
+    group: "{{ vault_container_gid if item.path.endswith('.key') else 'root' }}"
+    mode: "{{ '0600' if item.path.endswith('.key') else '0644' }}"
+  loop: "{{ vault_cert_dir_files.files }}"
+  loop_control:
+    label: "{{ item.path }}"
+
 - name: "Wait for webservice to come up: {{ vault_url }}"
   ansible.builtin.uri:
     validate_certs: false

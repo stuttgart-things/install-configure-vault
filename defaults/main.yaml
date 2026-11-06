@@ -4,6 +4,14 @@ configuration_file_format: "{% if vault_storage_backend == 'raft' %}hcl{% else %
 vault_version: "{{ '1.9.3' if vault_product_type == 'community' else '1.9.3-ent' }}"
 vault_url: https://vault.example.com:8200
 vault_container_reg: docker.io
+# UID/GID of the "vault" user inside the container. docker.io/vault and
+# hashicorp/vault-enterprise both run vault as 100:1000 (`id vault`, checked on
+# 1.9.3 / 1.9.3-ent). Podman runs rootful here (no userns), so the same numbers
+# own the TLS key on the host -- that is what lets the key be 0600: vault reads
+# it as its owner. A root-owned 0600 key stops the listener with
+# "error loading TLS cert: ... vault.key: permission denied".
+vault_container_uid: 100
+vault_container_gid: 1000
 vault_username: username
 vault_password: password
 debug: false

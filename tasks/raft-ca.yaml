@@ -159,8 +159,10 @@
   ansible.builtin.copy:
     src: "{{ item.path }}"
     dest: "/podman/pv/{{ container_name }}/certificate/"
-    # 0644, not 0600: this dir is bind-mounted into the vault container,
-    # where vault runs as the unprivileged "vault" user and must read the
-    # TLS and raft client keys; the file is root-owned, so 0600/0640 would stop vault.
-    mode: "0644"
+    # This dir is bind-mounted into the vault container, where vault runs as
+    # the unprivileged "vault" user and must read the TLS and raft client
+    # keys. Owned by that user's UID (vault_container_uid), so 0600 is enough.
+    owner: "{{ vault_container_uid }}"
+    group: "{{ vault_container_gid }}"
+    mode: "0600"
   with_items: "{{ ansible_ca_files_localhost_key.files }}"
