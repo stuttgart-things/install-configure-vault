@@ -99,6 +99,7 @@ vault_install_ca_cert_ca_path:
     7: "/etc/pki/ca-trust/source/anchors/vault-ca-{{ vault_ca_id }}.crt"
     8: "/etc/pki/ca-trust/source/anchors/vault-ca-{{ vault_ca_id }}.crt"
     9: "/etc/pki/ca-trust/source/anchors/vault-ca-{{ vault_ca_id }}.crt"
+    10: "/etc/pki/ca-trust/source/anchors/vault-ca-{{ vault_ca_id }}.crt"
     42: "/etc/pki/ca-trust/source/anchors/vault-ca-{{ vault_ca_id }}.crt"
     43: "/etc/pki/ca-trust/source/anchors/vault-ca-{{ vault_ca_id }}.crt"
     44: "/etc/pki/ca-trust/source/anchors/vault-ca-{{ vault_ca_id }}.crt"
